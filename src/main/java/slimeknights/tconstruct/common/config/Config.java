@@ -43,6 +43,7 @@ public final class Config {
   public static boolean castableBricks = true;
   public static boolean leatherDryingRecipe = true;
   public static boolean gravelFlintRecipe = true;
+  public static int ingotValue = 100;
   public static double oreToIngotRatio = 2;
   public static boolean matchVanillaSlimeblock = false;
   public static boolean limitPiggybackpack = false;
@@ -201,6 +202,12 @@ public final class Config {
       prop = configFile.get(cat, "addFlintRecipe", gravelFlintRecipe);
       prop.setComment("Adds a recipe that allows you to craft 3 gravel into a flint");
       gravelFlintRecipe = prop.getBoolean();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "ingotValue", ingotValue);
+      prop.setComment("How much the different items are \"worth\", this value is used for both liquid conversion as well as part crafting");
+      ingotValue = prop.getInt();
       prop.setRequiresMcRestart(true);
       propOrder.add(prop.getName());
 

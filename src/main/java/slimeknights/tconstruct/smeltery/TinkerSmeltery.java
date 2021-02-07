@@ -393,7 +393,7 @@ public class TinkerSmeltery extends TinkerPulse {
     TinkerRegistry.registerMelting(Items.GOLDEN_HORSE_ARMOR, TinkerFluids.gold, Material.VALUE_Ingot * 4);
 
     // rails, some of these are caught through registerOredictMelting, but for consistency all are just registered here
-    TinkerRegistry.registerMelting(Blocks.RAIL, TinkerFluids.iron, Material.VALUE_Ingot * 6 / 16);
+    TinkerRegistry.registerMelting(Blocks.RAIL, TinkerFluids.iron, Material.VALUE_Ingot * 6 / 10);
     TinkerRegistry.registerMelting(Blocks.ACTIVATOR_RAIL, TinkerFluids.iron, Material.VALUE_Ingot);
     TinkerRegistry.registerMelting(Blocks.DETECTOR_RAIL, TinkerFluids.iron, Material.VALUE_Ingot);
     TinkerRegistry.registerMelting(Blocks.GOLDEN_RAIL, TinkerFluids.gold, Material.VALUE_Ingot);
@@ -482,10 +482,10 @@ public class TinkerSmeltery extends TinkerPulse {
     TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of("sand", Material.VALUE_Glass), TinkerFluids.glass));
     builder = ImmutableSet.builder();
     builder.add(Pair.of("blockGlass", Material.VALUE_Glass));
-    builder.add(Pair.of("paneGlass", Material.VALUE_Glass * 6 / 16));
+    builder.add(Pair.of("paneGlass", Material.VALUE_Glass * 6 / 10));
     addKnownOreFluid(TinkerFluids.glass, builder.build());
 
-    TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Blocks.GLASS_PANE), null, TinkerFluids.glass, Material.VALUE_Glass * 6 / 16, 50));
+    TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Blocks.GLASS_PANE), null, TinkerFluids.glass, Material.VALUE_Glass * 6 / 10, 50));
     TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(TinkerCommons.blockClearGlass), null, TinkerFluids.glass, Material.VALUE_Glass, 120));
 
     // lavawood
@@ -528,24 +528,24 @@ public class TinkerSmeltery extends TinkerPulse {
     // 1 bucket water + 4 seared ingot + 4 mud bricks = 1 block hardened clay
     // 1000 + 288 + 576 = 576
     // 250 + 72 + 144 = 144
-    TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.clay, 144),
+    TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.clay, Config.ingotValue),
                                  new FluidStack(FluidRegistry.WATER, 250),
-                                 new FluidStack(TinkerFluids.searedStone, 72),
-                                 new FluidStack(TinkerFluids.dirt, 144));
+                                 new FluidStack(TinkerFluids.searedStone, Config.ingotValue / 2),
+                                 new FluidStack(TinkerFluids.dirt, Config.ingotValue));
 
     // 1 iron ingot + 1 purple slime ball + seared stone in molten form = 1 knightslime ingot
     // 144 + 250 + 288 = 144
-    TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.knightslime, 72),
-                                 new FluidStack(TinkerFluids.iron, 72),
+    TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.knightslime, Config.ingotValue / 2),
+                                 new FluidStack(TinkerFluids.iron, Config.ingotValue / 2),
                                  new FluidStack(TinkerFluids.purpleSlime, 125),
-                                 new FluidStack(TinkerFluids.searedStone, 144));
+                                 new FluidStack(TinkerFluids.searedStone, Config.ingotValue));
 
     // i iron ingot + 1 blood... unit thingie + 1/3 gem = 1 pigiron
     // 144 + 99 + 222 = 144
-    TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.pigIron, 144),
-                                 new FluidStack(TinkerFluids.iron, 144),
+    TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.pigIron, Config.ingotValue),
+                                 new FluidStack(TinkerFluids.iron, Config.ingotValue),
                                  new FluidStack(TinkerFluids.blood, 40),
-                                 new FluidStack(TinkerFluids.clay, 72));
+                                 new FluidStack(TinkerFluids.clay, Config.ingotValue / 2));
 
     // 1 ingot cobalt + 1 ingot ardite = 1 ingot manyullyn!
     // 144 + 144 = 144
