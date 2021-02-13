@@ -1,8 +1,15 @@
-# [Tinkers' Construct](http://minecraft.curseforge.com/projects/tinkers-construct)
+# 🅱️inkers' 🅱️onstruct
 
-Modify all the things, then do it again!   
-Melt down any metals you find. 	 
-Power the world with spinning wind!
+🅱️inkers' 🅱️onstruct is an unofficial Tinkers' Construct fork with additional configuration options. It was primarily made with TerraFirmaCraft in mind because TFC's metal math (100s) clashes horribly with TCon's metal math (144s).
+
+**List of changes:**
+* Configurable ingot/block/nugget/... values
+* Configurable clear glass breaking behavior (silk touch)
+* Mattocks are full-featured axes and shovels in one tool
+
+*More will come as I see fit...*
+
+**Notice: The Tinkers' Construct development team takes no responsibility for user support queries concerning this fork.**
 
 ### IMC
 Tinkers' Construct supports several IMCs to allow mods to integrate themselves. The [Wiki](https://github.com/SlimeKnights/TinkersConstruct/wiki/IMC) contains a page with further information.
