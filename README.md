@@ -1,5 +1,7 @@
 # 🅱️inkers' 🅱️onstruct
 
+![](https://i.imgur.com/2NPePPo.jpg)
+
 🅱️inkers' 🅱️onstruct is an unofficial Tinkers' Construct fork with additional configuration options. It was primarily made with TerraFirmaCraft in mind because TFC's metal math (100s) clashes horribly with TCon's metal math (144s).
 
 **List of changes:**
