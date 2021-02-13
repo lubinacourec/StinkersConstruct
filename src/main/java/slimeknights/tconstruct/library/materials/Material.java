@@ -42,13 +42,13 @@ public class Material extends RecipeMatchRegistry {
 
   // How much the different items are "worth"
   // the values are used for both liquid conversion as well as part crafting
-  public static final int VALUE_Ingot = Config.ingotValue;
-  public static final int VALUE_Nugget = VALUE_Ingot / 10;
-  public static final int VALUE_Fragment = VALUE_Ingot / 4;
-  public static final int VALUE_Shard = VALUE_Ingot / 2;
+  public static final int VALUE_Ingot = Config.ingotValue; // 100
+  public static final int VALUE_Nugget = Config.nuggetValue; //VALUE_Ingot / 10
+  public static final int VALUE_Fragment = Config.fragmentValue; // VALUE_Ingot / 4
+  public static final int VALUE_Shard = Config.shardValue; // VALUE_Ingot / 2
 
-  public static final int VALUE_Gem = 666; // divisible by 3!
-  public static final int VALUE_Block = VALUE_Ingot * 8;
+  public static final int VALUE_Gem = Config.gemValue; // 666
+  public static final int VALUE_Block = Config.blockValue; // VALUE_Ingot * 8
 
   public static final int VALUE_SearedBlock = VALUE_Ingot * 2;
   public static final int VALUE_SearedMaterial = VALUE_Ingot / 2;

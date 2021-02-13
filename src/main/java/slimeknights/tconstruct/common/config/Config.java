@@ -44,6 +44,11 @@ public final class Config {
   public static boolean leatherDryingRecipe = true;
   public static boolean gravelFlintRecipe = true;
   public static int ingotValue = 100;
+  public static int nuggetValue = 10;
+  public static int fragmentValue = 25;
+  public static int shardValue = 50;
+  public static int gemValue = 666;
+  public static int blockValue = 800;
   public static double oreToIngotRatio = 2;
   public static boolean matchVanillaSlimeblock = false;
   public static boolean limitPiggybackpack = false;
@@ -206,8 +211,38 @@ public final class Config {
       propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "ingotValue", ingotValue);
-      prop.setComment("How much the different items are \"worth\", this value is used for both liquid conversion as well as part crafting");
+      prop.setComment("How much ingots are \"worth\", this value is used for both liquid conversion as well as part crafting");
       ingotValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "nuggetValue", nuggetValue);
+      prop.setComment("How much nuggets are \"worth\", this value is used for both liquid conversion as well as part crafting");
+      nuggetValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "fragmentValue", fragmentValue);
+      prop.setComment("How much fragments are \"worth\", this value is used for both liquid conversion as well as part crafting");
+      fragmentValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "shardValue", shardValue);
+      prop.setComment("How much shards are \"worth\", this value is used for both liquid conversion as well as part crafting");
+      shardValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "gemValue", gemValue);
+      prop.setComment("How much gems are \"worth\", this value is used for both liquid conversion as well as part crafting");
+      gemValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "blockValue", blockValue);
+      prop.setComment("How much blocks are \"worth\", this value is used for both liquid conversion as well as part crafting");
+      blockValue = prop.getInt();
       prop.setRequiresMcRestart(true);
       propOrder.add(prop.getName());
 
