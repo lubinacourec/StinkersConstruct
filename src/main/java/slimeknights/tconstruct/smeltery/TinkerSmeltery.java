@@ -610,10 +610,14 @@ public class TinkerSmeltery extends TinkerPulse {
         Cast.setTagForPart(cast, stack.getItem());
 
         if(fluid != null) {
-          // melting
-          TinkerRegistry.registerMelting(stack, fluid, toolPart.getCost());
-          // casting
-          TinkerRegistry.registerTableCasting(stack, cast, fluid, toolPart.getCost());
+          if(Config.meltingToolpart) {
+            // melting
+            TinkerRegistry.registerMelting(stack, fluid, toolPart.getCost());
+          }
+          if(Config.castingToolpart) {
+            // casting
+            TinkerRegistry.registerTableCasting(stack, cast, fluid, toolPart.getCost());
+          }
         }
         // register cast creation from the toolparts
         for(FluidStack fs : castCreationFluids) {
@@ -691,37 +695,53 @@ public class TinkerSmeltery extends TinkerPulse {
 
     // register oredict castings!
     // ingot casting
-    TinkerRegistry.registerTableCasting(new PreferenceCastingRecipe(ingotOre.getLeft(),
-                                                                    RecipeMatch.ofNBT(castIngot),
-                                                                    fluid,
-                                                                    ingotOre.getRight()));
+    if(Config.castingIngot) {
+      TinkerRegistry.registerTableCasting(new PreferenceCastingRecipe(ingotOre.getLeft(),
+              RecipeMatch.ofNBT(castIngot),
+              fluid,
+              ingotOre.getRight()));
+    }
+
     // nugget casting
-    TinkerRegistry.registerTableCasting(new PreferenceCastingRecipe(nuggetOre.getLeft(),
-                                                                    RecipeMatch.ofNBT(castNugget),
-                                                                    fluid,
-                                                                    nuggetOre.getRight()));
+    if(Config.castingNugget) {
+      TinkerRegistry.registerTableCasting(new PreferenceCastingRecipe(nuggetOre.getLeft(),
+              RecipeMatch.ofNBT(castNugget),
+              fluid,
+              nuggetOre.getRight()));
+    }
+
     // block casting
-    TinkerRegistry.registerBasinCasting(new PreferenceCastingRecipe(blockOre.getLeft(),
-                                                                    null, // no cast
-                                                                    fluid,
-                                                                    blockOre.getRight()));
+    if(Config.castingBlock) {
+      TinkerRegistry.registerBasinCasting(new PreferenceCastingRecipe(blockOre.getLeft(),
+              null, // no cast
+              fluid,
+              blockOre.getRight()));
+    }
+
     // plate casting
-    TinkerRegistry.registerTableCasting(new PreferenceCastingRecipe(plateOre.getLeft(),
-                                                                    RecipeMatch.ofNBT(castPlate),
-                                                                    fluid,
-                                                                    plateOre.getRight()));
+    if(Config.castingPlate) {
+      TinkerRegistry.registerTableCasting(new PreferenceCastingRecipe(plateOre.getLeft(),
+              RecipeMatch.ofNBT(castPlate),
+              fluid,
+              plateOre.getRight()));
+    }
+
     // gear casting
-    TinkerRegistry.registerTableCasting(new PreferenceCastingRecipe(gearOre.getLeft(),
-                                                                    RecipeMatch.ofNBT(castGear),
-                                                                    fluid,
-                                                                    gearOre.getRight()));
+      if(Config.castingGear) {
+        TinkerRegistry.registerTableCasting(new PreferenceCastingRecipe(gearOre.getLeft(),
+                RecipeMatch.ofNBT(castGear),
+                fluid,
+                gearOre.getRight()));
+      }
 
     // and also cast creation!
-    for(FluidStack fs : castCreationFluids) {
-      TinkerRegistry.registerTableCasting(new CastingRecipe(castIngot, RecipeMatch.of(ingotOre.getLeft()), fs, true, true));
-      TinkerRegistry.registerTableCasting(new CastingRecipe(castNugget, RecipeMatch.of(nuggetOre.getLeft()), fs, true, true));
-      TinkerRegistry.registerTableCasting(new CastingRecipe(castPlate, RecipeMatch.of(plateOre.getLeft()), fs, true, true));
-      TinkerRegistry.registerTableCasting(new CastingRecipe(castGear, RecipeMatch.of(gearOre.getLeft()), fs, true, true));
+    if(Config.castingCast) {
+      for (FluidStack fs : castCreationFluids) {
+        TinkerRegistry.registerTableCasting(new CastingRecipe(castIngot, RecipeMatch.of(ingotOre.getLeft()), fs, true, true));
+        TinkerRegistry.registerTableCasting(new CastingRecipe(castNugget, RecipeMatch.of(nuggetOre.getLeft()), fs, true, true));
+        TinkerRegistry.registerTableCasting(new CastingRecipe(castPlate, RecipeMatch.of(plateOre.getLeft()), fs, true, true));
+        TinkerRegistry.registerTableCasting(new CastingRecipe(castGear, RecipeMatch.of(gearOre.getLeft()), fs, true, true));
+      }
     }
   }
 
@@ -731,10 +751,11 @@ public class TinkerSmeltery extends TinkerPulse {
    * @param knownOres  Set of pairs of an oredict name to a integer fluid amount
    */
   private static void addKnownOreFluid(Fluid fluid, Set<Pair<String, Integer>> knownOres) {
-    for(Pair<String, Integer> pair : knownOres) {
-      TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(pair.getLeft(), pair.getRight()), fluid));
+    if(Config.meltingOreDict) {
+      for (Pair<String, Integer> pair : knownOres) {
+        TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(pair.getLeft(), pair.getRight()), fluid));
+      }
     }
-
     knownOreFluids.put(fluid, knownOres);
   }
 

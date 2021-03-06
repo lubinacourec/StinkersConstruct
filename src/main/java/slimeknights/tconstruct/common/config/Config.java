@@ -53,6 +53,15 @@ public final class Config {
   public static boolean matchVanillaSlimeblock = false;
   public static boolean limitPiggybackpack = false;
   public static boolean clearGlassSilkTouch = true;
+  public static boolean meltingOreDict = true;
+  public static boolean meltingToolpart = true;
+  public static boolean castingIngot = true;
+  public static boolean castingNugget = true;
+  public static boolean castingBlock = true;
+  public static boolean castingPlate = true;
+  public static boolean castingGear = true;
+  public static boolean castingToolpart = true;
+  public static boolean castingCast = true;
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
   };
@@ -268,6 +277,51 @@ public final class Config {
       prop = configFile.get(cat, "clearGlassSilkTouch", clearGlassSilkTouch);
       prop.setComment("If true, clear glass can only be harvested with silk touch like regular glass.");
       clearGlassSilkTouch = prop.getBoolean();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "meltingOreDict", meltingOreDict);
+      prop.setComment("If true, melting recipes based on the ore dictionary will be generated.");
+      meltingOreDict = prop.getBoolean();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "meltingToolpart", meltingToolpart);
+      prop.setComment("If true, melting recipes for toolparts will be generated.");
+      meltingToolpart = prop.getBoolean();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "castingIngot", castingIngot);
+      prop.setComment("If true, casting recipes for ingots will be generated.");
+      castingIngot = prop.getBoolean();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "castingNugget", castingNugget);
+      prop.setComment("If true, casting recipes for nuggets will be generated.");
+      castingNugget = prop.getBoolean();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "castingBlock", castingBlock);
+      prop.setComment("If true, casting recipes for blocks will be generated.");
+      castingBlock = prop.getBoolean();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "castingPlate", castingPlate);
+      prop.setComment("If true, casting recipes for plates will be generated.");
+      castingPlate = prop.getBoolean();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "castingGear", castingGear);
+      prop.setComment("If true, casting recipes for gears will be generated.");
+      castingGear = prop.getBoolean();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "castingToolpart", castingToolpart);
+      prop.setComment("If true, casting recipes for toolparts will be generated.");
+      castingToolpart = prop.getBoolean();
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "castingCast", castingCast);
+      prop.setComment("If true, casting recipes for casts will be generated.");
+      castingCast = prop.getBoolean();
       propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "craftingStationBlacklist", craftingStationBlacklistArray);
