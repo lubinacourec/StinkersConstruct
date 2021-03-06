@@ -45,8 +45,8 @@ public final class Config {
   public static boolean gravelFlintRecipe = true;
   public static int ingotValue = 100;
   public static int ingotValueCasting = 100;
-  public static int nuggetValue = 9;
-  public static int nuggetValueCasting = 9;
+  public static int nuggetValue = 10;
+  public static int nuggetValueCasting = 10;
   public static int fragmentValue = 25;
   public static int shardValue = 50;
   public static int gemValue = 666;
