@@ -6,6 +6,7 @@
 
 **List of changes:**
 * Configurable ingot/block/nugget/... values
+* Master switches for enabling/disabling melting and casting of respective types
 * Configurable clear glass breaking behavior (silk touch)
 * Mattocks are full-featured axes and shovels in one tool
 
