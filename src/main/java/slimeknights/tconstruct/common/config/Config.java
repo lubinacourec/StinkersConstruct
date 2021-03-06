@@ -44,11 +44,14 @@ public final class Config {
   public static boolean leatherDryingRecipe = true;
   public static boolean gravelFlintRecipe = true;
   public static int ingotValue = 100;
-  public static int nuggetValue = 10;
+  public static int ingotValueCasting = 100;
+  public static int nuggetValue = 9;
+  public static int nuggetValueCasting = 9;
   public static int fragmentValue = 25;
   public static int shardValue = 50;
   public static int gemValue = 666;
-  public static int blockValue = 800;
+  public static int blockValue = 900;
+  public static int blockValueCasting = 900;
   public static double oreToIngotRatio = 2;
   public static boolean matchVanillaSlimeblock = false;
   public static boolean limitPiggybackpack = false;
@@ -221,14 +224,26 @@ public final class Config {
       propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "ingotValue", ingotValue);
-      prop.setComment("How much ingots are \"worth\", this value is used for both liquid conversion as well as part crafting.");
+      prop.setComment("How much ingots are \"worth\", this value is used for melting.");
       ingotValue = prop.getInt();
       prop.setRequiresMcRestart(true);
       propOrder.add(prop.getName());
 
+      prop = configFile.get(cat, "ingotValueCasting", ingotValueCasting);
+      prop.setComment("How much ingots are \"worth\", this value is used for cost calculation and casting.");
+      ingotValueCasting = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
       prop = configFile.get(cat, "nuggetValue", nuggetValue);
-      prop.setComment("How much nuggets are \"worth\", this value is used for both liquid conversion as well as part crafting.");
+      prop.setComment("How much nuggets are \"worth\", this value is used for melting.");
       nuggetValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "nuggetValueCasting", nuggetValueCasting);
+      prop.setComment("How much nuggets are \"worth\", this value is used for cost calculation and casting.");
+      nuggetValueCasting = prop.getInt();
       prop.setRequiresMcRestart(true);
       propOrder.add(prop.getName());
 
@@ -251,8 +266,14 @@ public final class Config {
       propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "blockValue", blockValue);
-      prop.setComment("How much blocks are \"worth\", this value is used for both liquid conversion as well as part crafting.");
+      prop.setComment("How much blocks are \"worth\", this value is used for melting.");
       blockValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "blockValueCasting", blockValueCasting);
+      prop.setComment("How much blocks are \"worth\", this value is used for cost calculation and casting.");
+      blockValueCasting = prop.getInt();
       prop.setRequiresMcRestart(true);
       propOrder.add(prop.getName());
 

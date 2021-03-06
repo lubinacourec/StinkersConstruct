@@ -699,7 +699,7 @@ public class TinkerSmeltery extends TinkerPulse {
       TinkerRegistry.registerTableCasting(new PreferenceCastingRecipe(ingotOre.getLeft(),
               RecipeMatch.ofNBT(castIngot),
               fluid,
-              ingotOre.getRight()));
+              Config.ingotValueCasting));
     }
 
     // nugget casting
@@ -707,7 +707,7 @@ public class TinkerSmeltery extends TinkerPulse {
       TinkerRegistry.registerTableCasting(new PreferenceCastingRecipe(nuggetOre.getLeft(),
               RecipeMatch.ofNBT(castNugget),
               fluid,
-              nuggetOre.getRight()));
+              Config.nuggetValueCasting));
     }
 
     // block casting
@@ -715,7 +715,7 @@ public class TinkerSmeltery extends TinkerPulse {
       TinkerRegistry.registerBasinCasting(new PreferenceCastingRecipe(blockOre.getLeft(),
               null, // no cast
               fluid,
-              blockOre.getRight()));
+              Config.blockValueCasting));
     }
 
     // plate casting
