@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.tools.common.client;
 
-import org.apache.commons.lang3.tuple.Pair;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.init.SoundEvents;
@@ -12,6 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import slimeknights.mantle.client.gui.GuiElement;
 import slimeknights.mantle.client.gui.GuiMultiModule;
@@ -27,93 +28,78 @@ import slimeknights.tconstruct.tools.common.network.TinkerStationTabPacket;
 
 @SideOnly(Side.CLIENT)
 // Takes care of the tinker station pseudo-multiblock
-public class GuiTinkerStation extends GuiMultiModule
-{
+public class GuiTinkerStation extends GuiMultiModule {
 
-    public static final ResourceLocation BLANK_BACK = Util.getResource("textures/gui/blank.png");
+  public static final ResourceLocation BLANK_BACK = Util.getResource("textures/gui/blank.png");
 
-    protected final ContainerMultiModule<?> container;
-    private final World world;
-    protected GuiTinkerTabs tinkerTabs;
+  protected final ContainerMultiModule<?> container;
 
-    public GuiTinkerStation(World world, BlockPos pos, ContainerTinkerStation<?> container)
-    {
-        super(container);
+  protected GuiTinkerTabs tinkerTabs;
+  private final World world;
 
-        this.world = world;
-        this.container = container;
+  public GuiTinkerStation(World world, BlockPos pos, ContainerTinkerStation<?> container) {
+    super(container);
 
-        tinkerTabs = new GuiTinkerTabs(this, container);
-        addModule(tinkerTabs);
+    this.world = world;
+    this.container = container;
 
-        // add tab data
-        if (container.hasCraftingStation)
-        {
-            for (Pair<BlockPos, IBlockState> pair : container.tinkerStationBlocks)
-            {
-                IBlockState state = pair.getRight();
-                BlockPos blockPos = pair.getLeft();
-                ItemStack stack = state.getBlock().getDrops(world, blockPos, state, 0).get(0);
-                tinkerTabs.addTab(stack, blockPos);
-            }
-        }
+    tinkerTabs = new GuiTinkerTabs(this, container);
+    addModule(tinkerTabs);
 
-        // preselect the correct tab
-        for (int i = 0; i < tinkerTabs.tabData.size(); i++)
-        {
-            if (tinkerTabs.tabData.get(i).equals(pos))
-            {
-                tinkerTabs.tabs.selected = i;
-            }
-        }
+    // add tab data
+    if(container.hasCraftingStation) {
+      for(Pair<BlockPos, IBlockState> pair : container.tinkerStationBlocks) {
+        IBlockState state = pair.getRight();
+        BlockPos blockPos = pair.getLeft();
+        ItemStack stack = state.getBlock().getDrops(world, blockPos, state, 0).get(0);
+        tinkerTabs.addTab(stack, blockPos);
+      }
     }
 
-    public void onTabSelection(int selection)
-    {
-        if (selection < 0 || selection > tinkerTabs.tabData.size())
-        {
-            return;
-        }
+    // preselect the correct tab
+    for(int i = 0; i < tinkerTabs.tabData.size(); i++) {
+      if(tinkerTabs.tabData.get(i).equals(pos)) {
+        tinkerTabs.tabs.selected = i;
+      }
+    }
+  }
 
-        BlockPos pos = tinkerTabs.tabData.get(selection);
-        IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof ITinkerStationBlock)
-        {
-            TileEntity te = world.getTileEntity(pos);
-            if (te instanceof IInventoryGui)
-            {
-                TinkerNetwork.sendToServer(new TinkerStationTabPacket(pos));
-            }
+  protected void drawIcon(Slot slot, GuiElement element) {
+    this.mc.getTextureManager().bindTexture(Icons.ICON);
+    element.draw(slot.xPos + this.cornerX - 1, slot.yPos + this.cornerY - 1);
+  }
 
-            // sound!
-            mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
-        }
+  protected void drawIconEmpty(Slot slot, GuiElement element) {
+    if(slot.getHasStack()) {
+      return;
+    }
+    drawIcon(slot, element);
+  }
+
+  public void onTabSelection(int selection) {
+    if(selection < 0 || selection > tinkerTabs.tabData.size()) {
+      return;
     }
 
-    public void error(String message)
-    {
-    }
+    BlockPos pos = tinkerTabs.tabData.get(selection);
+    IBlockState state = world.getBlockState(pos);
+    if(state.getBlock() instanceof ITinkerStationBlock) {
+      TileEntity te = world.getTileEntity(pos);
+      if(te instanceof IInventoryGui) {
+        TinkerNetwork.sendToServer(new TinkerStationTabPacket(pos));
+      }
 
-    public void warning(String message)
-    {
+      // sound!
+      mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
     }
+  }
 
-    public void updateDisplay()
-    {
-    }
+  public void error(String message) {
+  }
 
-    protected void drawIcon(Slot slot, GuiElement element)
-    {
-        this.mc.getTextureManager().bindTexture(Icons.ICON);
-        element.draw(slot.xPos + this.cornerX - 1, slot.yPos + this.cornerY - 1);
-    }
+  public void warning(String message) {
+  }
 
-    protected void drawIconEmpty(Slot slot, GuiElement element)
-    {
-        if (slot.getHasStack())
-        {
-            return;
-        }
-        drawIcon(slot, element);
-    }
+  public void updateDisplay() {
+  }
 }

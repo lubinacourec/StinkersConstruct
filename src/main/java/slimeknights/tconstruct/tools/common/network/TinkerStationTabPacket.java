@@ -18,78 +18,67 @@ import slimeknights.tconstruct.tools.common.block.ITinkerStationBlock;
 /**
  * Sent to the server when the user clicks on a tab in the TinkerStation GUI
  */
-public class TinkerStationTabPacket extends AbstractPacketThreadsafe
-{
+public class TinkerStationTabPacket extends AbstractPacketThreadsafe {
 
-    public int blockX;
-    public int blockY;
-    public int blockZ;
+  public int blockX;
+  public int blockY;
+  public int blockZ;
 
-    public TinkerStationTabPacket()
-    {
+  public TinkerStationTabPacket() {
+  }
+
+  @SideOnly(Side.CLIENT)
+  public TinkerStationTabPacket(BlockPos pos) {
+    this.blockX = pos.getX();
+    this.blockY = pos.getY();
+    this.blockZ = pos.getZ();
+  }
+
+  @Override
+  public void handleClientSafe(NetHandlerPlayClient netHandler) {
+    // Serverside only
+    throw new UnsupportedOperationException("Serverside only");
+  }
+
+  @Override
+  public void handleServerSafe(NetHandlerPlayServer netHandler) {
+    EntityPlayerMP player = netHandler.player;
+
+    ItemStack heldStack = null;
+    if(!player.inventory.getItemStack().isEmpty()) {
+      heldStack = player.inventory.getItemStack();
+      // set it to null so it's not getting dropped
+      player.inventory.setItemStack(ItemStack.EMPTY);
     }
 
-    @SideOnly(Side.CLIENT)
-    public TinkerStationTabPacket(BlockPos pos)
-    {
-        this.blockX = pos.getX();
-        this.blockY = pos.getY();
-        this.blockZ = pos.getZ();
+    BlockPos pos = new BlockPos(blockX, blockY, blockZ);
+    IBlockState state = player.getEntityWorld().getBlockState(pos);
+    if(state.getBlock() instanceof ITinkerStationBlock) {
+      ((ITinkerStationBlock) state.getBlock()).openGui(player, player.getEntityWorld(), pos);
+    }
+    else {
+      player.openGui(TConstruct.instance, 0, player.getEntityWorld(), blockX, blockY, blockZ);
     }
 
-    @Override
-    public void handleClientSafe(NetHandlerPlayClient netHandler)
-    {
-        // Serverside only
-        throw new UnsupportedOperationException("Serverside only");
+    // set held item again for the new container
+    if(heldStack != null) {
+      player.inventory.setItemStack(heldStack);
+      // also send it to the client
+      netHandler.sendPacket(new SPacketSetSlot(-1, -1, heldStack));
     }
+  }
 
-    @Override
-    public void handleServerSafe(NetHandlerPlayServer netHandler)
-    {
-        EntityPlayerMP player = netHandler.player;
+  @Override
+  public void fromBytes(ByteBuf buf) {
+    blockX = buf.readInt();
+    blockY = buf.readInt();
+    blockZ = buf.readInt();
+  }
 
-        ItemStack heldStack = null;
-        if (!player.inventory.getItemStack().isEmpty())
-        {
-            heldStack = player.inventory.getItemStack();
-            // set it to null so it's not getting dropped
-            player.inventory.setItemStack(ItemStack.EMPTY);
-        }
-
-        BlockPos pos = new BlockPos(blockX, blockY, blockZ);
-        IBlockState state = player.getEntityWorld().getBlockState(pos);
-        if (state.getBlock() instanceof ITinkerStationBlock)
-        {
-            ((ITinkerStationBlock) state.getBlock()).openGui(player, player.getEntityWorld(), pos);
-        }
-        else
-        {
-            player.openGui(TConstruct.instance, 0, player.getEntityWorld(), blockX, blockY, blockZ);
-        }
-
-        // set held item again for the new container
-        if (heldStack != null)
-        {
-            player.inventory.setItemStack(heldStack);
-            // also send it to the client
-            netHandler.sendPacket(new SPacketSetSlot(-1, -1, heldStack));
-        }
-    }
-
-    @Override
-    public void fromBytes(ByteBuf buf)
-    {
-        blockX = buf.readInt();
-        blockY = buf.readInt();
-        blockZ = buf.readInt();
-    }
-
-    @Override
-    public void toBytes(ByteBuf buf)
-    {
-        buf.writeInt(blockX);
-        buf.writeInt(blockY);
-        buf.writeInt(blockZ);
-    }
+  @Override
+  public void toBytes(ByteBuf buf) {
+    buf.writeInt(blockX);
+    buf.writeInt(blockY);
+    buf.writeInt(blockZ);
+  }
 }

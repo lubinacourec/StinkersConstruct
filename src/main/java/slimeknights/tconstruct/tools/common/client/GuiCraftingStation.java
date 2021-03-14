@@ -17,45 +17,38 @@ import slimeknights.tconstruct.tools.common.inventory.ContainerTinkerStation;
 import slimeknights.tconstruct.tools.common.tileentity.TileCraftingStation;
 
 @SideOnly(Side.CLIENT)
-public class GuiCraftingStation extends GuiTinkerStation
-{
+public class GuiCraftingStation extends GuiTinkerStation {
 
-    private static final ResourceLocation BACKGROUND = new ResourceLocation("textures/gui/container/crafting_table.png");
-    protected final TileCraftingStation tile;
+  private static final ResourceLocation BACKGROUND = new ResourceLocation("textures/gui/container/crafting_table.png");
+  protected final TileCraftingStation tile;
 
-    public GuiCraftingStation(InventoryPlayer playerInv, World world, BlockPos pos, TileCraftingStation tile)
-    {
-        super(world, pos, (ContainerTinkerStation) tile.createContainer(playerInv, world, pos));
+  public GuiCraftingStation(InventoryPlayer playerInv, World world, BlockPos pos, TileCraftingStation tile) {
+    super(world, pos, (ContainerTinkerStation) tile.createContainer(playerInv, world, pos));
 
-        this.tile = tile;
+    this.tile = tile;
 
-        if (inventorySlots instanceof ContainerCraftingStation)
-        {
-            ContainerCraftingStation container = (ContainerCraftingStation) inventorySlots;
-            ContainerSideInventory chestContainer = container.getSubContainer(ContainerSideInventory.class);
-            if (chestContainer != null)
-            {
-                if (chestContainer.getTile() instanceof TileEntityChest)
-                {
-                    // Fix: chests don't update their single/double chest status clientside once accessed
-                    ((TileEntityChest) chestContainer.getTile()).doubleChestHandler = null;
-                }
-                this.addModule(new GuiSideInventory(this, chestContainer, chestContainer.getSlotCount(), chestContainer.columns));
-            }
+    if(inventorySlots instanceof ContainerCraftingStation) {
+      ContainerCraftingStation container = (ContainerCraftingStation) inventorySlots;
+      ContainerSideInventory chestContainer = container.getSubContainer(ContainerSideInventory.class);
+      if(chestContainer != null) {
+        if(chestContainer.getTile() instanceof TileEntityChest) {
+          // Fix: chests don't update their single/double chest status clientside once accessed
+          ((TileEntityChest) chestContainer.getTile()).doubleChestHandler = null;
         }
+        this.addModule(new GuiSideInventory(this, chestContainer, chestContainer.getSlotCount(), chestContainer.columns));
+      }
     }
+  }
 
-    public boolean isSlotInChestInventory(Slot slot)
-    {
-        GuiModule module = getModuleForSlot(slot.slotNumber);
-        return module instanceof GuiSideInventory;
-    }
+  public boolean isSlotInChestInventory(Slot slot) {
+    GuiModule module = getModuleForSlot(slot.slotNumber);
+    return module instanceof GuiSideInventory;
+  }
 
-    @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-    {
-        drawBackground(BACKGROUND);
+  @Override
+  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    drawBackground(BACKGROUND);
 
-        super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-    }
+    super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+  }
 }

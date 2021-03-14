@@ -13,30 +13,27 @@ import slimeknights.tconstruct.tools.common.inventory.ContainerTinkerStation;
 import slimeknights.tconstruct.tools.common.tileentity.TilePartChest;
 
 @SideOnly(Side.CLIENT)
-public class GuiPartChest extends GuiTinkerStation
-{
+public class GuiPartChest extends GuiTinkerStation {
 
-    protected static final GuiElementScalable background = GuiGeneric.slotEmpty;
+  protected static final GuiElementScalable background = GuiGeneric.slotEmpty;
 
-    public GuiScalingChest guiInventory;
+  public GuiScalingChest guiInventory;
 
-    public GuiPartChest(InventoryPlayer playerInv, World world, BlockPos pos, TilePartChest tile)
-    {
-        super(world, pos, (ContainerTinkerStation) tile.createContainer(playerInv, world, pos));
+  public GuiPartChest(InventoryPlayer playerInv, World world, BlockPos pos, TilePartChest tile) {
+    super(world, pos, (ContainerTinkerStation) tile.createContainer(playerInv, world, pos));
 
-        // we use the sideinventory class for the inventory itself
-        // it doesn't contain the player inventory
-        guiInventory = new GuiScalingChest(this, container.getSubContainer(ContainerPartChest.DynamicChestInventory.class));
-        addModule(guiInventory);
-    }
+    // we use the sideinventory class for the inventory itself
+    // it doesn't contain the player inventory
+    guiInventory = new GuiScalingChest(this, container.getSubContainer(ContainerPartChest.DynamicChestInventory.class));
+    addModule(guiInventory);
+  }
 
-    @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-    {
-        drawBackground(BLANK_BACK);
+  @Override
+  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    drawBackground(BLANK_BACK);
 
-        guiInventory.update(mouseX, mouseY);
+    guiInventory.update(mouseX, mouseY);
 
-        super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-    }
+    super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+  }
 }

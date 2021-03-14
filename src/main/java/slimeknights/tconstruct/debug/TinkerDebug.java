@@ -1,9 +1,7 @@
 package slimeknights.tconstruct.debug;
 
-import java.util.Map;
-
 import com.google.common.eventbus.Subscribe;
-import org.apache.logging.log4j.Logger;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -21,6 +19,9 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Map;
 
 import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.tconstruct.common.config.Config;
@@ -30,146 +31,115 @@ import slimeknights.tconstruct.library.modifiers.IModifier;
 import slimeknights.tconstruct.library.utils.ListUtil;
 
 @Pulse(id = TinkerDebug.PulseId, description = "Debug utilities", defaultEnable = false)
-public class TinkerDebug
-{
+public class TinkerDebug {
 
-    public static final String PulseId = "TinkerDebug";
-    static final Logger log = Util.getLogger(PulseId);
+  public static final String PulseId = "TinkerDebug";
+  static final Logger log = Util.getLogger(PulseId);
 
-    public static void sanityCheck()
-    {
-        // check all modifiers if they can be applied
-        for (IModifier modifier : TinkerRegistry.getAllModifiers())
-        {
-            try
-            {
-                modifier.matches(ListUtil.getListFrom(new ItemStack(Items.STICK)));
-                modifier.matches(NonNullList.withSize(1, ItemStack.EMPTY));
-            }
-            catch (Exception e)
-            {
-                log.error("Caught exception in modifier " + modifier.getIdentifier(), e);
-            }
-        }
+  @Subscribe
+  public void preInit(FMLPreInitializationEvent event) {
+    if(Config.dumpTextureMap) {
+      MinecraftForge.EVENT_BUS.register(new TextureDump());
+    }
+  }
 
-        // check all blocks if all metadatas are supported
-        for (ResourceLocation identifier : Block.REGISTRY.getKeys())
-        {
-            // only our own stuff
-            if (!identifier.getResourceDomain().equals(Util.RESOURCE))
-            {
-                continue;
-            }
+  @SubscribeEvent
+  public void testSmelteryIMC(Register<Item> event) {
+    if(Config.testIMC) {
+      TestIMC.integrateSmeltery();
+    }
+  }
 
-            Block block = Block.REGISTRY.getObject(identifier);
-            for (int i = 0; i < 16; i++)
-            {
-                try
-                {
-                    IBlockState state = block.getStateFromMeta(i);
-                    state.getBlock().getMetaFromState(state);
-                }
-                catch (Exception e)
-                {
-                    log.error("Caught exception when checking block " + identifier + ":" + i, e);
-                }
-            }
-        }
+  @Subscribe
+  public void init(FMLInitializationEvent event) {
+    if(Config.testIMC) {
+      TestIMC.testAll();
+    }
+  }
 
-        // same for items
-        for (ResourceLocation identifier : Item.REGISTRY.getKeys())
-        {
-            // only our own stuff
-            if (!identifier.getResourceDomain().equals(Util.RESOURCE))
-            {
-                continue;
-            }
+  @Subscribe
+  public void postInit(FMLPostInitializationEvent event) {
+    if(event.getSide().isClient()) {
+      ClientCommandHandler.instance.registerCommand(new ReloadResources());
+    }
+  }
 
-            Item item = Item.REGISTRY.getObject(identifier);
-            for (int i = 0; i < 0x7FFF; i++)
-            {
-                try
-                {
-                    item.getMetadata(i);
-                }
-                catch (Exception e)
-                {
-                    log.error("Caught exception when checking item " + identifier + ":" + i, e);
-                }
-            }
-        }
+  @Subscribe
+  public void serverStart(FMLServerStartingEvent event) {
+    event.registerServerCommand(new DamageTool());
+    event.registerServerCommand(new TestTool());
+    event.registerServerCommand(new GenValidModifiers());
+    event.registerServerCommand(new BreakTool());
 
-        // check for broken unsavable fluids
-        for (Map.Entry<String, Fluid> entry : FluidRegistry.getRegisteredFluids().entrySet())
-        {
-            if (entry.getKey() == null || entry.getKey().isEmpty())
-            {
-                log.error("Fluid " + entry.getValue().getUnlocalizedName() + " has an empty name registered!");
-            }
-            String name = FluidRegistry.getFluidName(entry.getValue());
-            if (name == null || name.isEmpty())
-            {
-                log.error("Fluid " + entry.getValue().getUnlocalizedName() + " is registered with an empty name!");
-            }
-        }
-
-        log.info("Sanity Check Complete");
+    if(event.getSide().isClient()) {
+      ClientCommandHandler.instance.registerCommand(new LocalizationCheckCommand());
+      ClientCommandHandler.instance.registerCommand(new DumpMaterialTest());
+      ClientCommandHandler.instance.registerCommand(new FindBestTool());
+      ClientCommandHandler.instance.registerCommand(new GetToolGrowth());
+      ClientCommandHandler.instance.registerCommand(new CompareVanilla());
+      ClientCommandHandler.instance.registerCommand(new ListValidModifiers());
     }
 
-    @Subscribe
-    public void preInit(FMLPreInitializationEvent event)
-    {
-        if (Config.dumpTextureMap)
-        {
-            MinecraftForge.EVENT_BUS.register(new TextureDump());
-        }
+    sanityCheck();
+  }
+
+  public static void sanityCheck() {
+    // check all modifiers if they can be applied
+    for(IModifier modifier : TinkerRegistry.getAllModifiers()) {
+      try {
+        modifier.matches(ListUtil.getListFrom(new ItemStack(Items.STICK)));
+        modifier.matches(NonNullList.withSize(1, ItemStack.EMPTY));
+      } catch(Exception e) {
+        log.error("Caught exception in modifier " + modifier.getIdentifier(), e);
+      }
     }
 
-    @SubscribeEvent
-    public void testSmelteryIMC(Register<Item> event)
-    {
-        if (Config.testIMC)
-        {
-            TestIMC.integrateSmeltery();
+    // check all blocks if all metadatas are supported
+    for(ResourceLocation identifier : Block.REGISTRY.getKeys()) {
+      // only our own stuff
+      if(!identifier.getResourceDomain().equals(Util.RESOURCE)) {
+        continue;
+      }
+
+      Block block = Block.REGISTRY.getObject(identifier);
+      for(int i = 0; i < 16; i++) {
+        try {
+          IBlockState state = block.getStateFromMeta(i);
+          state.getBlock().getMetaFromState(state);
+        } catch(Exception e) {
+          log.error("Caught exception when checking block " + identifier + ":" + i, e);
         }
+      }
     }
 
-    @Subscribe
-    public void init(FMLInitializationEvent event)
-    {
-        if (Config.testIMC)
-        {
-            TestIMC.testAll();
+    // same for items
+    for(ResourceLocation identifier : Item.REGISTRY.getKeys()) {
+      // only our own stuff
+      if(!identifier.getResourceDomain().equals(Util.RESOURCE)) {
+        continue;
+      }
+
+      Item item = Item.REGISTRY.getObject(identifier);
+      for(int i = 0; i < 0x7FFF; i++) {
+        try {
+          item.getMetadata(i);
+        } catch(Exception e) {
+          log.error("Caught exception when checking item " + identifier + ":" + i, e);
         }
+      }
     }
 
-    @Subscribe
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        if (event.getSide().isClient())
-        {
-            ClientCommandHandler.instance.registerCommand(new ReloadResources());
-        }
+    // check for broken unsavable fluids
+    for(Map.Entry<String, Fluid> entry : FluidRegistry.getRegisteredFluids().entrySet()) {
+      if(entry.getKey() == null || entry.getKey().isEmpty()) {
+        log.error("Fluid " + entry.getValue().getUnlocalizedName() + " has an empty name registered!");
+      }
+      String name = FluidRegistry.getFluidName(entry.getValue());
+      if(name == null || name.isEmpty()) {
+        log.error("Fluid " + entry.getValue().getUnlocalizedName() + " is registered with an empty name!");
+      }
     }
 
-    @Subscribe
-    public void serverStart(FMLServerStartingEvent event)
-    {
-        event.registerServerCommand(new DamageTool());
-        event.registerServerCommand(new TestTool());
-        event.registerServerCommand(new GenValidModifiers());
-        event.registerServerCommand(new BreakTool());
-
-        if (event.getSide().isClient())
-        {
-            ClientCommandHandler.instance.registerCommand(new LocalizationCheckCommand());
-            ClientCommandHandler.instance.registerCommand(new DumpMaterialTest());
-            ClientCommandHandler.instance.registerCommand(new FindBestTool());
-            ClientCommandHandler.instance.registerCommand(new GetToolGrowth());
-            ClientCommandHandler.instance.registerCommand(new CompareVanilla());
-            ClientCommandHandler.instance.registerCommand(new ListValidModifiers());
-        }
-
-        sanityCheck();
-    }
+    log.info("Sanity Check Complete");
+  }
 }

@@ -15,30 +15,29 @@ import slimeknights.tconstruct.tools.common.inventory.ContainerTinkerStation;
 import slimeknights.tconstruct.tools.common.tileentity.TilePatternChest;
 
 @SideOnly(Side.CLIENT)
-public class GuiPatternChest extends GuiTinkerStation
-{
+public class GuiPatternChest extends GuiTinkerStation {
 
-    protected static final GuiElementScalable background = GuiGeneric.slotEmpty;
-    private static final ResourceLocation BACKGROUND = Util.getResource("textures/gui/blank.png");
-    public GuiScalingChest guiInventory;
+  private static final ResourceLocation BACKGROUND = Util.getResource("textures/gui/blank.png");
 
-    public GuiPatternChest(InventoryPlayer playerInv, World world, BlockPos pos, TilePatternChest tile)
-    {
-        super(world, pos, (ContainerTinkerStation<TilePatternChest>) tile.createContainer(playerInv, world, pos));
+  protected static final GuiElementScalable background = GuiGeneric.slotEmpty;
 
-        // we use the sideinventory class for the inventory itself
-        // it doesn't contain the player inventory
-        guiInventory = new GuiScalingChest(this, container.getSubContainer(ContainerPatternChest.DynamicChestInventory.class));
-        addModule(guiInventory);
-    }
+  public GuiScalingChest guiInventory;
 
-    @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-    {
-        drawBackground(BACKGROUND);
+  public GuiPatternChest(InventoryPlayer playerInv, World world, BlockPos pos, TilePatternChest tile) {
+    super(world, pos, (ContainerTinkerStation<TilePatternChest>) tile.createContainer(playerInv, world, pos));
 
-        guiInventory.update(mouseX, mouseY);
+    // we use the sideinventory class for the inventory itself
+    // it doesn't contain the player inventory
+    guiInventory = new GuiScalingChest(this, container.getSubContainer(ContainerPatternChest.DynamicChestInventory.class));
+    addModule(guiInventory);
+  }
 
-        super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-    }
+  @Override
+  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    drawBackground(BACKGROUND);
+
+    guiInventory.update(mouseX, mouseY);
+
+    super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+  }
 }
