@@ -18,46 +18,51 @@ import slimeknights.tconstruct.tools.common.network.StencilTableSelectionPacket;
 import slimeknights.tconstruct.tools.common.tileentity.TileStencilTable;
 
 @SideOnly(Side.CLIENT)
-public class GuiStencilTable extends GuiTinkerStation {
+public class GuiStencilTable extends GuiTinkerStation
+{
 
-  private static final ResourceLocation BACKGROUND = Util.getResource("textures/gui/stenciltable.png");
+    public static final int Column_Count = 4;
+    private static final ResourceLocation BACKGROUND = Util.getResource("textures/gui/stenciltable.png");
+    protected GuiButtonsStencilTable buttons;
+    protected GuiSideInventory sideInventory;
+    protected ContainerPatternChest.DynamicChestInventory chestContainer;
 
-  public static final int Column_Count = 4;
+    public GuiStencilTable(InventoryPlayer playerInv, World world, BlockPos pos, TileStencilTable tile)
+    {
+        super(world, pos, (ContainerTinkerStation) tile.createContainer(playerInv, world, pos));
 
-  protected GuiButtonsStencilTable buttons;
-  protected GuiSideInventory sideInventory;
-  protected ContainerPatternChest.DynamicChestInventory chestContainer;
+        buttons = new GuiButtonsStencilTable(this, inventorySlots, false);
+        this.addModule(buttons);
 
-  public GuiStencilTable(InventoryPlayer playerInv, World world, BlockPos pos, TileStencilTable tile) {
-    super(world, pos, (ContainerTinkerStation) tile.createContainer(playerInv, world, pos));
-
-    buttons = new GuiButtonsStencilTable(this, inventorySlots, false);
-    this.addModule(buttons);
-
-    if(inventorySlots instanceof ContainerStencilTable) {
-      ContainerStencilTable container = (ContainerStencilTable) inventorySlots;
-      chestContainer = container.getSubContainer(ContainerPatternChest.DynamicChestInventory.class);
-      if(chestContainer != null) {
-        sideInventory = new GuiSideInventory(this, chestContainer, chestContainer.getSizeInventory(), chestContainer.columns, true, false);
-        this.addModule(sideInventory);
-      }
-    }
-  }
-
-  public void onSelectionPacket(StencilTableSelectionPacket packet) {
-    buttons.setSelectedbuttonByItem(packet.output);
-  }
-
-  @Override
-  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    drawBackground(BACKGROUND);
-
-    if(sideInventory != null) {
-      sideInventory.updateSlotCount(chestContainer.getSizeInventory());
+        if (inventorySlots instanceof ContainerStencilTable)
+        {
+            ContainerStencilTable container = (ContainerStencilTable) inventorySlots;
+            chestContainer = container.getSubContainer(ContainerPatternChest.DynamicChestInventory.class);
+            if (chestContainer != null)
+            {
+                sideInventory = new GuiSideInventory(this, chestContainer, chestContainer.getSizeInventory(), chestContainer.columns, true, false);
+                this.addModule(sideInventory);
+            }
+        }
     }
 
-    drawIcon(inventorySlots.getSlot(0), Icons.ICON_Pattern);
+    public void onSelectionPacket(StencilTableSelectionPacket packet)
+    {
+        buttons.setSelectedbuttonByItem(packet.output);
+    }
 
-    super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-  }
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+    {
+        drawBackground(BACKGROUND);
+
+        if (sideInventory != null)
+        {
+            sideInventory.updateSlotCount(chestContainer.getSizeInventory());
+        }
+
+        drawIcon(inventorySlots.getSlot(0), Icons.ICON_Pattern);
+
+        super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+    }
 }
