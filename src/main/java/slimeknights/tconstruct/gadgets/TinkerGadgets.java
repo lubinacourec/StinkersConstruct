@@ -26,6 +26,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import org.apache.logging.log4j.Logger;
 
+import net.dries007.tfc.objects.fluids.FluidsTFC;
 import slimeknights.mantle.item.ItemMetaDynamic;
 import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.mantle.util.RecipeMatch;
@@ -237,7 +238,11 @@ public class TinkerGadgets extends TinkerPulse {
     modSpaghettiMeat.addRecipeMatch(new RecipeMatch.ItemCombination(1, new ItemStack(Items.COOKED_BEEF), new ItemStack(Items.COOKED_CHICKEN), new ItemStack(Items.COOKED_MUTTON), new ItemStack(Items.COOKED_PORKCHOP)));
 
     // Recipe for mom's spaghetti: soak em, dry em, cook em, eat em
-    TinkerRegistry.registerTableCasting(new CastingRecipe(wetSpaghetti, RecipeMatch.of(hardSpaghetti), new FluidStack(FluidRegistry.WATER, Fluid.BUCKET_VOLUME * 3), 15 * 60 * 20, true, false));
+    if(TConstruct.instance.tfc) {
+      TinkerRegistry.registerTableCasting(new CastingRecipe(wetSpaghetti, RecipeMatch.of(hardSpaghetti), new FluidStack(FluidsTFC.FRESH_WATER.get(), Fluid.BUCKET_VOLUME * 3), 15 * 60 * 20, true, false));
+    } else {
+      TinkerRegistry.registerTableCasting(new CastingRecipe(wetSpaghetti, RecipeMatch.of(hardSpaghetti), new FluidStack(FluidRegistry.WATER, Fluid.BUCKET_VOLUME * 3), 15 * 60 * 20, true, false));
+    }
     TinkerRegistry.registerDryingRecipe(wetSpaghetti, coldSpaghetti, 15 * 60 * 20);
     GameRegistry.addSmelting(coldSpaghetti, new ItemStack(momsSpaghetti), 2.0f);
 

@@ -38,11 +38,14 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.Logger;
+
+import net.dries007.tfc.objects.fluids.FluidsTFC;
 import slimeknights.mantle.block.EnumBlock;
 import slimeknights.mantle.item.ItemBlockMeta;
 import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.mantle.util.RecipeMatchRegistry;
+import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.TinkerIntegration;
 import slimeknights.tconstruct.common.CommonProxy;
 import slimeknights.tconstruct.common.TinkerPulse;
@@ -353,11 +356,19 @@ public class TinkerSmeltery extends TinkerPulse {
     TinkerRegistry.registerTableCasting(new BucketCastingRecipe(Items.BUCKET));
 
     // Water
-    Fluid water = FluidRegistry.WATER;
-    TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(Blocks.ICE, bucket), water, 305));
-    TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(Blocks.PACKED_ICE, bucket * 2), water, 310));
-    TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(Blocks.SNOW, bucket), water, 305));
-    TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(Items.SNOWBALL, bucket / 8), water, 301));
+    if(TConstruct.instance.tfc) {
+      Fluid water = FluidsTFC.FRESH_WATER.get();
+      TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(Blocks.ICE, bucket), water, 305));
+      TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(Blocks.PACKED_ICE, bucket * 2), water, 310));
+      TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(Blocks.SNOW, bucket), water, 305));
+      TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(Items.SNOWBALL, bucket / 8), water, 301));
+    } else {
+      Fluid water = FluidRegistry.WATER;
+      TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(Blocks.ICE, bucket), water, 305));
+      TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(Blocks.PACKED_ICE, bucket * 2), water, 310));
+      TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(Blocks.SNOW, bucket), water, 305));
+      TinkerRegistry.registerMelting(new MeltingRecipe(RecipeMatch.of(Items.SNOWBALL, bucket / 8), water, 301));
+    }
 
     // bloooooood
     TinkerRegistry.registerMelting(Items.ROTTEN_FLESH, TinkerFluids.blood, 40);
@@ -455,13 +466,23 @@ public class TinkerSmeltery extends TinkerPulse {
     //TinkerRegistry.registerMelting(Blocks.stained_hardened_clay, TinkerFluids.clay, Material.VALUE_BrickBlock);
     TinkerRegistry.registerBasinCasting(new ItemStack(Blocks.HARDENED_CLAY), ItemStack.EMPTY, TinkerFluids.clay, Material.VALUE_BrickBlock);
     // funny thing about hardened clay. If it's stained and you wash it with water, it turns back into regular hardened clay!
-    TinkerRegistry.registerBasinCasting(new CastingRecipe(
-                                                          new ItemStack(Blocks.HARDENED_CLAY),
-                                                          RecipeMatch.of(new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, OreDictionary.WILDCARD_VALUE)),
-                                                          new FluidStack(FluidRegistry.WATER, 250),
-                                                          150,
-                                                          true,
-                                                          false));
+    if(TConstruct.instance.tfc) {
+          TinkerRegistry.registerBasinCasting(new CastingRecipe(
+          new ItemStack(Blocks.HARDENED_CLAY),
+          RecipeMatch.of(new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, OreDictionary.WILDCARD_VALUE)),
+          new FluidStack(FluidsTFC.FRESH_WATER.get(), 250),
+          150,
+          true,
+          false));
+    } else {
+          TinkerRegistry.registerBasinCasting(new CastingRecipe(
+          new ItemStack(Blocks.HARDENED_CLAY),
+          RecipeMatch.of(new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, OreDictionary.WILDCARD_VALUE)),
+          new FluidStack(FluidRegistry.WATER, 250),
+          150,
+          true,
+          false));
+    }
     // let's allow bricks because we're nice
     if(Config.castableBricks) {
       TinkerRegistry.registerTableCasting(new ItemStack(Items.BRICK), castIngot, TinkerFluids.clay, Material.VALUE_Ingot);
@@ -500,7 +521,11 @@ public class TinkerSmeltery extends TinkerPulse {
 
     // melt entities into a pulp
     TinkerRegistry.registerEntityMelting(EntityIronGolem.class, new FluidStack(TinkerFluids.iron, 18));
-    TinkerRegistry.registerEntityMelting(EntitySnowman.class, new FluidStack(FluidRegistry.WATER, 100));
+    if(TConstruct.instance.tfc) {
+      TinkerRegistry.registerEntityMelting(EntitySnowman.class, new FluidStack(FluidsTFC.FRESH_WATER.get(), 100));
+    } else {
+      TinkerRegistry.registerEntityMelting(EntitySnowman.class, new FluidStack(FluidRegistry.WATER, 100));
+    }
     TinkerRegistry.registerEntityMelting(EntityVillager.class, new FluidStack(TinkerFluids.emerald, 6));
     TinkerRegistry.registerEntityMelting(EntityVindicator.class, new FluidStack(TinkerFluids.emerald, 6));
     TinkerRegistry.registerEntityMelting(EntityEvoker.class, new FluidStack(TinkerFluids.emerald, 6));
@@ -519,18 +544,31 @@ public class TinkerSmeltery extends TinkerPulse {
     // 1000 + 1000 = 288
     // 125 + 125 = 36
     if(Config.obsidianAlloy) {
-      TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.obsidian, 36),
-                                   new FluidStack(FluidRegistry.WATER, 125),
-                                   new FluidStack(FluidRegistry.LAVA, 125));
+      if(TConstruct.instance.tfc) {
+        TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.obsidian, 36),
+            new FluidStack(FluidsTFC.FRESH_WATER.get(), 125),
+            new FluidStack(FluidRegistry.LAVA, 125));
+      } else {
+        TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.obsidian, 36),
+            new FluidStack(FluidRegistry.WATER, 125),
+            new FluidStack(FluidRegistry.LAVA, 125));
+      }
     }
 
     // 1 bucket water + 4 seared ingot + 4 mud bricks = 1 block hardened clay
     // 1000 + 288 + 576 = 576
     // 250 + 72 + 144 = 144
-    TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.clay, Config.ingotValue),
-                                 new FluidStack(FluidRegistry.WATER, 250),
-                                 new FluidStack(TinkerFluids.searedStone, Config.ingotValue / 2),
-                                 new FluidStack(TinkerFluids.dirt, Config.ingotValue));
+    if(TConstruct.instance.tfc) {
+      TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.clay, Config.ingotValue),
+          new FluidStack(FluidsTFC.FRESH_WATER.get(), 250),
+          new FluidStack(TinkerFluids.searedStone, Config.ingotValue / 2),
+          new FluidStack(TinkerFluids.dirt, Config.ingotValue));
+    } else {
+      TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.clay, Config.ingotValue),
+          new FluidStack(FluidRegistry.WATER, 250),
+          new FluidStack(TinkerFluids.searedStone, Config.ingotValue / 2),
+          new FluidStack(TinkerFluids.dirt, Config.ingotValue));
+    }
 
     // 1 iron ingot + 1 purple slime ball + seared stone in molten form = 1 knightslime ingot
     // 144 + 250 + 288 = 144
