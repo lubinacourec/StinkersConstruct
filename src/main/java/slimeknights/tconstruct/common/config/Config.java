@@ -29,7 +29,6 @@ public final class Config {
   private Config() {
   }
 
-
   public static boolean forceRegisterAll = false; // enables all common items, even if their module is not present
 
   // Tools and general

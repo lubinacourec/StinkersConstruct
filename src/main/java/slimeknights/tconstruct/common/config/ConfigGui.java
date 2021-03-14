@@ -26,12 +26,12 @@ public class ConfigGui extends GuiConfig {
 
     list.add(new ConfigElement(Config.Modules));
     list.add(new ConfigElement(Config.Gameplay));
+    list.add(new ConfigElement(Config.Values));
     list.add(new ConfigElement(Config.Worldgen));
     list.add(new ConfigElement(Config.ClientSide));
 
     return list;
   }
-
 
   public static class ConfigGuiFactory implements IModGuiFactory {
 
