@@ -43,6 +43,7 @@ public final class Config {
   public static boolean castableBricks = true;
   public static boolean leatherDryingRecipe = true;
   public static boolean gravelFlintRecipe = true;
+
   public static int ingotValue = 100;
   public static int ingotValueCasting = 100;
   public static int nuggetValue = 10;
@@ -52,19 +53,27 @@ public final class Config {
   public static int gemValue = 666;
   public static int blockValue = 900;
   public static int blockValueCasting = 900;
+  public static int gearValue = 400;
+  public static int gearValueCasting = 400;
+  public static int plateValue = 100;
+  public static int plateValueCasting = 100;
   public static double oreToIngotRatio = 2;
+
   public static boolean matchVanillaSlimeblock = false;
   public static boolean limitPiggybackpack = false;
   public static boolean clearGlassSilkTouch = true;
   public static boolean meltingOreDict = true;
   public static boolean meltingToolpart = true;
+
+  public static boolean castingBlock = true;
+  public static boolean castingCast = true;
+  public static boolean castingGear = true;
+  public static boolean castingGem = true;
   public static boolean castingIngot = true;
   public static boolean castingNugget = true;
-  public static boolean castingBlock = true;
   public static boolean castingPlate = true;
-  public static boolean castingGear = true;
   public static boolean castingToolpart = true;
-  public static boolean castingCast = true;
+
   private static String[] craftingStationBlacklistArray = new String[] {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
   };
@@ -117,6 +126,7 @@ public final class Config {
 
   static ConfigCategory Modules;
   static ConfigCategory Gameplay;
+  static ConfigCategory Values;
   static ConfigCategory Worldgen;
   static ConfigCategory ClientSide;
 
@@ -223,67 +233,6 @@ public final class Config {
       prop.setRequiresMcRestart(true);
       propOrder.add(prop.getName());
 
-      prop = configFile.get(cat, "ingotValue", ingotValue);
-      prop.setComment("How much ingots are \"worth\", this value is used for melting.");
-      ingotValue = prop.getInt();
-      prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "ingotValueCasting", ingotValueCasting);
-      prop.setComment("How much ingots are \"worth\", this value is used for cost calculation and casting.");
-      ingotValueCasting = prop.getInt();
-      prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "nuggetValue", nuggetValue);
-      prop.setComment("How much nuggets are \"worth\", this value is used for melting.");
-      nuggetValue = prop.getInt();
-      prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "nuggetValueCasting", nuggetValueCasting);
-      prop.setComment("How much nuggets are \"worth\", this value is used for cost calculation and casting.");
-      nuggetValueCasting = prop.getInt();
-      prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "fragmentValue", fragmentValue);
-      prop.setComment("How much fragments are \"worth\", this value is used for both liquid conversion as well as part crafting.");
-      fragmentValue = prop.getInt();
-      prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "shardValue", shardValue);
-      prop.setComment("How much shards are \"worth\", this value is used for both liquid conversion as well as part crafting.");
-      shardValue = prop.getInt();
-      prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "gemValue", gemValue);
-      prop.setComment("How much gems are \"worth\", this value is used for both liquid conversion as well as part crafting.");
-      gemValue = prop.getInt();
-      prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "blockValue", blockValue);
-      prop.setComment("How much blocks are \"worth\", this value is used for melting.");
-      blockValue = prop.getInt();
-      prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "blockValueCasting", blockValueCasting);
-      prop.setComment("How much blocks are \"worth\", this value is used for cost calculation and casting.");
-      blockValueCasting = prop.getInt();
-      prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "oreToIngotRatio", oreToIngotRatio);
-      prop.setComment("Determines the ratio of ore to ingot, or in other words how many ingots you get out of an ore. This ratio applies to all ores (including poor and dense). The ratio can be any decimal, including 1.5 and the like, but can't go below 1. THIS ALSO AFFECTS MELTING TEMPERATURE!");
-      prop.setMinValue(1);
-      oreToIngotRatio = prop.getDouble();
-      prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
-
       prop = configFile.get(cat, "matchVanillaSlimeblock", matchVanillaSlimeblock);
       prop.setComment("If true, requires slimeballs in the vanilla slimeblock recipe to match in color, otherwise gives a pink slimeblock.");
       matchVanillaSlimeblock = prop.getBoolean();
@@ -365,6 +314,97 @@ public final class Config {
       prop = configFile.get(cat, "testIMC", testIMC);
       prop.setComment("REQUIRES DEBUG MODULE. Tests all IMC integrations with dummy recipes. May significantly impact gameplay, so its advised you disable this outside of dev environements.");
       testIMC = prop.getBoolean();
+      propOrder.add(prop.getName());
+    }
+    // Values
+    {
+      String cat = "values";
+      List<String> propOrder = Lists.newArrayList();
+      Values = configFile.getCategory(cat);
+
+      prop = configFile.get(cat, "ingotValue", ingotValue);
+      prop.setComment("How much ingots are \"worth\", this value is used for melting.");
+      ingotValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "ingotValueCasting", ingotValueCasting);
+      prop.setComment("How much ingots are \"worth\", this value is used for cost calculation and casting.");
+      ingotValueCasting = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "nuggetValue", nuggetValue);
+      prop.setComment("How much nuggets are \"worth\", this value is used for melting.");
+      nuggetValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "nuggetValueCasting", nuggetValueCasting);
+      prop.setComment("How much nuggets are \"worth\", this value is used for cost calculation and casting.");
+      nuggetValueCasting = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "fragmentValue", fragmentValue);
+      prop.setComment("How much fragments are \"worth\", this value is used for both liquid conversion as well as part crafting.");
+      fragmentValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "shardValue", shardValue);
+      prop.setComment("How much shards are \"worth\", this value is used for both liquid conversion as well as part crafting.");
+      shardValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "gemValue", gemValue);
+      prop.setComment("How much gems are \"worth\", this value is used for both liquid conversion as well as part crafting.");
+      gemValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "blockValue", blockValue);
+      prop.setComment("How much blocks are \"worth\", this value is used for melting.");
+      blockValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "blockValueCasting", blockValueCasting);
+      prop.setComment("How much blocks are \"worth\", this value is used for cost calculation and casting.");
+      blockValueCasting = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "gearValue", gearValue);
+      prop.setComment("How much gears are \"worth\", this value is used for melting.");
+      gearValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "gearValueCasting", gearValueCasting);
+      prop.setComment("How much gears are \"worth\", this value is used for cost calculation and casting.");
+      gearValueCasting = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "plateValue", plateValue);
+      prop.setComment("How much plates are \"worth\", this value is used for melting.");
+      plateValue = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "plateValueCasting", plateValueCasting);
+      prop.setComment("How much plates are \"worth\", this value is used for cost calculation and casting.");
+      plateValueCasting = prop.getInt();
+      prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "oreToIngotRatio", oreToIngotRatio);
+      prop.setComment("Determines the ratio of ore to ingot, or in other words how many ingots you get out of an ore. This ratio applies to all ores (including poor and dense). The ratio can be any decimal, including 1.5 and the like, but can't go below 1. THIS ALSO AFFECTS MELTING TEMPERATURE!");
+      prop.setMinValue(1);
+      oreToIngotRatio = prop.getDouble();
+      prop.setRequiresMcRestart(true);
       propOrder.add(prop.getName());
     }
     // Worldgen

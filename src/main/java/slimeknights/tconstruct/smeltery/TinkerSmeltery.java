@@ -237,12 +237,11 @@ public class TinkerSmeltery extends TinkerPulse {
 
     cast = registerItem(registry, new Cast(), "cast");
     castCustom = registerItem(registry, new CastCustom(), "cast_custom");
+    castGear = castCustom.addMeta(4, "gear", Material.VALUE_Gear);
+    castGem = castCustom.addMeta(2, "gem", Material.VALUE_Gem);
     castIngot = castCustom.addMeta(0, "ingot", Material.VALUE_Ingot);
     castNugget = castCustom.addMeta(1, "nugget", Material.VALUE_Nugget);
-    castGem = castCustom.addMeta(2, "gem", Material.VALUE_Gem);
-    castPlate = castCustom.addMeta(3, "plate", Material.VALUE_Ingot);
-    castGear = castCustom.addMeta(4, "gear", Material.VALUE_Ingot * 4);
-
+    castPlate = castCustom.addMeta(3, "plate", Material.VALUE_Plate);
     clayCast = registerItem(registry, new Cast(), "clay_cast");
 
     if(TinkerRegistry.getShard() != null) {
@@ -683,8 +682,8 @@ public class TinkerSmeltery extends TinkerPulse {
     Pair<String, Integer> oreDenseOre = Pair.of("denseore" + ore, (int) (3 * Material.VALUE_Ingot * Config.oreToIngotRatio));
     Pair<String, Integer> orePoorOre = Pair.of("orePoor" + ore, (int) (Material.VALUE_Nugget * 3 * Config.oreToIngotRatio));
     Pair<String, Integer> oreNuggetOre = Pair.of("oreNugget" + ore, (int) (Material.VALUE_Nugget * Config.oreToIngotRatio));
-    Pair<String, Integer> plateOre = Pair.of("plate" + ore, Material.VALUE_Ingot);
-    Pair<String, Integer> gearOre = Pair.of("gear" + ore, Material.VALUE_Ingot * 4);
+    Pair<String, Integer> plateOre = Pair.of("plate" + ore, Material.VALUE_Plate);
+    Pair<String, Integer> gearOre = Pair.of("gear" + ore, Material.VALUE_Gear);
     Pair<String, Integer> dustOre = Pair.of("dust" + ore, Material.VALUE_Ingot);
 
     builder.add(nuggetOre, ingotOre, blockOre, oreOre, oreNetherOre, oreDenseOre, orePoorOre, oreNuggetOre, plateOre, gearOre, dustOre);
@@ -723,7 +722,7 @@ public class TinkerSmeltery extends TinkerPulse {
       TinkerRegistry.registerTableCasting(new PreferenceCastingRecipe(plateOre.getLeft(),
               RecipeMatch.ofNBT(castPlate),
               fluid,
-              plateOre.getRight()));
+              Config.plateValueCasting));
     }
 
     // gear casting
@@ -731,7 +730,7 @@ public class TinkerSmeltery extends TinkerPulse {
         TinkerRegistry.registerTableCasting(new PreferenceCastingRecipe(gearOre.getLeft(),
                 RecipeMatch.ofNBT(castGear),
                 fluid,
-                gearOre.getRight()));
+                Config.gearValueCasting));
       }
 
     // and also cast creation!
