@@ -15,53 +15,44 @@ import slimeknights.tconstruct.library.utils.ToolHelper;
 import slimeknights.tconstruct.shared.client.ParticleEffect;
 import slimeknights.tconstruct.tools.TinkerTools;
 
-public class TraitSpiky extends AbstractTrait
-{
+public class TraitSpiky extends AbstractTrait {
 
-    public TraitSpiky()
-    {
-        super("spiky", TextFormatting.DARK_GREEN);
-        MinecraftForge.EVENT_BUS.register(this);
+  public TraitSpiky() {
+    super("spiky", TextFormatting.DARK_GREEN);
+    MinecraftForge.EVENT_BUS.register(this);
+  }
+
+  @Override
+  public void onPlayerHurt(ItemStack tool, EntityPlayer player, EntityLivingBase attacker, LivingHurtEvent event) {
+    dealSpikyDamage(false, tool, player, attacker, event);
+  }
+
+  @Override
+  public void onBlock(ItemStack tool, EntityPlayer player, LivingHurtEvent event) {
+    Entity target = event.getSource().getTrueSource();
+    dealSpikyDamage(true, tool, player, target, event);
+  }
+
+  private void dealSpikyDamage(boolean isBlocking, ItemStack tool, EntityPlayer player, Entity target, LivingHurtEvent event) {
+    if(target instanceof EntityLivingBase && target.isEntityAlive() && target != player && !isThornsDamage(event.getSource())) {
+      float damage = ToolHelper.getActualDamage(tool, player);
+      if(!isBlocking) {
+        damage /= 2;
+      }
+      EntityDamageSource damageSource = new EntityDamageSource(DamageSource.CACTUS.damageType, player);
+      damageSource.setDamageBypassesArmor();
+      damageSource.setDamageIsAbsolute();
+      damageSource.setIsThornsDamage();
+
+      int oldHurtResistantTime = target.hurtResistantTime;
+      if(attackEntitySecondary(damageSource, damage, target, true, false)) {
+        TinkerTools.proxy.spawnEffectParticle(ParticleEffect.Type.HEART_CACTUS, target, 1);
+      }
+      target.hurtResistantTime = oldHurtResistantTime; // reset to old time
     }
+  }
 
-    @Override
-    public void onPlayerHurt(ItemStack tool, EntityPlayer player, EntityLivingBase attacker, LivingHurtEvent event)
-    {
-        dealSpikyDamage(false, tool, player, attacker, event);
-    }
-
-    @Override
-    public void onBlock(ItemStack tool, EntityPlayer player, LivingHurtEvent event)
-    {
-        Entity target = event.getSource().getTrueSource();
-        dealSpikyDamage(true, tool, player, target, event);
-    }
-
-    private void dealSpikyDamage(boolean isBlocking, ItemStack tool, EntityPlayer player, Entity target, LivingHurtEvent event)
-    {
-        if (target instanceof EntityLivingBase && target.isEntityAlive() && target != player && !isThornsDamage(event.getSource()))
-        {
-            float damage = ToolHelper.getActualDamage(tool, player);
-            if (!isBlocking)
-            {
-                damage /= 2;
-            }
-            EntityDamageSource damageSource = new EntityDamageSource(DamageSource.CACTUS.damageType, player);
-            damageSource.setDamageBypassesArmor();
-            damageSource.setDamageIsAbsolute();
-            damageSource.setIsThornsDamage();
-
-            int oldHurtResistantTime = target.hurtResistantTime;
-            if (attackEntitySecondary(damageSource, damage, target, true, false))
-            {
-                TinkerTools.proxy.spawnEffectParticle(ParticleEffect.Type.HEART_CACTUS, target, 1);
-            }
-            target.hurtResistantTime = oldHurtResistantTime; // reset to old time
-        }
-    }
-
-    private boolean isThornsDamage(DamageSource damageSource)
-    {
-        return damageSource instanceof EntityDamageSource && ((EntityDamageSource) damageSource).getIsThornsDamage();
-    }
+  private boolean isThornsDamage(DamageSource damageSource) {
+    return damageSource instanceof EntityDamageSource && ((EntityDamageSource) damageSource).getIsThornsDamage();
+  }
 }

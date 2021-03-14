@@ -47,6 +47,31 @@ public class BlockToolForge extends BlockTable implements ITinkerStationBlock
         this.setHarvestLevel("pickaxe", 0);
     }
 
+    @Nonnull
+    @Override
+    public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta)
+    {
+        return new TileToolForge();
+    }
+
+    @Override
+    public boolean openGui(EntityPlayer player, World world, BlockPos pos)
+    {
+        player.openGui(TConstruct.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
+        if (player.openContainer instanceof BaseContainer)
+        {
+            ((BaseContainer) player.openContainer).syncOnOpen((EntityPlayerMP) player);
+        }
+        return true;
+    }
+
+    @Nonnull
+    @Override
+    protected BlockStateContainer createBlockState()
+    {
+        return new ExtendedBlockState(this, new IProperty[] {}, new IUnlistedProperty[] {TEXTURE, INVENTORY, FACING});
+    }
+
     @Override
     public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
     {
@@ -72,30 +97,5 @@ public class BlockToolForge extends BlockTable implements ITinkerStationBlock
     {
         // same as toolstation
         return 25;
-    }
-
-    @Nonnull
-    @Override
-    protected BlockStateContainer createBlockState()
-    {
-        return new ExtendedBlockState(this, new IProperty[] {}, new IUnlistedProperty[] {TEXTURE, INVENTORY, FACING});
-    }
-
-    @Nonnull
-    @Override
-    public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta)
-    {
-        return new TileToolForge();
-    }
-
-    @Override
-    public boolean openGui(EntityPlayer player, World world, BlockPos pos)
-    {
-        player.openGui(TConstruct.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
-        if (player.openContainer instanceof BaseContainer)
-        {
-            ((BaseContainer) player.openContainer).syncOnOpen((EntityPlayerMP) player);
-        }
-        return true;
     }
 }

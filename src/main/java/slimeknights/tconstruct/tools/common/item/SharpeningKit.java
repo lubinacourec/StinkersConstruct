@@ -27,12 +27,6 @@ public class SharpeningKit extends ToolPart
     }
 
     @Override
-    public boolean canUseMaterial(Material mat)
-    {
-        return mat.hasStats(MaterialTypes.HEAD);
-    }
-
-    @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
     {
         if (this.isInCreativeTab(tab))
@@ -47,6 +41,12 @@ public class SharpeningKit extends ToolPart
                 }
             }
         }
+    }
+
+    @Override
+    public boolean canUseMaterial(Material mat)
+    {
+        return mat.hasStats(MaterialTypes.HEAD);
     }
 
     @Override

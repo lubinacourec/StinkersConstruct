@@ -4,48 +4,41 @@ import net.minecraft.util.text.TextFormatting;
 
 import slimeknights.tconstruct.library.Util;
 
-public abstract class AbstractMaterialStats implements IMaterialStats
-{
+public abstract class AbstractMaterialStats implements IMaterialStats {
 
-    public static String formatNumber(String loc, String color, int number)
-    {
-        return formatNumber(loc, color, (float) number);
-    }
+  protected final String materialType;
 
-    public static String formatNumber(String loc, String color, float number)
-    {
-        return String.format("%s: %s%s",
-            Util.translate(loc),
-            color,
-            Util.df.format(number))
-            + TextFormatting.RESET;
-    }
+  public AbstractMaterialStats(String materialType) {
+    this.materialType = materialType;
+  }
 
-    public static String formatNumberPercent(String loc, String color, float number)
-    {
-        return String.format("%s: %s%s",
-            Util.translate(loc),
-            color,
-            Util.dfPercent.format(number))
-            + TextFormatting.RESET;
-    }
+  @Override
+  public String getIdentifier() {
+    return materialType;
+  }
 
-    protected final String materialType;
+  @Override
+  public String getLocalizedName() {
+    return Util.translate("stat.%s.name", materialType);
+  }
 
-    public AbstractMaterialStats(String materialType)
-    {
-        this.materialType = materialType;
-    }
+  public static String formatNumber(String loc, String color, int number) {
+    return formatNumber(loc, color, (float) number);
+  }
 
-    @Override
-    public String getIdentifier()
-    {
-        return materialType;
-    }
+  public static String formatNumber(String loc, String color, float number) {
+    return String.format("%s: %s%s",
+                         Util.translate(loc),
+                         color,
+                         Util.df.format(number))
+           + TextFormatting.RESET;
+  }
 
-    @Override
-    public String getLocalizedName()
-    {
-        return Util.translate("stat.%s.name", materialType);
-    }
+  public static String formatNumberPercent(String loc, String color, float number) {
+    return String.format("%s: %s%s",
+                         Util.translate(loc),
+                         color,
+                         Util.dfPercent.format(number))
+           + TextFormatting.RESET;
+  }
 }

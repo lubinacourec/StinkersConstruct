@@ -11,25 +11,20 @@ import slimeknights.tconstruct.library.book.content.ContentModifier;
 import slimeknights.tconstruct.library.modifiers.IModifier;
 
 @SideOnly(Side.CLIENT)
-public class ModifierSectionTransformer extends ContentListingSectionTransformer
-{
+public class ModifierSectionTransformer extends ContentListingSectionTransformer {
 
-    public ModifierSectionTransformer()
-    {
-        super("modifiers");
+  public ModifierSectionTransformer() {
+    super("modifiers");
+  }
+
+
+  @Override
+  protected void processPage(BookData book, ContentListing listing, PageData page) {
+    if(page.content instanceof ContentModifier) {
+      IModifier modifier = TinkerRegistry.getModifier(((ContentModifier) page.content).modifierName);
+      if(modifier != null) {
+        listing.addEntry(modifier.getLocalizedName(), page);
+      }
     }
-
-
-    @Override
-    protected void processPage(BookData book, ContentListing listing, PageData page)
-    {
-        if (page.content instanceof ContentModifier)
-        {
-            IModifier modifier = TinkerRegistry.getModifier(((ContentModifier) page.content).modifierName);
-            if (modifier != null)
-            {
-                listing.addEntry(modifier.getLocalizedName(), page);
-            }
-        }
-    }
+  }
 }

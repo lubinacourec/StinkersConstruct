@@ -13,43 +13,35 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.potion.TinkerPotion;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 
-public class TraitEnderference extends AbstractTrait
-{
+public class TraitEnderference extends AbstractTrait {
 
-    public static TinkerPotion Enderference = new TinkerPotion(Util.getResource("enderference"), true, false, 0x21985f);
+  public static TinkerPotion Enderference = new TinkerPotion(Util.getResource("enderference"), true, false, 0x21985f);
 
-    public TraitEnderference()
-    {
-        super("enderference", TextFormatting.DARK_AQUA);
+  public TraitEnderference() {
+    super("enderference", TextFormatting.DARK_AQUA);
 
-        MinecraftForge.EVENT_BUS.register(this);
+    MinecraftForge.EVENT_BUS.register(this);
+  }
+
+  @Override
+  public void onHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, boolean isCritical) {
+    if(target instanceof EntityEnderman) {
+      PotionEffect effect = new PotionEffect(Enderference, 100, 1, false, true);
+      target.addPotionEffect(effect);
     }
+  }
 
-    @Override
-    public void onHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, boolean isCritical)
-    {
-        if (target instanceof EntityEnderman)
-        {
-            PotionEffect effect = new PotionEffect(Enderference, 100, 1, false, true);
-            target.addPotionEffect(effect);
-        }
+  @Override
+  public void afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit) {
+    if(!wasHit) {
+      target.removePotionEffect(Enderference);
     }
+  }
 
-    @Override
-    public void afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit)
-    {
-        if (!wasHit)
-        {
-            target.removePotionEffect(Enderference);
-        }
+  @SubscribeEvent
+  public void onEnderTeleport(EnderTeleportEvent event) {
+    if(Enderference.getLevel(event.getEntityLiving()) > 0) {
+      event.setCanceled(true);
     }
-
-    @SubscribeEvent
-    public void onEnderTeleport(EnderTeleportEvent event)
-    {
-        if (Enderference.getLevel(event.getEntityLiving()) > 0)
-        {
-            event.setCanceled(true);
-        }
-    }
+  }
 }

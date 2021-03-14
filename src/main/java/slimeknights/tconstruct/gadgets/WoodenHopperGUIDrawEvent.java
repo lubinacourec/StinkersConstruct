@@ -18,52 +18,43 @@ import slimeknights.tconstruct.library.Util;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(Side.CLIENT)
-public class WoodenHopperGUIDrawEvent
-{
+public class WoodenHopperGUIDrawEvent {
 
-    private static final ResourceLocation HOPPER_GUI_TEXTURE = new ResourceLocation(TConstruct.modID, "textures/gui/hopper.png");
+  private static final ResourceLocation HOPPER_GUI_TEXTURE = new ResourceLocation(TConstruct.modID, "textures/gui/hopper.png");
 
-    @SubscribeEvent
-    public static void addTooltip(ItemTooltipEvent itemTooltipEvent)
-    {
-        if (itemTooltipEvent.getItemStack().getItem() == Item.getItemFromBlock(TinkerGadgets.woodenHopper))
-        {
-            itemTooltipEvent.getToolTip().add(Util.translate("item.tconstruct.wooden_hopper.tooltip"));
-        }
+  @SubscribeEvent
+  public static void addTooltip(ItemTooltipEvent itemTooltipEvent) {
+    if( itemTooltipEvent.getItemStack().getItem() == Item.getItemFromBlock(TinkerGadgets.woodenHopper)) {
+      itemTooltipEvent.getToolTip().add(Util.translate("item.tconstruct.wooden_hopper.tooltip"));
+    }
+  }
+
+  @SubscribeEvent
+  public static void onWoodenHopperDrawGui(GuiOpenEvent guiOpenEvent) {
+    if(guiOpenEvent.getGui() instanceof GuiHopper) {
+      GuiHopper gui = (GuiHopper) guiOpenEvent.getGui();
+      if(gui.hopperInventory.getSizeInventory() == 1) {
+        guiOpenEvent.setGui(new GuiWoodenHopper((InventoryPlayer) gui.playerInventory, gui.hopperInventory));
+      }
+    }
+  }
+
+  @SideOnly(Side.CLIENT)
+  private static class GuiWoodenHopper extends GuiHopper {
+
+    public GuiWoodenHopper(InventoryPlayer playerInv, IInventory hopperInv) {
+      super(playerInv, hopperInv);
+
+      inventorySlots.getSlot(0).xPos += 18*2;
     }
 
-    @SubscribeEvent
-    public static void onWoodenHopperDrawGui(GuiOpenEvent guiOpenEvent)
-    {
-        if (guiOpenEvent.getGui() instanceof GuiHopper)
-        {
-            GuiHopper gui = (GuiHopper) guiOpenEvent.getGui();
-            if (gui.hopperInventory.getSizeInventory() == 1)
-            {
-                guiOpenEvent.setGui(new GuiWoodenHopper((InventoryPlayer) gui.playerInventory, gui.hopperInventory));
-            }
-        }
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+      GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+      this.mc.getTextureManager().bindTexture(HOPPER_GUI_TEXTURE);
+      int i = (this.width - this.xSize) / 2;
+      int j = (this.height - this.ySize) / 2;
+      this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
     }
-
-    @SideOnly(Side.CLIENT)
-    private static class GuiWoodenHopper extends GuiHopper
-    {
-
-        public GuiWoodenHopper(InventoryPlayer playerInv, IInventory hopperInv)
-        {
-            super(playerInv, hopperInv);
-
-            inventorySlots.getSlot(0).xPos += 18 * 2;
-        }
-
-        @Override
-        protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-        {
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            this.mc.getTextureManager().bindTexture(HOPPER_GUI_TEXTURE);
-            int i = (this.width - this.xSize) / 2;
-            int j = (this.height - this.ySize) / 2;
-            this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
-        }
-    }
+  }
 }

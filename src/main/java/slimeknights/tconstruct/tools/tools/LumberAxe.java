@@ -176,6 +176,12 @@ public class LumberAxe extends AoeToolCore
     }
 
     @Override
+    public boolean isEffective(IBlockState state)
+    {
+        return effective_materials.contains(state.getMaterial()) || ItemAxe.EFFECTIVE_ON.contains(state.getBlock());
+    }
+
+    @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
     {
         if (this.isInCreativeTab(tab))
@@ -183,12 +189,6 @@ public class LumberAxe extends AoeToolCore
             addDefaultSubItems(subItems);
             addInfiTool(subItems, "InfiChopper");
         }
-    }
-
-    @Override
-    public boolean isEffective(IBlockState state)
-    {
-        return effective_materials.contains(state.getMaterial()) || ItemAxe.EFFECTIVE_ON.contains(state.getBlock());
     }
 
     @Override
@@ -214,16 +214,6 @@ public class LumberAxe extends AoeToolCore
     }
 
     @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer player)
-    {
-        if (!ToolHelper.isBroken(itemstack) && ToolHelper.isToolEffective2(itemstack, player.getEntityWorld().getBlockState(pos)) && detectTree(player.getEntityWorld(), pos))
-        {
-            return fellTree(itemstack, pos, player);
-        }
-        return super.onBlockStartBreak(itemstack, pos, player);
-    }
-
-    @Override
     public ToolNBT buildTagData(List<Material> materials)
     {
         HandleMaterialStats handle = materials.get(0).getStatsOrUnknown(MaterialTypes.HANDLE);
@@ -240,6 +230,16 @@ public class LumberAxe extends AoeToolCore
         data.durability *= DURABILITY_MODIFIER;
 
         return data;
+    }
+
+    @Override
+    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer player)
+    {
+        if (!ToolHelper.isBroken(itemstack) && ToolHelper.isToolEffective2(itemstack, player.getEntityWorld().getBlockState(pos)) && detectTree(player.getEntityWorld(), pos))
+        {
+            return fellTree(itemstack, pos, player);
+        }
+        return super.onBlockStartBreak(itemstack, pos, player);
     }
 
     public static class TreeChopTask

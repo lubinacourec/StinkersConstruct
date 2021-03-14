@@ -1,34 +1,32 @@
 package slimeknights.tconstruct.library.client.model.format;
 
-import java.lang.reflect.Type;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+
 import net.minecraft.util.ResourceLocation;
 
-public class PredicateDeserializer implements JsonDeserializer<ImmutableMap<ResourceLocation, Float>>
-{
+import java.lang.reflect.Type;
+import java.util.Map;
 
-    public static final PredicateDeserializer INSTANCE = new PredicateDeserializer();
-    public static final Type TYPE = new TypeToken<ImmutableMap<ResourceLocation, Float>>() {}.getType();
+public class PredicateDeserializer implements JsonDeserializer<ImmutableMap<ResourceLocation, Float>> {
 
-    @Override
-    public ImmutableMap<ResourceLocation, Float> deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext)
-        throws JsonParseException
-    {
+  public static final PredicateDeserializer INSTANCE = new PredicateDeserializer();
+  public static final Type TYPE = new TypeToken<ImmutableMap<ResourceLocation, Float>>() {}.getType();
 
-        ImmutableMap.Builder<ResourceLocation, Float> builder = ImmutableMap.builder();
+  @Override
+  public ImmutableMap<ResourceLocation, Float> deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext)
+      throws JsonParseException {
 
-        for (Map.Entry<String, JsonElement> entry : json.getAsJsonObject().getAsJsonObject("predicate").entrySet())
-        {
-            builder.put(new ResourceLocation(entry.getKey()), entry.getValue().getAsFloat());
-        }
+    ImmutableMap.Builder<ResourceLocation, Float> builder = ImmutableMap.builder();
 
-        return builder.build();
+    for (Map.Entry<String, JsonElement> entry : json.getAsJsonObject().getAsJsonObject("predicate").entrySet()) {
+      builder.put(new ResourceLocation(entry.getKey()), entry.getValue().getAsFloat());
     }
+
+    return builder.build();
+  }
 }

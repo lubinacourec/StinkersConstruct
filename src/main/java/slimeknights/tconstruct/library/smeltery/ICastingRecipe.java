@@ -1,33 +1,29 @@
 package slimeknights.tconstruct.library.smeltery;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-public interface ICastingRecipe
-{
+import javax.annotation.Nonnull;
 
-    ItemStack getResult(@Nonnull ItemStack cast, Fluid fluid);
+public interface ICastingRecipe {
 
-    default FluidStack getFluid(@Nonnull ItemStack cast, Fluid fluid)
-    {
-        return new FluidStack(fluid, getFluidAmount());
-    }
+  ItemStack getResult(@Nonnull ItemStack cast, Fluid fluid);
 
-    boolean matches(@Nonnull ItemStack cast, Fluid fluid);
+  default FluidStack getFluid(@Nonnull ItemStack cast, Fluid fluid) {
+    return new FluidStack(fluid, getFluidAmount());
+  }
 
-    // all the things that have to be the same for each recipe
+  boolean matches(@Nonnull ItemStack cast, Fluid fluid);
 
-    boolean switchOutputs();
+  // all the things that have to be the same for each recipe
 
-    boolean consumesCast();
+  boolean switchOutputs();
 
-    int getTime();
+  boolean consumesCast();
 
-    /**
-     * Amount of fluid needed for the recipe
-     */
-    int getFluidAmount();
+  int getTime();
+
+  /** Amount of fluid needed for the recipe */
+  int getFluidAmount();
 }

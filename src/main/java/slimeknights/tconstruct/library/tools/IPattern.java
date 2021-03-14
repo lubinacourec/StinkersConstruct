@@ -1,5 +1,4 @@
 package slimeknights.tconstruct.library.tools;
 
-public interface IPattern
-{
+public interface IPattern {
 }

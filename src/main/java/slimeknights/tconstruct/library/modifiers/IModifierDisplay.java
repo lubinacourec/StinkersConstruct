@@ -1,25 +1,20 @@
 package slimeknights.tconstruct.library.modifiers;
 
-import java.util.List;
-
 import net.minecraft.item.ItemStack;
 
-/**
- * Stuff needed for a modifier to be displayed in books
- */
-public interface IModifierDisplay
-{
+import java.util.List;
 
-    /**
-     * Color of the modifier, used for the title header
-     */
-    int getColor();
+/** Stuff needed for a modifier to be displayed in books */
+public interface IModifierDisplay {
+
+  /** Color of the modifier, used for the title header */
+  int getColor();
 
 
-    /**
-     * List of ItemStacks possible to apply the modifier.
-     * Each list entry corresponds to one item combination that can be applied
-     * Example: first entry with size 1 and redstone, second entry with size 1 and redstone block,...
-     */
-    List<List<ItemStack>> getItems();
+  /**
+   * List of ItemStacks possible to apply the modifier.
+   * Each list entry corresponds to one item combination that can be applied
+   * Example: first entry with size 1 and redstone, second entry with size 1 and redstone block,...
+   */
+  List<List<ItemStack>> getItems();
 }

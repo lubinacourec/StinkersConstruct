@@ -7,26 +7,22 @@ import net.minecraft.potion.PotionEffect;
 
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 
-public class TraitFreezing extends AbstractTrait
-{
+public class TraitFreezing extends AbstractTrait {
 
-    public TraitFreezing()
-    {
-        super("freezing", 0xffffff);
+  public TraitFreezing() {
+    super("freezing", 0xffffff);
+  }
+
+  @Override
+  public void onHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, boolean isCritical) {
+    int level = -1;
+    PotionEffect potionEffect = target.getActivePotionEffect(MobEffects.SLOWNESS);
+    if(potionEffect != null) {
+      level = potionEffect.getAmplifier();
     }
 
-    @Override
-    public void onHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, boolean isCritical)
-    {
-        int level = -1;
-        PotionEffect potionEffect = target.getActivePotionEffect(MobEffects.SLOWNESS);
-        if (potionEffect != null)
-        {
-            level = potionEffect.getAmplifier();
-        }
+    level = Math.min(4, level+1);
 
-        level = Math.min(4, level + 1);
-
-        target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 30, level));
-    }
+    target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 30, level));
+  }
 }

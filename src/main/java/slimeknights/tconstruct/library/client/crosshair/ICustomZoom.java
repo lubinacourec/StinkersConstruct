@@ -6,11 +6,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public interface ICustomZoom
-{
+public interface ICustomZoom {
 
-    /**
-     * Current zoom, 1f means regular zoom
-     */
-    float getZoomLevel(ItemStack itemStack, EntityPlayer entityPlayer);
+  /** Current zoom, 1f means regular zoom */
+  float getZoomLevel(ItemStack itemStack, EntityPlayer entityPlayer);
 }

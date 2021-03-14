@@ -14,68 +14,60 @@ import slimeknights.mantle.network.AbstractPacketThreadsafe;
 import slimeknights.tconstruct.smeltery.tileentity.TileHeatingStructureFuelTank;
 
 // Sent to the client when the smeltery consumes fuel
-public class HeatingStructureFuelUpdatePacket extends AbstractPacketThreadsafe
-{
+public class HeatingStructureFuelUpdatePacket extends AbstractPacketThreadsafe {
 
-    BlockPos pos;
-    BlockPos tank;
-    int temperature;
-    FluidStack fuel;
+  BlockPos pos;
+  BlockPos tank;
+  int temperature;
+  FluidStack fuel;
 
-    public HeatingStructureFuelUpdatePacket()
-    {
+  public HeatingStructureFuelUpdatePacket() {
+  }
+
+  public HeatingStructureFuelUpdatePacket(BlockPos pos, BlockPos tank, int temperature, FluidStack fuel) {
+    this.pos = pos;
+    this.tank = tank;
+    this.temperature = temperature;
+    this.fuel = fuel;
+  }
+
+  @Override
+  public void handleClientSafe(NetHandlerPlayClient netHandler) {
+    TileEntity te = Minecraft.getMinecraft().world.getTileEntity(pos);
+    if(te instanceof TileHeatingStructureFuelTank) {
+      TileHeatingStructureFuelTank structure = (TileHeatingStructureFuelTank) te;
+      structure.currentFuel = fuel;
+      structure.currentTank = tank;
+      structure.updateTemperatureFromPacket(temperature);
     }
+  }
 
-    public HeatingStructureFuelUpdatePacket(BlockPos pos, BlockPos tank, int temperature, FluidStack fuel)
-    {
-        this.pos = pos;
-        this.tank = tank;
-        this.temperature = temperature;
-        this.fuel = fuel;
-    }
+  @Override
+  public void handleServerSafe(NetHandlerPlayServer netHandler) {
+    // Clientside only
+    throw new UnsupportedOperationException("Clientside only");
+  }
 
-    @Override
-    public void handleClientSafe(NetHandlerPlayClient netHandler)
-    {
-        TileEntity te = Minecraft.getMinecraft().world.getTileEntity(pos);
-        if (te instanceof TileHeatingStructureFuelTank)
-        {
-            TileHeatingStructureFuelTank structure = (TileHeatingStructureFuelTank) te;
-            structure.currentFuel = fuel;
-            structure.currentTank = tank;
-            structure.updateTemperatureFromPacket(temperature);
-        }
-    }
+  @Override
+  public void fromBytes(ByteBuf buf) {
+    pos = readPos(buf);
+    tank = readPos(buf);
 
-    @Override
-    public void handleServerSafe(NetHandlerPlayServer netHandler)
-    {
-        // Clientside only
-        throw new UnsupportedOperationException("Clientside only");
-    }
+    temperature = buf.readInt();
 
-    @Override
-    public void fromBytes(ByteBuf buf)
-    {
-        pos = readPos(buf);
-        tank = readPos(buf);
+    NBTTagCompound fluidTag = ByteBufUtils.readTag(buf);
+    fuel = FluidStack.loadFluidStackFromNBT(fluidTag);
+  }
 
-        temperature = buf.readInt();
+  @Override
+  public void toBytes(ByteBuf buf) {
+    writePos(pos, buf);
+    writePos(tank, buf);
 
-        NBTTagCompound fluidTag = ByteBufUtils.readTag(buf);
-        fuel = FluidStack.loadFluidStackFromNBT(fluidTag);
-    }
+    buf.writeInt(temperature);
 
-    @Override
-    public void toBytes(ByteBuf buf)
-    {
-        writePos(pos, buf);
-        writePos(tank, buf);
-
-        buf.writeInt(temperature);
-
-        NBTTagCompound fluidTag = new NBTTagCompound();
-        fuel.writeToNBT(fluidTag);
-        ByteBufUtils.writeTag(buf, fluidTag);
-    }
+    NBTTagCompound fluidTag = new NBTTagCompound();
+    fuel.writeToNBT(fluidTag);
+    ByteBufUtils.writeTag(buf, fluidTag);
+  }
 }

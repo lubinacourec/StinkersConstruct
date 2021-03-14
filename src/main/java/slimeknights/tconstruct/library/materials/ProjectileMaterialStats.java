@@ -1,29 +1,23 @@
 package slimeknights.tconstruct.library.materials;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
 
-/**
- * Basically a dummy stat type to differentiate projectile parts from regular parts
- */
-public class ProjectileMaterialStats extends AbstractMaterialStats
-{
+import java.util.List;
 
-    public ProjectileMaterialStats()
-    {
-        super(MaterialTypes.PROJECTILE);
-    }
+/** Basically a dummy stat type to differentiate projectile parts from regular parts */
+public class ProjectileMaterialStats extends AbstractMaterialStats {
 
-    @Override
-    public List<String> getLocalizedInfo()
-    {
-        return ImmutableList.of();
-    }
+  public ProjectileMaterialStats() {
+    super(MaterialTypes.PROJECTILE);
+  }
 
-    @Override
-    public List<String> getLocalizedDesc()
-    {
-        return ImmutableList.of();
-    }
+  @Override
+  public List<String> getLocalizedInfo() {
+    return ImmutableList.of();
+  }
+
+  @Override
+  public List<String> getLocalizedDesc() {
+    return ImmutableList.of();
+  }
 }

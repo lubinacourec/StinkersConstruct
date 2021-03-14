@@ -13,34 +13,30 @@ import slimeknights.tconstruct.library.potion.TinkerPotion;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
-public class TraitMomentum extends AbstractTrait
-{
+public class TraitMomentum extends AbstractTrait {
 
-    public static final TinkerPotion Momentum = new TinkerPotion(Util.getResource("momentum"), false, false);
+  public static final TinkerPotion Momentum = new TinkerPotion(Util.getResource("momentum"), false, false);
 
-    public TraitMomentum()
-    {
-        super("momentum", TextFormatting.BLUE);
-    }
+  public TraitMomentum() {
+    super("momentum", TextFormatting.BLUE);
+  }
 
-    @Override
-    public void miningSpeed(ItemStack tool, PlayerEvent.BreakSpeed event)
-    {
-        float boost = Momentum.getLevel(event.getEntityPlayer());
-        boost /= 80f; // 40% boost max
+  @Override
+  public void miningSpeed(ItemStack tool, PlayerEvent.BreakSpeed event) {
+    float boost = Momentum.getLevel(event.getEntityPlayer());
+    boost /= 80f; // 40% boost max
 
-        event.setNewSpeed(event.getNewSpeed() + event.getOriginalSpeed() * boost);
-    }
+    event.setNewSpeed(event.getNewSpeed() + event.getOriginalSpeed() * boost);
+  }
 
-    @Override
-    public void afterBlockBreak(ItemStack tool, World world, IBlockState state, BlockPos pos, EntityLivingBase player, boolean wasEffective)
-    {
-        int level = 1;
-        level += Momentum.getLevel(player);
+  @Override
+  public void afterBlockBreak(ItemStack tool, World world, IBlockState state, BlockPos pos, EntityLivingBase player, boolean wasEffective) {
+    int level = 1;
+    level += Momentum.getLevel(player);
 
-        level = Math.min(32, level);
-        int duration = (int) ((10f / ToolHelper.getActualMiningSpeed(tool)) * 1.5f * 20f);
+    level = Math.min(32, level);
+    int duration = (int) ((10f / ToolHelper.getActualMiningSpeed(tool)) * 1.5f * 20f);
 
-        Momentum.apply(player, duration, level);
-    }
+    Momentum.apply(player, duration, level);
+  }
 }

@@ -45,14 +45,14 @@ public class GuiInfoPanel extends GuiModule
     private static final GuiElementScalable sliderBar = new GuiElementScalable(0, 88, 3, 8);
     private static final GuiElement sliderTop = new GuiElement(3, 88, 3, 4);
     private static final GuiElement sliderBot = new GuiElement(3, 92, 3, 4);
-    private final GuiWidgetBorder border = new GuiWidgetBorder();
-    private final FontRenderer fontRenderer = ClientProxy.fontRenderer;
-    private final TIntList tooltipLines = new TIntLinkedList();
     public float textScale = 1.0f;
     protected String caption;
     protected List<String> text;
     protected List<String> tooltips;
+    private final GuiWidgetBorder border = new GuiWidgetBorder();
+    private final FontRenderer fontRenderer = ClientProxy.fontRenderer;
     private GuiWidgetSlider slider = new GuiWidgetSlider(sliderNormal, sliderHover, sliderHover, sliderTop, sliderBot, sliderBar);
+    private final TIntList tooltipLines = new TIntLinkedList();
 
 
     public GuiInfoPanel(GuiMultiModule parent, Container container)

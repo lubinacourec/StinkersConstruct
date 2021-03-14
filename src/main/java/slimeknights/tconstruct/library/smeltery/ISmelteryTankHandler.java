@@ -1,34 +1,32 @@
 package slimeknights.tconstruct.library.smeltery;
 
-import java.util.List;
-import javax.annotation.Nullable;
-
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public interface ISmelteryTankHandler
-{
+import javax.annotation.Nullable;
+import java.util.List;
 
-    /**
-     * Called when the liquids in the smeltery tank change.
-     *
-     * @param fluids  All fluids in the tank, new state. Same as tank.getFluids
-     * @param changed The fluidstack that got changed or null if all got changed.
-     */
-    void onTankChanged(List<FluidStack> fluids, FluidStack changed);
+public interface ISmelteryTankHandler {
 
-    /**
-     * Returns a copy of the SmelteryTank of the TE
-     *
-     * @return Smeltery Tank if active, null if the smeltery is inactive
-     */
-    @Nullable
-    SmelteryTank getTank();
+  /**
+   * Called when the liquids in the smeltery tank change.
+   *
+   * @param fluids  All fluids in the tank, new state. Same as tank.getFluids
+   * @param changed The fluidstack that got changed or null if all got changed.
+   */
+  void onTankChanged(List<FluidStack> fluids, FluidStack changed);
 
-    /**
-     * Updates the fluids in the tank with data from the packet
-     */
-    @SideOnly(Side.CLIENT)
-    void updateFluidsFromPacket(List<FluidStack> liquids);
+  /**
+   * Returns a copy of the SmelteryTank of the TE
+   * @return Smeltery Tank if active, null if the smeltery is inactive
+   */
+  @Nullable
+  SmelteryTank getTank();
+
+  /**
+   * Updates the fluids in the tank with data from the packet
+   */
+  @SideOnly(Side.CLIENT)
+  void updateFluidsFromPacket(List<FluidStack> liquids);
 }

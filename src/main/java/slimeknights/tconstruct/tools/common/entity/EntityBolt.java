@@ -29,18 +29,6 @@ public class EntityBolt extends EntityProjectileBase
     }
 
     @Override
-    public double getSlowdown()
-    {
-        return 0.015;
-    }
-
-    @Override
-    public double getGravity()
-    {
-        return 0.065;
-    }
-
-    @Override
     protected void playHitBlockSound(float speed, IBlockState state)
     {
         this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
@@ -55,5 +43,17 @@ public class EntityBolt extends EntityProjectileBase
             EntityLivingBase entityLivingBaseHit = (EntityLivingBase) entityHit;
             entityLivingBaseHit.setArrowCountInEntity(entityLivingBaseHit.getArrowCountInEntity() + 1);
         }
+    }
+
+    @Override
+    public double getSlowdown()
+    {
+        return 0.015;
+    }
+
+    @Override
+    public double getGravity()
+    {
+        return 0.065;
     }
 }

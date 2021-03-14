@@ -2,25 +2,21 @@ package slimeknights.tconstruct.library.client.material.deserializers;
 
 import slimeknights.tconstruct.library.client.material.IMaterialRenderInfoDeserializer;
 
-public abstract class AbstractRenderInfoDeserializer implements IMaterialRenderInfoDeserializer
-{
+public abstract class AbstractRenderInfoDeserializer implements IMaterialRenderInfoDeserializer {
 
-    private String suffix;
+  private String suffix;
 
-    @Override
-    public String getSuffix()
-    {
-        return suffix;
-    }
+  protected int fromHex(String hex) {
+    return Integer.parseInt(hex, 16);
+  }
 
-    @Override
-    public void setSuffix(String suffix)
-    {
-        this.suffix = suffix;
-    }
+  @Override
+  public String getSuffix() {
+    return suffix;
+  }
 
-    protected int fromHex(String hex)
-    {
-        return Integer.parseInt(hex, 16);
-    }
+  @Override
+  public void setSuffix(String suffix) {
+    this.suffix = suffix;
+  }
 }

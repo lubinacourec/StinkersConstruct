@@ -1,8 +1,7 @@
 package slimeknights.tconstruct.library.events;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -10,6 +9,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
+
+import java.util.List;
 
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.modifiers.IModifier;
@@ -23,165 +24,139 @@ import slimeknights.tconstruct.library.utils.TinkerUtil;
  * message to display to the player.
  */
 @Cancelable
-public class TinkerCraftingEvent extends TinkerEvent
-{
-    private final ItemStack itemStack;
-    private final EntityPlayer player;
-    private String message;
+public class TinkerCraftingEvent extends TinkerEvent {
+  private final ItemStack itemStack;
+  private final EntityPlayer player;
+  private String message;
 
-    protected TinkerCraftingEvent(ItemStack itemStack, EntityPlayer player, String message)
-    {
-        this.itemStack = itemStack;
-        this.player = player;
+  protected TinkerCraftingEvent(ItemStack itemStack, EntityPlayer player, String message) {
+    this.itemStack = itemStack;
+    this.player = player;
 
-        message += "\n" + TextFormatting.ITALIC + "by " + Loader.instance().activeModContainer().getName();
-        this.message = message;
+    message += "\n" + TextFormatting.ITALIC + "by " + Loader.instance().activeModContainer().getName();
+    this.message = message;
+  }
+
+  public ItemStack getItemStack() {
+    return itemStack;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public EntityPlayer getPlayer() {
+    return player;
+  }
+
+  public void setCanceled(String localizedMessage) {
+    this.message = localizedMessage;
+    setCanceled(true);
+  }
+
+  /**
+   * Fired when a tool is being built in a tool station/forge.
+   * Cancelable.
+   * Be sure to provide a proper message when cancelling, so the user know what's going on!
+   */
+  public static class ToolCraftingEvent extends TinkerCraftingEvent {
+
+    private final NonNullList<ItemStack> toolParts;
+
+    private ToolCraftingEvent(ItemStack itemStack, EntityPlayer player, NonNullList<ItemStack> toolParts) {
+      super(itemStack, player, Util.translate("gui.error.craftevent.tool.default"));
+      this.toolParts = toolParts;
     }
 
-    public ItemStack getItemStack()
-    {
-        return itemStack;
+    public NonNullList<ItemStack> getToolParts() {
+      return toolParts;
     }
 
-    public String getMessage()
-    {
-        return message;
+    public static void fireEvent(ItemStack itemStack, EntityPlayer player, NonNullList<ItemStack> toolParts) throws TinkerGuiException {
+      ToolCraftingEvent toolCraftingEvent = new ToolCraftingEvent(itemStack, player, toolParts);
+      if(MinecraftForge.EVENT_BUS.post(toolCraftingEvent)) {
+        throw new TinkerGuiException(toolCraftingEvent.getMessage());
+      }
+    }
+  }
+
+  /**
+   * Fired when a toolpart is being replaced on a tool station/forge. Multiple parts can be exchanged at the same time
+   * Cancelable.
+   * Be sure to provide a proper message when cancelling, so the user know what's going on!
+   */
+  public static class ToolPartReplaceEvent extends TinkerCraftingEvent {
+
+    private final NonNullList<ItemStack> toolParts;
+
+    private ToolPartReplaceEvent(ItemStack itemStack, EntityPlayer player, NonNullList<ItemStack> toolParts) {
+      super(itemStack, player, Util.translate("gui.error.craftevent.replace.default"));
+      this.toolParts = toolParts;
     }
 
-    public EntityPlayer getPlayer()
-    {
-        return player;
+    public NonNullList<ItemStack> getToolParts() {
+      return toolParts;
     }
 
-    public void setCanceled(String localizedMessage)
-    {
-        this.message = localizedMessage;
-        setCanceled(true);
+    public static void fireEvent(ItemStack itemStack, EntityPlayer player, NonNullList<ItemStack> toolParts) throws TinkerGuiException {
+      ToolPartReplaceEvent toolPartReplaceEvent = new ToolPartReplaceEvent(itemStack, player, toolParts);
+      if(MinecraftForge.EVENT_BUS.post(toolPartReplaceEvent)) {
+        throw new TinkerGuiException(toolPartReplaceEvent.getMessage());
+      }
+    }
+  }
+
+  /**
+   * Fired when a tool is being modified in a tool station/forge. Multiple modifiers can be applied at once.
+   * Cancelable.
+   * Be sure to provide a proper message when cancelling, so the user know what's going on!
+   */
+  public static class ToolModifyEvent extends TinkerCraftingEvent {
+    private final List<IModifier> modifiers;
+    private final ItemStack toolBeforeModification;
+
+    protected ToolModifyEvent(ItemStack itemStack, EntityPlayer player, ItemStack toolBeforeModification) {
+      super(itemStack, player, Util.translate("gui.error.craftevent.modifier.default"));
+      this.toolBeforeModification = toolBeforeModification;
+
+      List<IModifier> modifiers = TinkerUtil.getModifiers(itemStack);
+      modifiers.removeAll(TinkerUtil.getModifiers(toolBeforeModification));
+
+      this.modifiers = ImmutableList.copyOf(modifiers);
     }
 
-    /**
-     * Fired when a tool is being built in a tool station/forge.
-     * Cancelable.
-     * Be sure to provide a proper message when cancelling, so the user know what's going on!
-     */
-    public static class ToolCraftingEvent extends TinkerCraftingEvent
-    {
-
-        public static void fireEvent(ItemStack itemStack, EntityPlayer player, NonNullList<ItemStack> toolParts) throws TinkerGuiException
-        {
-            ToolCraftingEvent toolCraftingEvent = new ToolCraftingEvent(itemStack, player, toolParts);
-            if (MinecraftForge.EVENT_BUS.post(toolCraftingEvent))
-            {
-                throw new TinkerGuiException(toolCraftingEvent.getMessage());
-            }
-        }
-
-        private final NonNullList<ItemStack> toolParts;
-
-        private ToolCraftingEvent(ItemStack itemStack, EntityPlayer player, NonNullList<ItemStack> toolParts)
-        {
-            super(itemStack, player, Util.translate("gui.error.craftevent.tool.default"));
-            this.toolParts = toolParts;
-        }
-
-        public NonNullList<ItemStack> getToolParts()
-        {
-            return toolParts;
-        }
+    public List<IModifier> getModifiers() {
+      return modifiers;
     }
 
-    /**
-     * Fired when a toolpart is being replaced on a tool station/forge. Multiple parts can be exchanged at the same time
-     * Cancelable.
-     * Be sure to provide a proper message when cancelling, so the user know what's going on!
-     */
-    public static class ToolPartReplaceEvent extends TinkerCraftingEvent
-    {
-
-        public static void fireEvent(ItemStack itemStack, EntityPlayer player, NonNullList<ItemStack> toolParts) throws TinkerGuiException
-        {
-            ToolPartReplaceEvent toolPartReplaceEvent = new ToolPartReplaceEvent(itemStack, player, toolParts);
-            if (MinecraftForge.EVENT_BUS.post(toolPartReplaceEvent))
-            {
-                throw new TinkerGuiException(toolPartReplaceEvent.getMessage());
-            }
-        }
-
-        private final NonNullList<ItemStack> toolParts;
-
-        private ToolPartReplaceEvent(ItemStack itemStack, EntityPlayer player, NonNullList<ItemStack> toolParts)
-        {
-            super(itemStack, player, Util.translate("gui.error.craftevent.replace.default"));
-            this.toolParts = toolParts;
-        }
-
-        public NonNullList<ItemStack> getToolParts()
-        {
-            return toolParts;
-        }
+    public ItemStack getToolBeforeModification() {
+      return toolBeforeModification;
     }
 
-    /**
-     * Fired when a tool is being modified in a tool station/forge. Multiple modifiers can be applied at once.
-     * Cancelable.
-     * Be sure to provide a proper message when cancelling, so the user know what's going on!
-     */
-    public static class ToolModifyEvent extends TinkerCraftingEvent
-    {
-        public static void fireEvent(ItemStack itemStack, EntityPlayer player, ItemStack toolBeforeModification) throws TinkerGuiException
-        {
-            ToolModifyEvent toolModifyEvent = new ToolModifyEvent(itemStack, player, toolBeforeModification);
-            if (MinecraftForge.EVENT_BUS.post(toolModifyEvent))
-            {
-                throw new TinkerGuiException(toolModifyEvent.getMessage());
-            }
-        }
+    public static void fireEvent(ItemStack itemStack, EntityPlayer player, ItemStack toolBeforeModification) throws TinkerGuiException {
+      ToolModifyEvent toolModifyEvent = new ToolModifyEvent(itemStack, player, toolBeforeModification);
+      if(MinecraftForge.EVENT_BUS.post(toolModifyEvent)) {
+        throw new TinkerGuiException(toolModifyEvent.getMessage());
+      }
+    }
+  }
 
-        private final List<IModifier> modifiers;
-        private final ItemStack toolBeforeModification;
+  /**
+   * Fired when a toolpart is being crafted in a partbuilder.
+   * Cancelable.
+   * Be sure to provide a proper message when cancelling, so the user know what's going on!
+   */
+  public static class ToolPartCraftingEvent extends TinkerCraftingEvent {
 
-        protected ToolModifyEvent(ItemStack itemStack, EntityPlayer player, ItemStack toolBeforeModification)
-        {
-            super(itemStack, player, Util.translate("gui.error.craftevent.modifier.default"));
-            this.toolBeforeModification = toolBeforeModification;
-
-            List<IModifier> modifiers = TinkerUtil.getModifiers(itemStack);
-            modifiers.removeAll(TinkerUtil.getModifiers(toolBeforeModification));
-
-            this.modifiers = ImmutableList.copyOf(modifiers);
-        }
-
-        public List<IModifier> getModifiers()
-        {
-            return modifiers;
-        }
-
-        public ItemStack getToolBeforeModification()
-        {
-            return toolBeforeModification;
-        }
+    private ToolPartCraftingEvent(ItemStack itemStack, EntityPlayer player) {
+      super(itemStack, player, Util.translate("gui.error.craftevent.toolpart.default"));
     }
 
-    /**
-     * Fired when a toolpart is being crafted in a partbuilder.
-     * Cancelable.
-     * Be sure to provide a proper message when cancelling, so the user know what's going on!
-     */
-    public static class ToolPartCraftingEvent extends TinkerCraftingEvent
-    {
-
-        public static void fireEvent(ItemStack itemStack, EntityPlayer player) throws TinkerGuiException
-        {
-            ToolPartCraftingEvent toolPartCraftingEvent = new ToolPartCraftingEvent(itemStack, player);
-            if (MinecraftForge.EVENT_BUS.post(toolPartCraftingEvent))
-            {
-                throw new TinkerGuiException(toolPartCraftingEvent.getMessage());
-            }
-        }
-
-        private ToolPartCraftingEvent(ItemStack itemStack, EntityPlayer player)
-        {
-            super(itemStack, player, Util.translate("gui.error.craftevent.toolpart.default"));
-        }
+    public static void fireEvent(ItemStack itemStack, EntityPlayer player) throws TinkerGuiException {
+      ToolPartCraftingEvent toolPartCraftingEvent = new ToolPartCraftingEvent(itemStack, player);
+      if(MinecraftForge.EVENT_BUS.post(toolPartCraftingEvent)) {
+        throw new TinkerGuiException(toolPartCraftingEvent.getMessage());
+      }
     }
+  }
 }

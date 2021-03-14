@@ -54,23 +54,6 @@ public class TinkerMeleeWeapons extends AbstractToolPulse
         super.registerItems(event);
     }
 
-    // INITIALIZATION
-    @Override
-    @Subscribe
-    public void init(FMLInitializationEvent event)
-    {
-        super.init(event);
-        proxy.init();
-    }
-
-    // POST-INITIALIZATION
-    @Subscribe
-    @Override
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        super.postInit(event);
-    }
-
     @Override
     protected void registerTools(IForgeRegistry<Item> registry)
     {
@@ -86,6 +69,15 @@ public class TinkerMeleeWeapons extends AbstractToolPulse
         //battleAxe = registerTool(new BattleAxe(), "battleaxe");
     }
 
+    // INITIALIZATION
+    @Override
+    @Subscribe
+    public void init(FMLInitializationEvent event)
+    {
+        super.init(event);
+        proxy.init();
+    }
+
     @Override
     protected void registerToolBuilding()
     {
@@ -97,6 +89,14 @@ public class TinkerMeleeWeapons extends AbstractToolPulse
 
         TinkerRegistry.registerToolForgeCrafting(cleaver);
         //TinkerRegistry.registerToolForgeCrafting(battleAxe);
+    }
+
+    // POST-INITIALIZATION
+    @Subscribe
+    @Override
+    public void postInit(FMLPostInitializationEvent event)
+    {
+        super.postInit(event);
     }
 
     @Override

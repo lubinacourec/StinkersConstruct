@@ -5,14 +5,12 @@ import net.minecraft.block.SoundType;
 
 import slimeknights.tconstruct.library.TinkerRegistry;
 
-public class BlockWoodRail extends BlockRail
-{
+public class BlockWoodRail extends BlockRail {
 
-    public BlockWoodRail()
-    {
-        this.setHardness(0.2F); // much less than vanilla
-        this.setSoundType(SoundType.WOOD);
+  public BlockWoodRail() {
+    this.setHardness(0.2F); // much less than vanilla
+    this.setSoundType(SoundType.WOOD);
 
-        this.setCreativeTab(TinkerRegistry.tabGadgets);
-    }
+    this.setCreativeTab(TinkerRegistry.tabGadgets);
+  }
 }

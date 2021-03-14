@@ -12,39 +12,34 @@ import slimeknights.tconstruct.library.utils.ToolBuilder;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerTraits;
 
-public class ModSilktouch extends ToolModifier
-{
+public class ModSilktouch extends ToolModifier {
 
-    public ModSilktouch()
-    {
-        super("silktouch", 0xfbe28b);
+  public ModSilktouch() {
+    super("silktouch", 0xfbe28b);
 
-        addAspects(new ModifierAspect.SingleAspect(this), new ModifierAspect.DataAspect(this), ModifierAspect.freeModifier);
-    }
+    addAspects(new ModifierAspect.SingleAspect(this), new ModifierAspect.DataAspect(this), ModifierAspect.freeModifier);
+  }
 
-    @Override
-    public boolean canApplyTogether(IToolMod otherModifier)
-    {
-        return !otherModifier.getIdentifier().equals(TinkerTraits.squeaky.getIdentifier())
-            && !otherModifier.getIdentifier().equals(TinkerModifiers.modLuck.getIdentifier());
-    }
+  @Override
+  public boolean canApplyTogether(Enchantment enchantment) {
+    return enchantment != Enchantments.LOOTING
+           && enchantment != Enchantments.FORTUNE;
+  }
 
-    @Override
-    public boolean canApplyTogether(Enchantment enchantment)
-    {
-        return enchantment != Enchantments.LOOTING
-            && enchantment != Enchantments.FORTUNE;
-    }
+  @Override
+  public boolean canApplyTogether(IToolMod otherModifier) {
+    return !otherModifier.getIdentifier().equals(TinkerTraits.squeaky.getIdentifier())
+           && !otherModifier.getIdentifier().equals(TinkerModifiers.modLuck.getIdentifier());
+  }
 
-    @Override
-    public void applyEffect(NBTTagCompound rootCompound, NBTTagCompound modifierTag)
-    {
-        ToolBuilder.addEnchantment(rootCompound, Enchantments.SILK_TOUCH);
+  @Override
+  public void applyEffect(NBTTagCompound rootCompound, NBTTagCompound modifierTag) {
+    ToolBuilder.addEnchantment(rootCompound, Enchantments.SILK_TOUCH);
 
-        ToolNBT toolData = TagUtil.getToolStats(rootCompound);
-        toolData.speed = Math.max(1f, toolData.speed - 3f);
-        toolData.attack = Math.max(1f, toolData.attack - 3f);
+    ToolNBT toolData = TagUtil.getToolStats(rootCompound);
+    toolData.speed = Math.max(1f, toolData.speed - 3f);
+    toolData.attack = Math.max(1f, toolData.attack - 3f);
 
-        TagUtil.setToolTag(rootCompound, toolData.get());
-    }
+    TagUtil.setToolTag(rootCompound, toolData.get());
+  }
 }

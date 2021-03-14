@@ -1,47 +1,43 @@
 package slimeknights.tconstruct.tools.traits;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 
+import java.util.List;
+
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
-public class TraitJagged extends AbstractTrait
-{
+public class TraitJagged extends AbstractTrait {
 
-    public TraitJagged()
-    {
-        super("jagged", TextFormatting.AQUA);
-    }
+  public TraitJagged() {
+    super("jagged", TextFormatting.AQUA);
+  }
 
-    @Override
-    public float damage(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, float newDamage, boolean isCritical)
-    {
-        newDamage += calcBonus(tool);
+  private double calcBonus(ItemStack tool) {
+    int durability = ToolHelper.getCurrentDurability(tool);
+    int maxDurability = ToolHelper.getMaxDurability(tool);
 
-        return super.damage(tool, player, target, damage, newDamage, isCritical);
-    }
+    // old tcon jagged formula
+    return Math.log((maxDurability - durability) / 72d + 1d) * 2;
+  }
 
-    @Override
-    public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag)
-    {
-        String loc = String.format(LOC_Extra, getModifierIdentifier());
+  @Override
+  public float damage(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, float newDamage, boolean isCritical) {
+    newDamage += calcBonus(tool);
 
-        return ImmutableList.of(Util.translateFormatted(loc, Util.df.format(calcBonus(tool))));
-    }
+    return super.damage(tool, player, target, damage, newDamage, isCritical);
+  }
 
-    private double calcBonus(ItemStack tool)
-    {
-        int durability = ToolHelper.getCurrentDurability(tool);
-        int maxDurability = ToolHelper.getMaxDurability(tool);
+  @Override
+  public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
+    String loc = String.format(LOC_Extra, getModifierIdentifier());
 
-        // old tcon jagged formula
-        return Math.log((maxDurability - durability) / 72d + 1d) * 2;
-    }
+    return ImmutableList.of(Util.translateFormatted(loc, Util.df.format(calcBonus(tool))));
+  }
 }

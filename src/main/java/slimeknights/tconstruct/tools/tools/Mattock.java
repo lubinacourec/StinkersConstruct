@@ -167,6 +167,27 @@ public class Mattock extends AoeToolCore
     }
 
     @Override
+    public ToolNBT buildTagData(List<Material> materials)
+    {
+        HandleMaterialStats handle = materials.get(0).getStatsOrUnknown(MaterialTypes.HANDLE);
+        HeadMaterialStats axe = materials.get(1).getStatsOrUnknown(MaterialTypes.HEAD);
+        HeadMaterialStats shovel = materials.get(2).getStatsOrUnknown(MaterialTypes.HEAD);
+
+        MattockToolNBT data = new MattockToolNBT();
+        data.head(axe, shovel);
+        data.handle(handle);
+
+        // special harvest levels
+        data.axeLevel = axe.harvestLevel;
+        data.shovelLevel = shovel.harvestLevel;
+
+        // base damage!
+        data.attack += 3;
+
+        return data;
+    }
+
+    @Override
     public int getHarvestLevel(ItemStack stack, String toolClass, @Nullable EntityPlayer player, @Nullable IBlockState blockState)
     {
         if (StringUtils.isNullOrEmpty(toolClass))
@@ -187,27 +208,6 @@ public class Mattock extends AoeToolCore
 
         // none of them
         return super.getHarvestLevel(stack, toolClass, player, blockState);
-    }
-
-    @Override
-    public ToolNBT buildTagData(List<Material> materials)
-    {
-        HandleMaterialStats handle = materials.get(0).getStatsOrUnknown(MaterialTypes.HANDLE);
-        HeadMaterialStats axe = materials.get(1).getStatsOrUnknown(MaterialTypes.HEAD);
-        HeadMaterialStats shovel = materials.get(2).getStatsOrUnknown(MaterialTypes.HEAD);
-
-        MattockToolNBT data = new MattockToolNBT();
-        data.head(axe, shovel);
-        data.handle(handle);
-
-        // special harvest levels
-        data.axeLevel = axe.harvestLevel;
-        data.shovelLevel = shovel.harvestLevel;
-
-        // base damage!
-        data.attack += 3;
-
-        return data;
     }
 
     protected int getAxeLevel(ItemStack stack)

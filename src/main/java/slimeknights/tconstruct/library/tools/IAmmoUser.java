@@ -1,16 +1,15 @@
 package slimeknights.tconstruct.library.tools;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
-public interface IAmmoUser
-{
+import javax.annotation.Nonnull;
 
-    @Nonnull
-    ItemStack findAmmo(@Nonnull ItemStack weapon, EntityLivingBase player);
+public interface IAmmoUser {
 
-    @Nonnull
-    ItemStack getAmmoToRender(@Nonnull ItemStack weapon, EntityLivingBase player);
+  @Nonnull
+  ItemStack findAmmo(@Nonnull ItemStack weapon, EntityLivingBase player);
+
+  @Nonnull
+  ItemStack getAmmoToRender(@Nonnull ItemStack weapon, EntityLivingBase player);
 }

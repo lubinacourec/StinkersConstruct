@@ -65,24 +65,6 @@ public class BlockToolTable extends BlockTable implements ITinkerStationBlock
         this.setHarvestLevel("axe", 0);
     }
 
-    @Override
-    public RayTraceResult collisionRayTrace(IBlockState blockState, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Vec3d start, @Nonnull Vec3d end)
-    {
-        if (blockState.getValue(TABLES).isChest)
-        {
-            return raytraceMultiAABB(BOUNDS_Chest, pos, start, end);
-        }
-
-        return super.collisionRayTrace(blockState, worldIn, pos, start, end);
-    }
-
-    @Nonnull
-    @Override
-    protected BlockStateContainer createBlockState()
-    {
-        return new ExtendedBlockState(this, new IProperty[] {TABLES}, new IUnlistedProperty[] {TEXTURE, INVENTORY, FACING});
-    }
-
     @Nonnull
     @Override
     public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta)
@@ -120,11 +102,29 @@ public class BlockToolTable extends BlockTable implements ITinkerStationBlock
         return true;
     }
 
+    @Nonnull
+    @Override
+    protected BlockStateContainer createBlockState()
+    {
+        return new ExtendedBlockState(this, new IProperty[] {TABLES}, new IUnlistedProperty[] {TEXTURE, INVENTORY, FACING});
+    }
+
     @Override
     protected boolean keepInventory(IBlockState state)
     {
         return Config.chestsKeepInventory &&
             (state.getValue(TABLES) == TableTypes.PatternChest || state.getValue(TABLES) == TableTypes.PartChest);
+    }
+
+    @Override
+    public RayTraceResult collisionRayTrace(IBlockState blockState, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Vec3d start, @Nonnull Vec3d end)
+    {
+        if (blockState.getValue(TABLES).isChest)
+        {
+            return raytraceMultiAABB(BOUNDS_Chest, pos, start, end);
+        }
+
+        return super.collisionRayTrace(blockState, worldIn, pos, start, end);
     }
 
     @Override
@@ -254,10 +254,8 @@ public class BlockToolTable extends BlockTable implements ITinkerStationBlock
 
             return values()[meta];
         }
-
         public final int meta;
         public final boolean isChest;
-
         TableTypes()
         {
             meta = this.ordinal();

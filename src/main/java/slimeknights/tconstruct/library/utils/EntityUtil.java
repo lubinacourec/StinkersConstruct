@@ -1,89 +1,75 @@
 package slimeknights.tconstruct.library.utils;
 
-import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 
-public final class EntityUtil
-{
+import java.util.List;
 
-    public static RayTraceResult raytraceEntityPlayerLook(EntityPlayer player, float range)
-    {
-        Vec3d eye = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ); // Entity.getPositionEyes
-        Vec3d look = player.getLook(1.0f);
+public final class EntityUtil {
 
-        return raytraceEntity(player, eye, look, range, true);
-    }
+  private EntityUtil() {
+  }
 
-    // based on EntityRenderer.getMouseOver
-    public static RayTraceResult raytraceEntity(Entity entity, Vec3d start, Vec3d look, double range, boolean ignoreCanBeCollidedWith)
-    {
-        //Vec3 look = entity.getLook(partialTicks);
-        Vec3d direction = start.addVector(look.x * range, look.y * range, look.z * range);
+  public static RayTraceResult raytraceEntityPlayerLook(EntityPlayer player, float range) {
+    Vec3d eye = new Vec3d(player.posX, player.posY + player.getEyeHeight(), player.posZ); // Entity.getPositionEyes
+    Vec3d look = player.getLook(1.0f);
 
-        //Vec3 direction = vec3.addVector(vec31.x * d0, vec31.y * d0, vec31.z * d0);
-        Entity pointedEntity = null;
-        Vec3d hit = null;
-        AxisAlignedBB bb = entity.getEntityBoundingBox().expand(look.x * range, look.y * range, look.z * range).expand(1, 1, 1);
-        List<Entity> entitiesInArea = entity.getEntityWorld().getEntitiesWithinAABBExcludingEntity(entity, bb);
-        double range2 = range; // range to the current candidate. Used to find the closest entity.
+    return raytraceEntity(player, eye, look, range, true);
+  }
 
-        for (Entity candidate : entitiesInArea)
-        {
-            if (ignoreCanBeCollidedWith || candidate.canBeCollidedWith())
-            {
-                // does our vector go through the entity?
-                double colBorder = candidate.getCollisionBorderSize();
-                AxisAlignedBB entityBB = candidate.getEntityBoundingBox().expand(colBorder, colBorder, colBorder);
-                RayTraceResult movingobjectposition = entityBB.calculateIntercept(start, direction);
+  // based on EntityRenderer.getMouseOver
+  public static RayTraceResult raytraceEntity(Entity entity, Vec3d start, Vec3d look, double range, boolean ignoreCanBeCollidedWith) {
+    //Vec3 look = entity.getLook(partialTicks);
+    Vec3d direction = start.addVector(look.x * range, look.y * range, look.z * range);
 
-                // needs special casing: vector starts inside the entity
-                if (entityBB.contains(start))
-                {
-                    if (0.0D < range2 || range2 == 0.0D)
-                    {
-                        pointedEntity = candidate;
-                        hit = movingobjectposition == null ? start : movingobjectposition.hitVec;
-                        range2 = 0.0D;
-                    }
-                }
-                else if (movingobjectposition != null)
-                {
-                    double dist = start.distanceTo(movingobjectposition.hitVec);
+    //Vec3 direction = vec3.addVector(vec31.x * d0, vec31.y * d0, vec31.z * d0);
+    Entity pointedEntity = null;
+    Vec3d hit = null;
+    AxisAlignedBB bb = entity.getEntityBoundingBox().expand(look.x * range, look.y * range, look.z * range).expand(1, 1, 1);
+    List<Entity> entitiesInArea = entity.getEntityWorld().getEntitiesWithinAABBExcludingEntity(entity, bb);
+    double range2 = range; // range to the current candidate. Used to find the closest entity.
 
-                    if (dist < range2 || range2 == 0.0D)
-                    {
-                        if (candidate == entity.getRidingEntity() && !entity.canRiderInteract())
-                        {
-                            if (range2 == 0.0D)
-                            {
-                                pointedEntity = candidate;
-                                hit = movingobjectposition.hitVec;
-                            }
-                        }
-                        else
-                        {
-                            pointedEntity = candidate;
-                            hit = movingobjectposition.hitVec;
-                            range2 = dist;
-                        }
-                    }
-                }
+    for(Entity candidate : entitiesInArea) {
+      if(ignoreCanBeCollidedWith || candidate.canBeCollidedWith()) {
+        // does our vector go through the entity?
+        double colBorder = candidate.getCollisionBorderSize();
+        AxisAlignedBB entityBB = candidate.getEntityBoundingBox().expand(colBorder, colBorder, colBorder);
+        RayTraceResult movingobjectposition = entityBB.calculateIntercept(start, direction);
+
+        // needs special casing: vector starts inside the entity
+        if(entityBB.contains(start)) {
+          if(0.0D < range2 || range2 == 0.0D) {
+            pointedEntity = candidate;
+            hit = movingobjectposition == null ? start : movingobjectposition.hitVec;
+            range2 = 0.0D;
+          }
+        }
+        else if(movingobjectposition != null) {
+          double dist = start.distanceTo(movingobjectposition.hitVec);
+
+          if(dist < range2 || range2 == 0.0D) {
+            if(candidate == entity.getRidingEntity() && !entity.canRiderInteract()) {
+              if(range2 == 0.0D) {
+                pointedEntity = candidate;
+                hit = movingobjectposition.hitVec;
+              }
             }
+            else {
+              pointedEntity = candidate;
+              hit = movingobjectposition.hitVec;
+              range2 = dist;
+            }
+          }
         }
-
-        if (pointedEntity != null && range2 < range)
-        {
-            return new RayTraceResult(pointedEntity, hit);
-        }
-        return null;
+      }
     }
 
-    private EntityUtil()
-    {
+    if(pointedEntity != null && range2 < range) {
+      return new RayTraceResult(pointedEntity, hit);
     }
+    return null;
+  }
 }

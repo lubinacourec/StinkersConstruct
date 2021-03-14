@@ -1,27 +1,24 @@
 package slimeknights.tconstruct.library.events;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 
-public class TinkerProjectileImpactEvent extends ProjectileImpactEvent
-{
+import javax.annotation.Nonnull;
 
-    @Nonnull
-    private final ItemStack tool;
+public class TinkerProjectileImpactEvent extends ProjectileImpactEvent {
 
-    public TinkerProjectileImpactEvent(Entity entity, RayTraceResult ray, @Nonnull ItemStack tool)
-    {
-        super(entity, ray);
-        this.tool = tool.copy();
-    }
+  @Nonnull
+  private final ItemStack tool;
 
-    @Nonnull
-    public ItemStack getTool()
-    {
-        return tool;
-    }
+  public TinkerProjectileImpactEvent(Entity entity, RayTraceResult ray, @Nonnull ItemStack tool) {
+    super(entity, ray);
+    this.tool = tool.copy();
+  }
+
+  @Nonnull
+  public ItemStack getTool() {
+    return tool;
+  }
 }
