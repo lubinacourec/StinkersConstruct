@@ -1,40 +1,46 @@
 package slimeknights.tconstruct.library.client.texture;
 
+import java.util.function.Function;
+
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.function.Function;
 
 /**
  * ONLY USE THIS IF YOU KNOW WHAT YOU'RE DOING!
  * Animated textures eat up a lot of graphic memory. Generating many can lead to severe performance issues!
  * Only use this for very specific and limited applications!
  */
-public class AnimatedColoredTexture extends TextureColoredTexture {
+public class AnimatedColoredTexture extends TextureColoredTexture
+{
 
-  private TextureAtlasSprite actualTexture;
+    private TextureAtlasSprite actualTexture;
 
-  public AnimatedColoredTexture(ResourceLocation addTexture, ResourceLocation baseTexture, String spriteName) {
-    super(addTexture, baseTexture, spriteName);
-  }
-
-  @Override
-  public boolean load(IResourceManager manager, ResourceLocation location, Function<ResourceLocation, TextureAtlasSprite> textureGetter) {
-    if(addTexture.getFrameCount() > 0) {
-      actualTexture = addTexture;
-    }
-    else {
-      actualTexture = textureGetter.apply(addTextureLocation);
-      //actualTexture = backupLoadtextureAtlasSprite(new ResourceLocation(addTextureLocation),
-      //                                           Minecraft.getMinecraft().getResourceManager());
+    public AnimatedColoredTexture(ResourceLocation addTexture, ResourceLocation baseTexture, String spriteName)
+    {
+        super(addTexture, baseTexture, spriteName);
     }
 
-    return super.load(manager, location, textureGetter);
-  }
+    @Override
+    public boolean load(IResourceManager manager, ResourceLocation location, Function<ResourceLocation, TextureAtlasSprite> textureGetter)
+    {
+        if (addTexture.getFrameCount() > 0)
+        {
+            actualTexture = addTexture;
+        }
+        else
+        {
+            actualTexture = textureGetter.apply(addTextureLocation);
+            //actualTexture = backupLoadtextureAtlasSprite(new ResourceLocation(addTextureLocation),
+            //                                           Minecraft.getMinecraft().getResourceManager());
+        }
 
-  @Override
-  protected void processData(int[] data) {
+        return super.load(manager, location, textureGetter);
+    }
+
+    @Override
+    protected void processData(int[] data)
+    {
     /*
     // get animation data again
     ResourceLocation resourcelocation1 = this.getResourceLocation(addTextureLocation);
@@ -122,5 +128,5 @@ public class AnimatedColoredTexture extends TextureColoredTexture {
     catch(ReflectiveOperationException e) {
       e.printStackTrace();
     }*/
-  }
+    }
 }

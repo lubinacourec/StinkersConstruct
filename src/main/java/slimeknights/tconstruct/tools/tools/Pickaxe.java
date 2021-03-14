@@ -59,12 +59,6 @@ public class Pickaxe extends AoeToolCore
     }
 
     @Override
-    public boolean isEffective(IBlockState state)
-    {
-        return effective_materials.contains(state.getMaterial()) || ItemPickaxe.EFFECTIVE_ON.contains(state.getBlock());
-    }
-
-    @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
     {
         if (this.isInCreativeTab(tab))
@@ -72,6 +66,12 @@ public class Pickaxe extends AoeToolCore
             addDefaultSubItems(subItems);
             addInfiTool(subItems, "InfiHarvester");
         }
+    }
+
+    @Override
+    public boolean isEffective(IBlockState state)
+    {
+        return effective_materials.contains(state.getMaterial()) || ItemPickaxe.EFFECTIVE_ON.contains(state.getBlock());
     }
 
     @Override

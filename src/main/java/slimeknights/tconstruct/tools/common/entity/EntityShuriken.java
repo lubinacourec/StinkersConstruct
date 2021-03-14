@@ -30,19 +30,6 @@ public class EntityShuriken extends EntityProjectileBase
     }
 
     @Override
-    protected void init()
-    {
-        setSize(0.3f, 0.1f);
-        this.bounceOnNoDamage = false;
-    }
-
-    @Override
-    protected void playHitEntitySound()
-    {
-
-    }
-
-    @Override
     public double getSlowdown()
     {
         return 0.05f;
@@ -62,5 +49,18 @@ public class EntityShuriken extends EntityProjectileBase
         // this is only relevant clientside only, so we don't actually have it on the server
         spin = rand.nextInt(360);
         rollAngle = 7 - rand.nextInt(14);
+    }
+
+    @Override
+    protected void init()
+    {
+        setSize(0.3f, 0.1f);
+        this.bounceOnNoDamage = false;
+    }
+
+    @Override
+    protected void playHitEntitySound()
+    {
+
     }
 }

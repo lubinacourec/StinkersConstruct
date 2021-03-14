@@ -11,20 +11,24 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.tools.common.client.GuiToolForge;
 import slimeknights.tconstruct.tools.common.inventory.ContainerToolForge;
 
-public class TileToolForge extends TileToolStation {
+public class TileToolForge extends TileToolStation
+{
 
-  public TileToolForge() {
-    inventoryTitle = "gui.toolforge.name";
-  }
+    public TileToolForge()
+    {
+        inventoryTitle = "gui.toolforge.name";
+    }
 
-  @Override
-  @SideOnly(Side.CLIENT)
-  public GuiContainer createGui(InventoryPlayer inventoryplayer, World world, BlockPos pos) {
-    return new GuiToolForge(inventoryplayer, world, pos, this);
-  }
+    @Override
+    public Container createContainer(InventoryPlayer inventoryplayer, World world, BlockPos pos)
+    {
+        return new ContainerToolForge(inventoryplayer, this);
+    }
 
-  @Override
-  public Container createContainer(InventoryPlayer inventoryplayer, World world, BlockPos pos) {
-    return new ContainerToolForge(inventoryplayer, this);
-  }
+    @Override
+    @SideOnly(Side.CLIENT)
+    public GuiContainer createGui(InventoryPlayer inventoryplayer, World world, BlockPos pos)
+    {
+        return new GuiToolForge(inventoryplayer, world, pos, this);
+    }
 }

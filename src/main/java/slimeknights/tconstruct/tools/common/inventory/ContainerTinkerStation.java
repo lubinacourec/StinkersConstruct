@@ -1,9 +1,14 @@
 package slimeknights.tconstruct.tools.common.inventory;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.Queue;
+import java.util.Set;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
-
+import org.apache.commons.lang3.tuple.Pair;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -14,13 +19,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.Queue;
-import java.util.Set;
-
 import slimeknights.mantle.inventory.ContainerMultiModule;
 import slimeknights.tconstruct.tools.common.block.BlockToolTable;
 import slimeknights.tconstruct.tools.common.block.ITinkerStationBlock;
@@ -28,6 +26,36 @@ import slimeknights.tconstruct.tools.common.client.GuiTinkerStation;
 
 public class ContainerTinkerStation<T extends TileEntity & IInventory> extends ContainerMultiModule<T>
 {
+
+    @SideOnly(Side.CLIENT)
+    private static void clientGuiUpdate()
+    {
+        GuiScreen screen = Minecraft.getMinecraft().currentScreen;
+        if (screen instanceof GuiTinkerStation)
+        {
+            ((GuiTinkerStation) screen).updateDisplay();
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static void clientError(String message)
+    {
+        GuiScreen screen = Minecraft.getMinecraft().currentScreen;
+        if (screen instanceof GuiTinkerStation)
+        {
+            ((GuiTinkerStation) screen).error(message);
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static void clientWarning(String message)
+    {
+        GuiScreen screen = Minecraft.getMinecraft().currentScreen;
+        if (screen instanceof GuiTinkerStation)
+        {
+            ((GuiTinkerStation) screen).warning(message);
+        }
+    }
 
     public final boolean hasCraftingStation;
     public final List<Pair<BlockPos, IBlockState>> tinkerStationBlocks;
@@ -193,36 +221,6 @@ public class ContainerTinkerStation<T extends TileEntity & IInventory> extends C
                     ContainerTinkerStation.clientWarning(message);
                 }
             });
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    private static void clientGuiUpdate()
-    {
-        GuiScreen screen = Minecraft.getMinecraft().currentScreen;
-        if (screen instanceof GuiTinkerStation)
-        {
-            ((GuiTinkerStation) screen).updateDisplay();
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    private static void clientError(String message)
-    {
-        GuiScreen screen = Minecraft.getMinecraft().currentScreen;
-        if (screen instanceof GuiTinkerStation)
-        {
-            ((GuiTinkerStation) screen).error(message);
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    private static void clientWarning(String message)
-    {
-        GuiScreen screen = Minecraft.getMinecraft().currentScreen;
-        if (screen instanceof GuiTinkerStation)
-        {
-            ((GuiTinkerStation) screen).warning(message);
         }
     }
 

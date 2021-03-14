@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.library.tileentity;
 
-public interface IProgress {
+public interface IProgress
+{
 
-  float getProgress();
+    float getProgress();
 }

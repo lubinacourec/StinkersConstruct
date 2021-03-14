@@ -13,22 +13,27 @@ import mcjty.theoneprobe.api.ProbeMode;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.smeltery.tileentity.TileCasting;
 
-public class CastingInfoProvider implements IProbeInfoProvider {
+public class CastingInfoProvider implements IProbeInfoProvider
+{
 
-  @Override
-  public String getID() {
-    return Util.getResource("casting").toString();
-  }
-
-  @Override
-  public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
-    TileEntity te = world.getTileEntity(data.getPos());
-    if(te instanceof TileCasting) {
-      TileCasting casting = (TileCasting) te;
-      ItemStack output = casting.getCurrentResult();
-      if(output != null) {
-        probeInfo.horizontal().text(Util.translateFormatted("gui.waila.casting.recipe", output.getDisplayName()));
-      }
+    @Override
+    public String getID()
+    {
+        return Util.getResource("casting").toString();
     }
-  }
+
+    @Override
+    public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data)
+    {
+        TileEntity te = world.getTileEntity(data.getPos());
+        if (te instanceof TileCasting)
+        {
+            TileCasting casting = (TileCasting) te;
+            ItemStack output = casting.getCurrentResult();
+            if (output != null)
+            {
+                probeInfo.horizontal().text(Util.translateFormatted("gui.waila.casting.recipe", output.getDisplayName()));
+            }
+        }
+    }
 }

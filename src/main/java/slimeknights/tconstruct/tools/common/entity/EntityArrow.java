@@ -34,6 +34,16 @@ public class EntityArrow extends EntityProjectileBase
     }
 
     @Override
+    public void readSpawnData(ByteBuf data)
+    {
+        super.readSpawnData(data);
+
+        // animation stuff, it sometimes rotates left
+        int rollDir = rand.nextBoolean() ? -1 : 1;
+        rollSpeed = (int) ((getSpeed() * 80) / 3) * rollDir;
+    }
+
+    @Override
     protected void playHitBlockSound(float speed, IBlockState state)
     {
         this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
@@ -48,15 +58,5 @@ public class EntityArrow extends EntityProjectileBase
             EntityLivingBase entityLivingBaseHit = (EntityLivingBase) entityHit;
             entityLivingBaseHit.setArrowCountInEntity(entityLivingBaseHit.getArrowCountInEntity() + 1);
         }
-    }
-
-    @Override
-    public void readSpawnData(ByteBuf data)
-    {
-        super.readSpawnData(data);
-
-        // animation stuff, it sometimes rotates left
-        int rollDir = rand.nextBoolean() ? -1 : 1;
-        rollSpeed = (int) ((getSpeed() * 80) / 3) * rollDir;
     }
 }

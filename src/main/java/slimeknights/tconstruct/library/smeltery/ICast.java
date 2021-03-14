@@ -1,4 +1,5 @@
 package slimeknights.tconstruct.library.smeltery;
 
-public interface ICast {
+public interface ICast
+{
 }

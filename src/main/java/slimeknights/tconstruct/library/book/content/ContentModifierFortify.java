@@ -11,39 +11,47 @@ import slimeknights.tconstruct.library.modifiers.IModifier;
 import slimeknights.tconstruct.tools.TinkerTools;
 
 @SideOnly(Side.CLIENT)
-public class ContentModifierFortify extends ContentModifier {
+public class ContentModifierFortify extends ContentModifier
+{
 
-  public static final transient String ID = "modifier_fortify";
+    public static final transient String ID = "modifier_fortify";
 
-  public ContentModifierFortify() {
-  }
-
-  public ContentModifierFortify(IModifier modifier) {
-    super(modifier);
-  }
-
-  @Override
-  protected ItemStackList getDemoTools(ItemStack[][] inputItems) {
-    if(inputItems.length == 0) {
-      return ItemStackList.create();
+    public ContentModifierFortify()
+    {
     }
 
-    ItemStackList demo = super.getDemoTools(inputItems);
+    public ContentModifierFortify(IModifier modifier)
+    {
+        super(modifier);
+    }
 
-    ItemStackList out = ItemStackList.create();
-
-    for(int i = 0; i < inputItems[0].length; i++) {
-      if(inputItems[0][i].getItem() == TinkerTools.sharpeningKit) {
-        Material material = TinkerTools.sharpeningKit.getMaterial(inputItems[0][i]);
-        IModifier modifier = TinkerRegistry.getModifier("fortify" + material.getIdentifier());
-        if(modifier != null) {
-          ItemStack stack = demo.get(i % demo.size()).copy();
-          modifier.apply(stack);
-          out.add(stack);
+    @Override
+    protected ItemStackList getDemoTools(ItemStack[][] inputItems)
+    {
+        if (inputItems.length == 0)
+        {
+            return ItemStackList.create();
         }
-      }
-    }
 
-    return out;
-  }
+        ItemStackList demo = super.getDemoTools(inputItems);
+
+        ItemStackList out = ItemStackList.create();
+
+        for (int i = 0; i < inputItems[0].length; i++)
+        {
+            if (inputItems[0][i].getItem() == TinkerTools.sharpeningKit)
+            {
+                Material material = TinkerTools.sharpeningKit.getMaterial(inputItems[0][i]);
+                IModifier modifier = TinkerRegistry.getModifier("fortify" + material.getIdentifier());
+                if (modifier != null)
+                {
+                    ItemStack stack = demo.get(i % demo.size()).copy();
+                    modifier.apply(stack);
+                    out.add(stack);
+                }
+            }
+        }
+
+        return out;
+    }
 }

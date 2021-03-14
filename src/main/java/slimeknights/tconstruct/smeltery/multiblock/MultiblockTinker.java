@@ -7,31 +7,35 @@ import net.minecraft.world.World;
 import slimeknights.mantle.multiblock.MultiServantLogic;
 import slimeknights.tconstruct.smeltery.tileentity.TileMultiblock;
 
-public abstract class MultiblockTinker extends MultiblockCuboid {
+public abstract class MultiblockTinker extends MultiblockCuboid
+{
 
-  public final TileMultiblock<?> tile;
+    public final TileMultiblock<?> tile;
 
-  public MultiblockTinker(TileMultiblock<?> tile, boolean hasFloor, boolean hasFrame, boolean hasCeiling) {
-    super(hasFloor, hasFrame, hasCeiling);
-    this.tile = tile;
-  }
-
-  protected boolean isValidSlave(World world, BlockPos pos) {
-    if(!world.isBlockLoaded(pos)) {
-      return false;
+    public MultiblockTinker(TileMultiblock<?> tile, boolean hasFloor, boolean hasFrame, boolean hasCeiling)
+    {
+        super(hasFloor, hasFrame, hasCeiling);
+        this.tile = tile;
     }
-    TileEntity te = world.getTileEntity(pos);
 
-    // slave-blocks are only allowed if they already belong to this smeltery
-    if(te instanceof MultiServantLogic) {
-      MultiServantLogic slave = (MultiServantLogic) te;
-      if(slave.hasValidMaster()) {
-        if(!tile.getPos().equals(slave.getMasterPosition())) {
-          return false;
+    protected boolean isValidSlave(World world, BlockPos pos)
+    {
+        if (!world.isBlockLoaded(pos))
+        {
+            return false;
         }
-      }
-    }
+        TileEntity te = world.getTileEntity(pos);
 
-    return true;
-  }
+        // slave-blocks are only allowed if they already belong to this smeltery
+        if (te instanceof MultiServantLogic)
+        {
+            MultiServantLogic slave = (MultiServantLogic) te;
+            if (slave.hasValidMaster())
+            {
+                return tile.getPos().equals(slave.getMasterPosition());
+            }
+        }
+
+        return true;
+    }
 }

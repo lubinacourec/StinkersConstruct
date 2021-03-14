@@ -1,43 +1,42 @@
 package slimeknights.tconstruct.library.client.model.format;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 
-public class Offset {
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 
-  public int x;
-  public int y;
+public class Offset
+{
 
-  /**
-   * Deseralizes a json in the format of { "offset": { "x": 1, "y": 2 }}
-   * Ignores all invalid json
-   */
-  public static class OffsetDeserializer implements JsonDeserializer<Offset> {
+    public int x;
+    public int y;
 
-    public static final OffsetDeserializer INSTANCE = new OffsetDeserializer();
-    public static final Type TYPE = new TypeToken<Offset>() {}.getType();
+    /**
+     * Deseralizes a json in the format of { "offset": { "x": 1, "y": 2 }}
+     * Ignores all invalid json
+     */
+    public static class OffsetDeserializer implements JsonDeserializer<Offset>
+    {
 
-    private static final Gson GSON = new Gson();
+        public static final OffsetDeserializer INSTANCE = new OffsetDeserializer();
+        public static final Type TYPE = new TypeToken<Offset>() {}.getType();
 
-    @Override
-    public Offset deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-        throws JsonParseException {
+        private static final Gson GSON = new Gson();
 
-      JsonObject obj = json.getAsJsonObject();
-      JsonElement texElem = obj.get("offset");
+        @Override
+        public Offset deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+            throws JsonParseException
+        {
 
-      if(texElem == null) {
-        return new Offset();
-      }
+            JsonObject obj = json.getAsJsonObject();
+            JsonElement texElem = obj.get("offset");
 
-      return GSON.fromJson(texElem, TYPE);
+            if (texElem == null)
+            {
+                return new Offset();
+            }
+
+            return GSON.fromJson(texElem, TYPE);
+        }
     }
-  }
 }

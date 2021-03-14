@@ -7,18 +7,21 @@ import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 // Handles all Tinker tool parts subtypes
-public class ToolPartSubtypeInterpreter implements ISubtypeInterpreter {
+public class ToolPartSubtypeInterpreter implements ISubtypeInterpreter
+{
 
-  @Override
-  public String apply(ItemStack itemStack) {
-    String meta = itemStack.getItemDamage() + ":";
+    @Override
+    public String apply(ItemStack itemStack)
+    {
+        String meta = itemStack.getItemDamage() + ":";
 
-    Material material = TinkerUtil.getMaterialFromStack(itemStack);
-    if(material == null) {
-      return meta;
+        Material material = TinkerUtil.getMaterialFromStack(itemStack);
+        if (material == null)
+        {
+            return meta;
+        }
+
+        return meta + material.getIdentifier();
     }
-
-    return meta + material.getIdentifier();
-  }
 
 }

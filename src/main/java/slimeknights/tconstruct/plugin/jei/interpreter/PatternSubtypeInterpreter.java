@@ -7,18 +7,21 @@ import mezz.jei.api.ISubtypeRegistry.ISubtypeInterpreter;
 import slimeknights.tconstruct.library.tools.Pattern;
 
 // Handles pattern and cast subtypes
-public class PatternSubtypeInterpreter implements ISubtypeInterpreter {
+public class PatternSubtypeInterpreter implements ISubtypeInterpreter
+{
 
-  @Override
-  public String apply(ItemStack itemStack) {
-    String meta = itemStack.getItemDamage() + ":";
+    @Override
+    public String apply(ItemStack itemStack)
+    {
+        String meta = itemStack.getItemDamage() + ":";
 
-    Item part = Pattern.getPartFromTag(itemStack);
-    if(part == null) {
-      return meta;
+        Item part = Pattern.getPartFromTag(itemStack);
+        if (part == null)
+        {
+            return meta;
+        }
+
+        return meta + part.getRegistryName();
     }
-
-    return meta + part.getRegistryName();
-  }
 
 }

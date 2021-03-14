@@ -59,6 +59,7 @@ public class DumpMaterialTest extends CommandBase
         html.append("</table>");
         return html.toString();
     }
+
     public Material baseMaterial;
 
     public DumpMaterialTest()

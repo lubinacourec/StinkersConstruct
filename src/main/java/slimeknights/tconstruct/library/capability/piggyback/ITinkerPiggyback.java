@@ -2,9 +2,10 @@ package slimeknights.tconstruct.library.capability.piggyback;
 
 import net.minecraft.entity.player.EntityPlayer;
 
-public interface ITinkerPiggyback {
+public interface ITinkerPiggyback
+{
 
-  void setRiddenPlayer(EntityPlayer player);
+    void setRiddenPlayer(EntityPlayer player);
 
-  void updatePassengers();
+    void updatePassengers();
 }

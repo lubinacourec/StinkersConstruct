@@ -41,16 +41,6 @@ public class Hammer extends Pickaxe
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
-    {
-        if (this.isInCreativeTab(tab))
-        {
-            addDefaultSubItems(subItems);
-            addInfiTool(subItems, "InfiMiner");
-        }
-    }
-
-    @Override
     public float damagePotential()
     {
         return 1.2f;
@@ -60,6 +50,16 @@ public class Hammer extends Pickaxe
     public double attackSpeed()
     {
         return 0.8f;
+    }
+
+    @Override
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
+    {
+        if (this.isInCreativeTab(tab))
+        {
+            addDefaultSubItems(subItems);
+            addInfiTool(subItems, "InfiMiner");
+        }
     }
 
     @Override

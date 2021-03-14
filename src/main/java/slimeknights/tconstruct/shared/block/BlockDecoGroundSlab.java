@@ -9,22 +9,25 @@ import slimeknights.mantle.block.EnumBlockSlab;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.shared.TinkerCommons;
 
-public class BlockDecoGroundSlab extends EnumBlockSlab<BlockDecoGround.DecoGroundType> {
+public class BlockDecoGroundSlab extends EnumBlockSlab<BlockDecoGround.DecoGroundType>
+{
 
-  public final static PropertyEnum<BlockDecoGround.DecoGroundType> TYPE = PropertyEnum.create("type", BlockDecoGround.DecoGroundType.class);
+    public final static PropertyEnum<BlockDecoGround.DecoGroundType> TYPE = PropertyEnum.create("type", BlockDecoGround.DecoGroundType.class);
 
-  public BlockDecoGroundSlab() {
-    super(Material.GROUND, TYPE, BlockDecoGround.DecoGroundType.class);
-    this.setHardness(2.0f);
+    public BlockDecoGroundSlab()
+    {
+        super(Material.GROUND, TYPE, BlockDecoGround.DecoGroundType.class);
+        this.setHardness(2.0f);
 
-    this.setSoundType(SoundType.GROUND);
+        this.setSoundType(SoundType.GROUND);
 
-    setHarvestLevel("shovel", -1);
-    setCreativeTab(TinkerRegistry.tabGeneral);
-  }
+        setHarvestLevel("shovel", -1);
+        setCreativeTab(TinkerRegistry.tabGeneral);
+    }
 
-  @Override
-  public IBlockState getFullBlock(IBlockState state) {
-    return TinkerCommons.blockDecoGround.getDefaultState().withProperty(BlockDecoGround.TYPE, state.getValue(TYPE));
-  }
+    @Override
+    public IBlockState getFullBlock(IBlockState state)
+    {
+        return TinkerCommons.blockDecoGround.getDefaultState().withProperty(BlockDecoGround.TYPE, state.getValue(TYPE));
+    }
 }

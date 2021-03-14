@@ -11,18 +11,22 @@ import net.minecraft.world.World;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
-public class TraitPetramor extends AbstractTrait {
+public class TraitPetramor extends AbstractTrait
+{
 
-  private static final float chance = 0.1f;
+    private static final float chance = 0.1f;
 
-  public TraitPetramor() {
-    super("petramor", TextFormatting.RED);
-  }
-
-  @Override
-  public void afterBlockBreak(ItemStack tool, World world, IBlockState state, BlockPos pos, EntityLivingBase player, boolean wasEffective) {
-    if(!world.isRemote && state.getMaterial() == Material.ROCK && random.nextFloat() < chance) {
-      ToolHelper.healTool(tool, 5, player);
+    public TraitPetramor()
+    {
+        super("petramor", TextFormatting.RED);
     }
-  }
+
+    @Override
+    public void afterBlockBreak(ItemStack tool, World world, IBlockState state, BlockPos pos, EntityLivingBase player, boolean wasEffective)
+    {
+        if (!world.isRemote && state.getMaterial() == Material.ROCK && random.nextFloat() < chance)
+        {
+            ToolHelper.healTool(tool, 5, player);
+        }
+    }
 }

@@ -181,6 +181,15 @@ public class FryPan extends TinkerToolCore
     }
 
     @Override
+    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+    {
+        // has to be done in onUpdate because onTickUsing is too early and gets overwritten. bleh.
+        preventSlowDown(entityIn, 0.7f);
+
+        super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+    }
+
+    @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
     {
         if (this.isInCreativeTab(tab))
@@ -201,15 +210,6 @@ public class FryPan extends TinkerToolCore
                 }
             }
         }
-    }
-
-    @Override
-    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
-    {
-        // has to be done in onUpdate because onTickUsing is too early and gets overwritten. bleh.
-        preventSlowDown(entityIn, 0.7f);
-
-        super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
     }
 
     @Override
