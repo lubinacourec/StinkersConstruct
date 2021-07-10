@@ -503,8 +503,8 @@ fluid.tconstruct.nickel.name=Nickel fondu
 fluid.tconstruct.silver.name=Argent fondu
 fluid.tconstruct.electrum.name=Électrum fondu
 fluid.tconstruct.steel.name=Acier fondu
-fluid.tconstruct.aluminum.name=Aluminium fondu
-fluid.tconstruct.alubrass.name=Laiton d'aluminium fondu
+fluid.tconstruct.aluminium.name=Aluminium fondu
+fluid.tconstruct.aluminium_brass.name=Laiton d'aluminium fondu
 
 #################
 #    Potions    #

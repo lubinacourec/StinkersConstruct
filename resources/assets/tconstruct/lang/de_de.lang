@@ -497,8 +497,8 @@ fluid.tconstruct.nickel.name=Geschmolzenes Nickel
 fluid.tconstruct.silver.name=Geschmolzenes Silber
 fluid.tconstruct.electrum.name=Geschmolzenes Electrum
 fluid.tconstruct.steel.name=Geschmolzener Stahl
-fluid.tconstruct.aluminum.name=Geschmolzenes Aluminium
-fluid.tconstruct.alubrass.name=Geschmolzenes Duraluminium
+fluid.tconstruct.aluminium.name=Geschmolzenes Aluminium
+fluid.tconstruct.aluminium_brass.name=Geschmolzenes Duraluminium
 
 #################
 #    Potions    #

@@ -503,8 +503,8 @@ fluid.tconstruct.nickel.name=Nedsmält nickel
 fluid.tconstruct.silver.name=Nedsmält silver
 fluid.tconstruct.electrum.name=Nedsmält elektrum
 fluid.tconstruct.steel.name=Nedsmält stål
-fluid.tconstruct.aluminum.name=Nedsmält aluminium
-fluid.tconstruct.alubrass.name=Nedsmält aluminiummässing
+fluid.tconstruct.aluminium.name=Nedsmält aluminium
+fluid.tconstruct.aluminium_brass.name=Nedsmält aluminiummässing
 
 #################
 #    Potions    #

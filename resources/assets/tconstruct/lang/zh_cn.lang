@@ -509,8 +509,8 @@ fluid.tconstruct.nickel.name=熔融镍
 fluid.tconstruct.silver.name=熔融银
 fluid.tconstruct.electrum.name=熔融琥珀金
 fluid.tconstruct.steel.name=熔融钢
-fluid.tconstruct.aluminum.name=熔融铝
-fluid.tconstruct.alubrass.name=熔融铝黄铜
+fluid.tconstruct.aluminium.name=熔融铝
+fluid.tconstruct.aluminium_brass.name=熔融铝黄铜
 
 #################
 #    Potions    #

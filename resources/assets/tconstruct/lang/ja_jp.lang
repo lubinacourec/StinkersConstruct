@@ -497,8 +497,8 @@ fluid.tconstruct.nickel.name=溶けたニッケル
 fluid.tconstruct.silver.name=溶けた銀
 fluid.tconstruct.electrum.name=溶けたエレクトラム
 fluid.tconstruct.steel.name=溶けた鋼鉄
-fluid.tconstruct.aluminum.name=溶けたアルミニウム
-fluid.tconstruct.alubrass.name=溶けたアルミブラス
+fluid.tconstruct.aluminium.name=溶けたアルミニウム
+fluid.tconstruct.aluminium_brass.name=溶けたアルミブラス
 
 #################
 #    Potions    #

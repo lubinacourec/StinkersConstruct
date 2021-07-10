@@ -492,8 +492,8 @@ fluid.tconstruct.nickel.name=Níquel Derretido
 fluid.tconstruct.silver.name=Prata Derretida
 fluid.tconstruct.electrum.name=Eléctro Derretido
 fluid.tconstruct.steel.name=Aço Fundido
-fluid.tconstruct.aluminum.name=Alumínio Derretido
-fluid.tconstruct.alubrass.name=Latão de Alumínio Derretido
+fluid.tconstruct.aluminium.name=Alumínio Derretido
+fluid.tconstruct.aluminium_brass.name=Latão de Alumínio Derretido
 
 #################
 #    Potions    #

@@ -499,8 +499,8 @@ fluid.tconstruct.nickel.name=녹은 니켈
 fluid.tconstruct.silver.name=녹은 은
 fluid.tconstruct.electrum.name=녹은 호박금
 fluid.tconstruct.steel.name=녹은 강철
-fluid.tconstruct.aluminum.name=녹은 알루미늄
-fluid.tconstruct.alubrass.name=녹은 알루미늄 황동
+fluid.tconstruct.aluminium.name=녹은 알루미늄
+fluid.tconstruct.aluminium_brass.name=녹은 알루미늄 황동
 
 #################
 #    Potions    #

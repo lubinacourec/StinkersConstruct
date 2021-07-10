@@ -496,8 +496,8 @@ fluid.tconstruct.nickel.name=Níquel Fundido
 fluid.tconstruct.silver.name=Plata Fundida
 fluid.tconstruct.electrum.name=Electro Fundido
 fluid.tconstruct.steel.name=Acero Fundido
-fluid.tconstruct.aluminum.name=Aluminio Fundido
-fluid.tconstruct.alubrass.name=Latón de Aluminio Fundido
+fluid.tconstruct.aluminium.name=Aluminio Fundido
+fluid.tconstruct.aluminium_brass.name=Latón de Aluminio Fundido
 
 #################
 #    Potions    #
