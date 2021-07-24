@@ -49,7 +49,7 @@ public final class Config {
   public static int nuggetValueCasting = 10;
   public static int fragmentValue = 25;
   public static int shardValue = 50;
-  public static int gemValue = 666;
+  public static int gemValue = 600;
   public static int blockValue = 900;
   public static int blockValueCasting = 900;
   public static int gearValue = 400;
@@ -76,6 +76,7 @@ public final class Config {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
   };
   private static String[] orePreference = {
+      "tfc",
       "minecraft",
       "tconstruct",
       "thermalfoundation",

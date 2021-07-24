@@ -42,19 +42,19 @@ public class Material extends RecipeMatchRegistry {
 
   // How much the different items are "worth"
   // the values are used for both liquid conversion as well as part crafting
-  public static final int VALUE_Ingot = Config.ingotValue; // 100
-  public static final int VALUE_Nugget = Config.nuggetValue; //VALUE_Ingot / 10
-  public static final int VALUE_Fragment = Config.fragmentValue; // VALUE_Ingot / 4
-  public static final int VALUE_Shard = Config.shardValue; // VALUE_Ingot / 2
-  public static final int VALUE_Gear = Config.gearValue; // VALUE_Ingot * 4
-  public static final int VALUE_Plate = Config.plateValue; // VALUE_Ingot
-  public static final int VALUE_Gem = Config.gemValue; // 666
-  public static final int VALUE_Block = Config.blockValue; // VALUE_Ingot * 8
-  public static final int VALUE_SearedBlock = VALUE_Ingot * 2;
-  public static final int VALUE_SearedMaterial = VALUE_Ingot / 2;
-  public static final int VALUE_Glass = 1000;
-  public static final int VALUE_BrickBlock = VALUE_Ingot * 4;
-  public static final int VALUE_SlimeBall = 250;
+  public static int VALUE_Ingot = Config.ingotValue; // 100
+  public static int VALUE_Nugget = Config.nuggetValue; //VALUE_Ingot / 10
+  public static int VALUE_Fragment = Config.fragmentValue; // VALUE_Ingot / 4
+  public static int VALUE_Shard = Config.shardValue; // VALUE_Ingot / 2
+  public static int VALUE_Gear = Config.gearValue; // VALUE_Ingot * 4
+  public static int VALUE_Plate = Config.plateValue; // VALUE_Ingot
+  public static int VALUE_Gem = Config.gemValue; // 666
+  public static int VALUE_Block = Config.blockValue; // VALUE_Ingot * 8
+  public static int VALUE_SearedBlock = VALUE_Ingot * 2;
+  public static int VALUE_SearedMaterial = VALUE_Ingot / 2;
+  public static int VALUE_Glass = 1000;
+  public static int VALUE_BrickBlock = VALUE_Ingot * 4;
+  public static int VALUE_SlimeBall = 250;
 
   public static int VALUE_Ore() {
     return (int) (VALUE_Ingot * Config.oreToIngotRatio);
