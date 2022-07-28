@@ -57,6 +57,7 @@ public final class Config {
   public static int plateValue = 100;
   public static int plateValueCasting = 100;
   public static double oreToIngotRatio = 2;
+  public static int despawnProjectile = 1200;
 
   public static boolean matchVanillaSlimeblock = false;
   public static boolean limitPiggybackpack = false;
@@ -404,6 +405,11 @@ public final class Config {
       prop.setMinValue(1);
       oreToIngotRatio = prop.getDouble();
       prop.setRequiresMcRestart(true);
+      propOrder.add(prop.getName());
+
+      prop = configFile.get(cat, "despawnProjectile", despawnProjectile);
+      prop.setComment("How many ticks projectiles are allowed on the ground until they despawn.");
+      despawnProjectile = prop.getInt();
       propOrder.add(prop.getName());
     }
     // Worldgen
