@@ -68,6 +68,7 @@ public final class Config {
   public static boolean castingBlock = true;
   public static boolean castingCast = true;
   public static boolean castingGear = true;
+  public static boolean castingGem = true;
   public static boolean castingIngot = true;
   public static boolean castingNugget = true;
   public static boolean castingPlate = true;

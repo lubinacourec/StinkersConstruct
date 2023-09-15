@@ -79,8 +79,6 @@ public class TConstruct {
   public static final Logger log = LogManager.getLogger(modID);
   public static final Random random = new Random();
 
-  public boolean tfc;
-
   @Mod.Instance(modID)
   public static TConstruct instance;
 
@@ -133,9 +131,6 @@ public class TConstruct {
     }
     else {
       log.info("Preparing to take over the world");
-    }
-    if(Loader.isModLoaded("tfc")) {
-      tfc = true;
     }
   }
 
