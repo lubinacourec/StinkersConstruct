@@ -73,7 +73,7 @@ import java.util.Random;
 public class TConstruct {
 
   public static final String modID = Util.MODID;
-  public static final String modVersion = "${version}";
+  public static final String modVersion = "${VERSION}";
   public static final String modName = "Tinkers' Construct";
 
   public static final Logger log = LogManager.getLogger(modID);

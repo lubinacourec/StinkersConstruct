@@ -71,19 +71,12 @@ minecraft {
 
     // Include and use dependencies' Access Transformer files
     useDependencyAccessTransformers = true
-    
-    // Add any properties you want to swap out for a dynamic value at build time here
-    // Any properties here will be added to a class at build time, the name can be configured below
-    // Example:
-    // injectedTags.put('VERSION', project.version)
-    // injectedTags.put('MOD_ID', project.archives_base_name)
+
+    // version tag replacement
+    tagReplacementFiles.add "TConstruct.java"
+    injectedTags.put '${VERSION}', project.version
 }
 
-// Generate a group.archives_base_name.Tags class
-tasks.injectTags.configure {
-    // Change Tags class' name here:
-    outputClassName.set("${project.group}.${project.archives_base_name}.Tags")
-}
 
 repositories {
     maven {
@@ -125,6 +118,16 @@ repositories {
         name = "BlameJared"
         url = "https://maven.blamejared.com"
     }
+    maven {  // RetroFuturaGradle
+        name 'GTNH Maven'
+        url 'http://jenkins.usrv.eu:8081/nexus/content/groups/public/'
+        allowInsecureProtocol = true
+        mavenContent {
+            includeGroup 'com.gtnewhorizons'
+            includeGroup 'com.gtnewhorizons.retrofuturagradle'
+        }
+    }
+
     mavenLocal() // Must be last for caching to work
 }
 
@@ -164,8 +167,8 @@ dependencies {
 
 
 // Adds Access Transformer files to tasks
-tasks.deobfuscateMergedJarToSrg.accessTransformerFiles.from('resources/META-INF/tconstruct_at.cfg')
-tasks.srgifyBinpatchedJar.accessTransformerFiles.from('resources/META-INF/tconstruct_at.cfg')
+tasks.deobfuscateMergedJarToSrg.accessTransformerFiles.from('src/main/resources/META-INF/tconstruct_at.cfg')
+tasks.srgifyBinpatchedJar.accessTransformerFiles.from('src/main/resources/META-INF/tconstruct_at.cfg')
 
 processResources {
     // This will ensure that this task is redone when the versions change
@@ -180,10 +183,6 @@ processResources {
                 'mcversion': project.minecraft.version
         )
     }
-    
-    if (project.use_access_transformer.toBoolean()) {
-        rename '(.+_at.cfg)', 'META-INF/$1' // Make sure Access Transformer files are in META-INF folder
-    }
 }
 
 jar {
@@ -196,7 +195,7 @@ jar {
                 attribute_map['ForceLoadAsMod'] = project.gradle.startParameter.taskNames[0] == "build"
             }
         }
-        attribute_map['FMLAT'] = 'resources/META-INF/tconstruct_at.cfg'
+        attribute_map['FMLAT'] = 'src/main/resources/META-INF/tconstruct_at.cfg'
         attributes(attribute_map)
     }
     // Add all embedded dependencies into the jar
