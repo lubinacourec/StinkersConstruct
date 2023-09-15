@@ -49,7 +49,7 @@ public final class Config {
   public static int nuggetValueCasting = 16;
   public static int fragmentValue = 36;
   public static int shardValue = 72;
-  public static int gemValue = 864;
+  public static int gemValue = 666;
   public static int blockValue = 1296;
   public static int blockValueCasting = 1296;
   public static int gearValue = 576;
