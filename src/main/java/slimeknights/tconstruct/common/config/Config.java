@@ -43,20 +43,20 @@ public final class Config {
   public static boolean leatherDryingRecipe = true;
   public static boolean gravelFlintRecipe = true;
 
-  public static int ingotValue = 100;
-  public static int ingotValueCasting = 100;
-  public static int nuggetValue = 10;
-  public static int nuggetValueCasting = 10;
-  public static int fragmentValue = 25;
-  public static int shardValue = 50;
-  public static int gemValue = 600;
-  public static int blockValue = 900;
-  public static int blockValueCasting = 900;
-  public static int gearValue = 400;
-  public static int gearValueCasting = 400;
-  public static int plateValue = 100;
-  public static int plateValueCasting = 100;
-  public static double oreToIngotRatio = 2;
+  public static int ingotValue = 144;
+  public static int ingotValueCasting = 144;
+  public static int nuggetValue = 16;
+  public static int nuggetValueCasting = 16;
+  public static int fragmentValue = 36;
+  public static int shardValue = 72;
+  public static int gemValue = 864;
+  public static int blockValue = 1296;
+  public static int blockValueCasting = 1296;
+  public static int gearValue = 576;
+  public static int gearValueCasting = 576;
+  public static int plateValue = 144;
+  public static int plateValueCasting = 144;
+  public static double oreToIngotRatio = 1;
   public static int despawnProjectile = 1200;
 
   public static boolean matchVanillaSlimeblock = false;
@@ -78,7 +78,7 @@ public final class Config {
       "de.ellpeck.actuallyadditions.mod.tile.TileEntityItemViewer"
   };
   private static String[] orePreference = {
-      "tfc",
+      "gregtech",
       "minecraft",
       "tconstruct",
       "thermalfoundation",
@@ -119,7 +119,7 @@ public final class Config {
   public static boolean enableForgeBucketModel = true; // enables the forge bucket model by default
   public static boolean dumpTextureMap = false; // requires debug module
   public static boolean testIMC = false; // requires debug module
-  public static boolean temperatureCelsius = true;
+  public static boolean temperatureCelsius = false;
 
   /* Config File */
 
