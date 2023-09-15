@@ -3,7 +3,7 @@
     "name": "Stinkers' Construct",
     "description": "The stink makes the difference",
     "version": "${version}",
-    "mcversion": "${MCversion}",
+    "mcversion": "${mcversion}",
     "url": "https://github.com/lubinacourec/StinkersConstruct",
     "updateUrl": "",
     "authorList": [
