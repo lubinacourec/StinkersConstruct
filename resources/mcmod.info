@@ -1,10 +1,10 @@
 [{
     "modid": "tconstruct",
-    "name": "Binkers' Bonstruct",
-    "description": "The B makes the difference",
+    "name": "Stinkers' Construct",
+    "description": "The stink makes the difference",
     "version": "${version}",
     "mcversion": "${MCversion}",
-    "url": "https://github.com/ACGaming/BinkersBonstruct",
+    "url": "https://github.com/lubinacourec/StinkersConstruct",
     "updateUrl": "",
     "authorList": [
       "boni",
@@ -12,7 +12,7 @@
       "ACGaming"
     ],
     "credits": "Slime Knights, mDiyo, fuj1n, ProgWML6, Sunstrike, Pillbox",
-    "logoFile": "logo.png",
+    "logoFile": "",
     "screenshots": [],
     "parent":"",
     "dependencies": []
