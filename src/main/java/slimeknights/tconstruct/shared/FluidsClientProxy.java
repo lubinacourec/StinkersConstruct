@@ -28,7 +28,6 @@ public class FluidsClientProxy extends ClientProxy {
     super.registerModels();
 
     registerFluidModels(TinkerFluids.searedStone);
-    registerFluidModels(TinkerFluids.obsidian);
     registerFluidModels(TinkerFluids.clay);
     registerFluidModels(TinkerFluids.dirt);
     registerFluidModels(TinkerFluids.gold);

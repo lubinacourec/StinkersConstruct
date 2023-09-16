@@ -37,7 +37,6 @@ public final class Config {
   public static boolean craftCastableMaterials = false;
   public static boolean chestsKeepInventory = true;
   public static boolean autosmeltlapis = true;
-  public static boolean obsidianAlloy = true;
   public static boolean claycasts = true;
   public static boolean castableBricks = true;
   public static boolean leatherDryingRecipe = true;
@@ -213,12 +212,6 @@ public final class Config {
       prop = configFile.get(cat, "registerAllItems", forceRegisterAll);
       prop.setComment("Enables all items, even if the Module needed to obtain them is not active.");
       forceRegisterAll = prop.getBoolean();
-      prop.setRequiresMcRestart(true);
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "obsidianAlloy", obsidianAlloy);
-      prop.setComment("Allows the creation of obsidian in the smeltery, using a bucket of lava and water.");
-      obsidianAlloy = prop.getBoolean();
       prop.setRequiresMcRestart(true);
       propOrder.add(prop.getName());
 

@@ -40,7 +40,7 @@ public class TinkerIntegration extends TinkerPulse {
     integrate(TinkerMaterials.flint);
     integrate(TinkerMaterials.cactus);
     integrate(TinkerMaterials.bone);
-    integrate(TinkerMaterials.obsidian, TinkerFluids.obsidian);
+    integrate(TinkerMaterials.obsidian);
     integrate(TinkerMaterials.prismarine);
     integrate(TinkerMaterials.endstone);
     integrate(TinkerMaterials.paper);

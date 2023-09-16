@@ -232,9 +232,7 @@ public final class TinkerMaterials {
     cactus.addTrait(prickly, HEAD);
     cactus.addTrait(spiky);
 
-    obsidian.setFluid(TinkerFluids.obsidian);
     obsidian.setCraftable(true);
-    obsidian.setCastable(true);
     obsidian.addItemIngot("obsidian");
     obsidian.setRepresentativeItem(new ItemStack(Blocks.OBSIDIAN));
     obsidian.addTrait(duritos);

@@ -43,7 +43,6 @@ public class TinkerFluids extends TinkerPulse {
 
   // The fluids. Note that just because they exist doesn't mean that they're registered!
   public static FluidMolten searedStone;
-  public static FluidMolten obsidian;
   public static FluidMolten clay;
   public static FluidMolten dirt;
   public static FluidMolten iron;
@@ -160,10 +159,6 @@ public class TinkerFluids extends TinkerPulse {
       searedStone.setTemperature(800);
       registerMoltenBlock(registry, searedStone);
 
-      obsidian = fluidStone(TinkerMaterials.obsidian.getIdentifier(), 0x2c0d59);
-      obsidian.setTemperature(1000);
-      registerMoltenBlock(registry, obsidian);
-
       clay = fluidStone("clay", 0xc67453);
       clay.setTemperature(700);
       registerMoltenBlock(registry, clay);
@@ -213,8 +208,6 @@ public class TinkerFluids extends TinkerPulse {
 
     if(isSmelteryLoaded()) {
       FluidRegistry.addBucketForFluid(searedStone);
-
-      FluidRegistry.addBucketForFluid(obsidian);
 
       FluidRegistry.addBucketForFluid(clay);
 

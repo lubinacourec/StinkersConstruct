@@ -378,13 +378,6 @@ public class TinkerSmeltery extends TinkerPulse {
     TinkerRegistry.registerMelting(MeltingRecipe.forAmount(RecipeMatch.of("cobblestone", Material.VALUE_SearedMaterial),
                                                            TinkerFluids.searedStone, Material.VALUE_Ore()));
 
-    // obsidian
-    TinkerRegistry.registerMelting(MeltingRecipe.forAmount(RecipeMatch.of("obsidian", Material.VALUE_Ore()),
-                                                           TinkerFluids.obsidian, Material.VALUE_Ore()));
-    // note that obsidian casting gives you 2 ingot value per obsidian, while part crafting only gives 1 per obsidian
-    registerToolpartMeltingCasting(TinkerMaterials.obsidian);
-    TinkerRegistry.registerBasinCasting(new ItemStack(Blocks.OBSIDIAN), ItemStack.EMPTY, TinkerFluids.obsidian, Material.VALUE_Ore());
-
     // gold is integrated via MaterialIntegration in TinkerIntegration now
 
     // special melting
@@ -513,15 +506,6 @@ public class TinkerSmeltery extends TinkerPulse {
   public static void registerAlloys() {
     if(!isSmelteryLoaded()) {
       return;
-    }
-
-    // 1 bucket lava + 1 bucket water = 2 ingots = 1 block obsidian
-    // 1000 + 1000 = 288
-    // 125 + 125 = 36
-    if(Config.obsidianAlloy) {
-      TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.obsidian, 36),
-                                   new FluidStack(FluidRegistry.WATER, 125),
-                                   new FluidStack(FluidRegistry.LAVA, 125));
     }
 
     // 1 bucket water + 4 seared ingot + 4 mud bricks = 1 block hardened clay
