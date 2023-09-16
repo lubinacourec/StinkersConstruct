@@ -47,7 +47,6 @@ public class TinkerFluids extends TinkerPulse {
   public static FluidMolten dirt;
   public static FluidMolten iron;
   public static FluidMolten gold;
-  public static FluidMolten pigIron;
   public static FluidMolten cobalt;
   public static FluidMolten ardite;
   public static FluidMolten manyullyn;
@@ -89,10 +88,6 @@ public class TinkerFluids extends TinkerPulse {
     gold = fluidMetal("gold", 0xf6d609);
     gold.setTemperature(532);
     gold.setRarity(EnumRarity.RARE);
-
-    pigIron = fluidMetal(TinkerMaterials.pigiron);
-    pigIron.setTemperature(600);
-    pigIron.setRarity(EnumRarity.EPIC);
 
     cobalt = fluidMetal(TinkerMaterials.cobalt);
     cobalt.setTemperature(950);

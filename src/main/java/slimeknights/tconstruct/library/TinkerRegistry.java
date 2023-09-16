@@ -158,7 +158,7 @@ public final class TinkerRegistry {
   }
 
   /**
-   * Called by TinkerIntegrtion at the end of postInit to remove any materials that are still hidden (unused)
+   * Called by TinkerIntegration at the end of postInit to remove any materials that are still hidden (unused)
    * For internal use, should not need to be called by other mods
    */
   public static void removeHiddenMaterials() {

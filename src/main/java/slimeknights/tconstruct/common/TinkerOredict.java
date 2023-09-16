@@ -26,7 +26,6 @@ import static slimeknights.tconstruct.shared.TinkerCommons.blockClearStainedGlas
 import static slimeknights.tconstruct.shared.TinkerCommons.blockCobalt;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockKnightSlime;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockManyullyn;
-import static slimeknights.tconstruct.shared.TinkerCommons.blockPigIron;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockSlime;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockSlimeCongealed;
 import static slimeknights.tconstruct.shared.TinkerCommons.ingotAlubrass;
@@ -34,7 +33,6 @@ import static slimeknights.tconstruct.shared.TinkerCommons.ingotArdite;
 import static slimeknights.tconstruct.shared.TinkerCommons.ingotCobalt;
 import static slimeknights.tconstruct.shared.TinkerCommons.ingotKnightSlime;
 import static slimeknights.tconstruct.shared.TinkerCommons.ingotManyullyn;
-import static slimeknights.tconstruct.shared.TinkerCommons.ingotPigIron;
 import static slimeknights.tconstruct.shared.TinkerCommons.matNecroticBone;
 import static slimeknights.tconstruct.shared.TinkerCommons.matSlimeBallBlood;
 import static slimeknights.tconstruct.shared.TinkerCommons.matSlimeBallBlue;
@@ -49,7 +47,6 @@ import static slimeknights.tconstruct.shared.TinkerCommons.nuggetArdite;
 import static slimeknights.tconstruct.shared.TinkerCommons.nuggetCobalt;
 import static slimeknights.tconstruct.shared.TinkerCommons.nuggetKnightSlime;
 import static slimeknights.tconstruct.shared.TinkerCommons.nuggetManyullyn;
-import static slimeknights.tconstruct.shared.TinkerCommons.nuggetPigIron;
 import static slimeknights.tconstruct.shared.TinkerCommons.oreArdite;
 import static slimeknights.tconstruct.shared.TinkerCommons.oreCobalt;
 import static slimeknights.tconstruct.shared.TinkerCommons.searedBrick;
@@ -167,7 +164,6 @@ public class TinkerOredict {
     oredictNIB(nuggetArdite, ingotArdite, blockArdite, "Ardite");
     oredictNIB(nuggetManyullyn, ingotManyullyn, blockManyullyn, "Manyullyn");
     oredictNIB(nuggetKnightSlime, ingotKnightSlime, blockKnightSlime, "Knightslime");
-    oredictNIB(nuggetPigIron, ingotPigIron, blockPigIron, "Pigiron");
     oredictNIB(nuggetAlubrass, ingotAlubrass, blockAlubrass, "Alubrass");
 
     String metal = "blockMetal";

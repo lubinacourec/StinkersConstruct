@@ -134,7 +134,6 @@ public final class TinkerMaterials {
 
   // Metals
   public static final Material iron       = mat("iron", 0xcacaca);
-  public static final Material pigiron    = mat("pigiron", 0xef9e9b);
 
   // Nether Materials
   public static final Material netherrack = mat("netherrack", 0xb84f4f);
@@ -310,11 +309,6 @@ public final class TinkerMaterials {
     iron.setRepresentativeItem(Items.IRON_INGOT);
     iron.addTrait(magnetic2, HEAD);
     iron.addTrait(magnetic);
-
-    pigiron.addCommonItems("Pigiron");
-    pigiron.addTrait(baconlicious, HEAD);
-    pigiron.addTrait(tasty, HEAD);
-    pigiron.addTrait(tasty);
 
     cobalt.addCommonItems("Cobalt");
     cobalt.addTrait(momentum, HEAD);
@@ -495,10 +489,6 @@ public final class TinkerMaterials {
                                     new HeadMaterialStats(204, 6.00f, 4.00f, DIAMOND),
                                     new HandleMaterialStats(0.85f, 60),
                                     new ExtraMaterialStats(50));
-    TinkerRegistry.addMaterialStats(pigiron,
-                                    new HeadMaterialStats(380, 6.20f, 4.50f, DIAMOND),
-                                    new HandleMaterialStats(1.20f, 0),
-                                    new ExtraMaterialStats(170));
 
     // Mod Integration
     TinkerRegistry.addMaterialStats(copper,
@@ -564,7 +554,6 @@ public final class TinkerMaterials {
 
     // Metals
     TinkerRegistry.addMaterialStats(iron, new BowMaterialStats(0.5f, 1.5f, 7f));
-    TinkerRegistry.addMaterialStats(pigiron, new BowMaterialStats(0.6f, 1.4f, 7f));
 
     // Mod Integration
     TinkerRegistry.addMaterialStats(copper, new BowMaterialStats(0.6f, 1.45f, 5f));

@@ -18,9 +18,6 @@
             "knightslime": {
                 "textures": { "all": "tconstruct:blocks/block_knightslime" }
             },
-            "pigiron": {
-                "textures": { "all": "tconstruct:blocks/block_pigiron" }
-            },
             "alubrass": {
                 "textures": { "all": "tconstruct:blocks/block_alubrass" }
             },

@@ -7,17 +7,11 @@
         "stone": [{
             "custom": { "fluid": "stone" }
         }],
-        "obsidian": [{
-            "custom": { "fluid": "obsidian" }
-        }],
         "iron": [{
             "custom": { "fluid": "iron" }
         }],
         "gold": [{
             "custom": { "fluid": "gold" }
-        }],
-        "pigiron": [{
-            "custom": { "fluid": "pigiron" }
         }],
         "cobalt": [{
             "custom": { "fluid": "cobalt" }

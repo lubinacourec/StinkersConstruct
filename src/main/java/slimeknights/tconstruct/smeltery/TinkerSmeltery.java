@@ -523,13 +523,6 @@ public class TinkerSmeltery extends TinkerPulse {
                                  new FluidStack(TinkerFluids.purpleSlime, 125),
                                  new FluidStack(TinkerFluids.searedStone, Config.ingotValue));
 
-    // i iron ingot + 1 blood... unit thingie + 1/3 gem = 1 pigiron
-    // 144 + 99 + 222 = 144
-    TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.pigIron, Config.ingotValue),
-                                 new FluidStack(TinkerFluids.iron, Config.ingotValue),
-                                 new FluidStack(TinkerFluids.blood, 40),
-                                 new FluidStack(TinkerFluids.clay, Config.ingotValue / 2));
-
     // 1 ingot cobalt + 1 ingot ardite = 1 ingot manyullyn!
     // 144 + 144 = 144
     TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.manyullyn, 2),
