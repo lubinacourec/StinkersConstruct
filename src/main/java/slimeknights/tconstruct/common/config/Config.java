@@ -103,10 +103,6 @@ public final class Config {
   public static int magmaIslandsRate = 100; // Every x-th chunk will have a slime island. so 1 = every chunk, 100 = every 100th
   public static int[] slimeIslandBlacklist = new int[]{-1, 1};
   public static boolean slimeIslandsOnlyGenerateInSurfaceWorlds = true;
-  public static boolean genCobalt = true;
-  public static int cobaltRate = 20; // max. cobalt per chunk
-  public static boolean genArdite = true;
-  public static int arditeRate = 20; // max. ardite per chunk
 
   // Clientside configs
   public static boolean renderTableItems = true;
@@ -441,26 +437,6 @@ public final class Config {
       prop = configFile.get(cat, "slimeIslandsOnlyGenerateInSurfaceWorlds", slimeIslandsOnlyGenerateInSurfaceWorlds);
       prop.setComment("If false, slime islands only generate in dimensions which are of type surface. This means they won't generate in modded cave dimensions like the Deep Dark. Note that the name of this property is inverted: It must be set to false to prevent slime islands from generating in non-surface dimensions.");
       slimeIslandsOnlyGenerateInSurfaceWorlds = prop.getBoolean();
-      propOrder.add(prop.getName());
-
-      // Nether ore generation
-      prop = configFile.get(cat, "genCobalt", genCobalt);
-      prop.setComment("If true, cobalt ore will generate in the nether.");
-      genCobalt = prop.getBoolean();
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "genArdite", genArdite);
-      prop.setComment("If true, ardite ore will generate in the nether.");
-      genArdite = prop.getBoolean();
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "cobaltRate", cobaltRate);
-      prop.setComment("Approximate ores per chunk.");
-      cobaltRate = prop.getInt();
-      propOrder.add(prop.getName());
-
-      prop = configFile.get(cat, "arditeRate", arditeRate);
-      arditeRate = prop.getInt();
       propOrder.add(prop.getName());
 
       Worldgen.setPropertyOrder(propOrder);

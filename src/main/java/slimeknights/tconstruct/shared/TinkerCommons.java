@@ -43,12 +43,10 @@ import slimeknights.tconstruct.shared.block.BlockFirewood;
 import slimeknights.tconstruct.shared.block.BlockFirewoodSlab;
 import slimeknights.tconstruct.shared.block.BlockGlow;
 import slimeknights.tconstruct.shared.block.BlockMetal;
-import slimeknights.tconstruct.shared.block.BlockOre;
 import slimeknights.tconstruct.shared.block.BlockSlime;
 import slimeknights.tconstruct.shared.block.BlockSlimeCongealed;
 import slimeknights.tconstruct.shared.block.BlockSoil;
 import slimeknights.tconstruct.shared.item.ItemMetaDynamicTinkers;
-import slimeknights.tconstruct.shared.worldgen.NetherOreGenerator;
 
 /**
  * Contains items and blocks and stuff that is shared by multiple pulses, but might be required individually
@@ -63,7 +61,6 @@ public class TinkerCommons extends TinkerPulse {
   public static CommonProxy proxy;
 
   public static BlockSoil blockSoil;
-  public static BlockOre blockOre;
   public static BlockMetal blockMetal;
   public static BlockFirewood blockFirewood;
   public static BlockGlow blockGlow;
@@ -94,9 +91,6 @@ public class TinkerCommons extends TinkerPulse {
   public static ItemStack consecratedSoil;
 
   public static ItemStack mudBrickBlock;
-
-  public static ItemStack oreCobalt;
-  public static ItemStack oreArdite;
 
   public static ItemStack blockCobalt;
   public static ItemStack blockArdite;
@@ -192,9 +186,6 @@ public class TinkerCommons extends TinkerPulse {
     }
     blockSlimeCongealed = registerBlock(registry, new BlockSlimeCongealed(), "slime_congealed");
 
-    // Ores
-    blockOre = registerBlock(registry, new BlockOre(), "ore");
-
     // Firewood
     blockFirewood = registerBlock(registry, new BlockFirewood(), "firewood");
     blockFirewood.setLightLevel(0.5f);
@@ -245,12 +236,6 @@ public class TinkerCommons extends TinkerPulse {
     // Slime Blocks
     blockSlime = registerItemBlockProp(registry, new ItemBlockMeta(blockSlime), BlockSlime.TYPE);
     blockSlimeCongealed = registerItemBlockProp(registry, new ItemBlockMeta(blockSlimeCongealed), BlockSlime.TYPE);
-
-    // Ores
-    blockOre = registerEnumItemBlock(registry, blockOre);
-
-    oreCobalt = new ItemStack(blockOre, 1, BlockOre.OreTypes.COBALT.getMeta());
-    oreArdite = new ItemStack(blockOre, 1, BlockOre.OreTypes.ARDITE.getMeta());
 
     // Firewood
     blockFirewood = registerEnumItemBlock(registry, blockFirewood);
@@ -404,8 +389,6 @@ public class TinkerCommons extends TinkerPulse {
   public void init(FMLInitializationEvent event) {
     registerSmeltingRecipes();
     proxy.init();
-
-    GameRegistry.registerWorldGenerator(NetherOreGenerator.INSTANCE, 0);
 
     MinecraftForge.EVENT_BUS.register(new AchievementEvents());
     MinecraftForge.EVENT_BUS.register(new BlockEvents());

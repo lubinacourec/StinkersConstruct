@@ -47,8 +47,6 @@ import static slimeknights.tconstruct.shared.TinkerCommons.nuggetArdite;
 import static slimeknights.tconstruct.shared.TinkerCommons.nuggetCobalt;
 import static slimeknights.tconstruct.shared.TinkerCommons.nuggetKnightSlime;
 import static slimeknights.tconstruct.shared.TinkerCommons.nuggetManyullyn;
-import static slimeknights.tconstruct.shared.TinkerCommons.oreArdite;
-import static slimeknights.tconstruct.shared.TinkerCommons.oreCobalt;
 import static slimeknights.tconstruct.shared.TinkerCommons.searedBrick;
 import static slimeknights.tconstruct.tools.TinkerTools.binding;
 import static slimeknights.tconstruct.tools.TinkerTools.pattern;
@@ -160,8 +158,6 @@ public class TinkerOredict {
     oredict(matSlimeBallMagma, dict, dict + "Magma");
     oredict(matSlimeBallPink, dict);
 
-    oredictNIB(nuggetCobalt, ingotCobalt, blockCobalt, "Cobalt");
-    oredictNIB(nuggetArdite, ingotArdite, blockArdite, "Ardite");
     oredictNIB(nuggetManyullyn, ingotManyullyn, blockManyullyn, "Manyullyn");
     oredictNIB(nuggetKnightSlime, ingotKnightSlime, blockKnightSlime, "Knightslime");
     oredictNIB(nuggetAlubrass, ingotAlubrass, blockAlubrass, "Alubrass");
@@ -176,10 +172,6 @@ public class TinkerOredict {
     oredict(matSlimeCrystalGreen, dict, dict + "Green");
     oredict(matSlimeCrystalBlue, dict, dict + "Blue");
     oredict(matSlimeCrystalMagma, dict, dict + "Magma");
-
-    // Ores
-    oredict(oreCobalt, "oreCobalt");
-    oredict(oreArdite, "oreArdite");
 
     // glass
     oredict(blockClearGlass, "blockGlass"); // no blockGlassColorless as then it is assumed as available for staining
