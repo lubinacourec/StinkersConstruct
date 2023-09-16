@@ -1,8 +1,9 @@
 # Stinkers' Construct
 
-Stinkers' Construct is an unofficial Tinkers fork with additional configuration options.
+Stinkers' Construct is an unofficial Tinkers fork with the goal of providing a more tailored GregTech experience.
 
 **List of changes:**
+* Removal of Obsidian fluid (more to go)
 * Configurable ingot/block/nugget/... values
 * Master switches for enabling/disabling melting and casting of respective types
 * Configurable clear glass breaking behavior (silk touch)
