@@ -66,6 +66,7 @@ import java.util.Random;
      dependencies = "required-after:forge@[14.23.1.2577,);"
                     + "required-after:mantle@[1.12-1.3.3.49,);"
                     + "after:jei@[4.8,);"
+                    + "after:gregtech@[2.7.3-beta,);"
                     + "before:taiga@(1.3.0,);"
                     + "after:chisel;"
                     + "after:quark@[r1.6-177,)",
