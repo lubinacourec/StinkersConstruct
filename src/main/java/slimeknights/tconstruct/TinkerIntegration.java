@@ -60,7 +60,7 @@ public class TinkerIntegration extends TinkerPulse {
 
 
     integrate(TinkerMaterials.netherrack);
-    integrate(TinkerMaterials.ardite, TinkerFluids.ardite, "Ardite").toolforge();
+//    integrate(TinkerMaterials.ardite, TinkerFluids.ardite, "Ardite").toolforge();
     integrate(TinkerMaterials.manyullyn, TinkerFluids.manyullyn, "Manyullyn").toolforge();
 
     // mod integrations

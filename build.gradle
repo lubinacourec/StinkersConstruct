@@ -138,6 +138,8 @@ dependencies {
 
     //deobfCompile "vazkii.autoreglib:AutoRegLib:${config.arl_version}"
     deobfCompile "vazkii.quark:Quark:${config.quark_version}:api"
+
+    compile files('libs/gregtech-1.12.2-2.7.3-beta-dev.jar')
 }
 
 sourceSets {
