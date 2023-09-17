@@ -91,7 +91,7 @@ task buildInfo {
         if (proc.exitValue() == 0) {
             ext.revision = proc.text.trim()
         } else {
-            ext.revision = "ACG"
+            ext.revision = "stinky"
         }
     } catch(all) {
         ext.revision = "gitgud"
@@ -100,7 +100,7 @@ task buildInfo {
     if (System.getenv().BUILD_NUMBER != null) {
         ext.buildNum = "${System.getenv().BUILD_NUMBER}"
     } else {
-        ext.buildNum = "187.${project.buildInfo.revision}"
+        ext.buildNum = "190.${project.buildInfo.revision}"
     }
 }
 ext.artifact_version = 'NFG'
