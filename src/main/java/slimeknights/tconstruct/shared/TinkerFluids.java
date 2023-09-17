@@ -45,9 +45,6 @@ public class TinkerFluids extends TinkerPulse {
   public static FluidMolten searedStone;
   public static FluidMolten clay;
   public static FluidMolten dirt;
-  public static FluidMolten iron;
-  public static FluidMolten gold;
-  public static FluidMolten cobalt;
   public static FluidMolten ardite;
   public static FluidMolten manyullyn;
   public static FluidMolten knightslime;
@@ -61,17 +58,6 @@ public class TinkerFluids extends TinkerPulse {
   public static FluidMolten alubrass;
 
   // Mod Integration fluids
-  public static FluidMolten brass;
-  public static FluidMolten copper;
-  public static FluidMolten tin;
-  public static FluidMolten bronze;
-  public static FluidMolten zinc;
-  public static FluidMolten lead;
-  public static FluidMolten nickel;
-  public static FluidMolten silver;
-  public static FluidMolten electrum;
-  public static FluidMolten steel;
-  public static FluidMolten aluminum;
 
   static {
     setupFluids();
@@ -82,17 +68,6 @@ public class TinkerFluids extends TinkerPulse {
     FluidRegistry.enableUniversalBucket();
 
     // Fluids for integration, getting registered by TinkerIntegration
-    iron = fluidMetal(TinkerMaterials.iron.getIdentifier(), 0xa81212);
-    iron.setTemperature(769);
-
-    gold = fluidMetal("gold", 0xf6d609);
-    gold.setTemperature(532);
-    gold.setRarity(EnumRarity.RARE);
-
-    cobalt = fluidMetal(TinkerMaterials.cobalt);
-    cobalt.setTemperature(950);
-    cobalt.setRarity(EnumRarity.RARE);
-
     ardite = fluidMetal(TinkerMaterials.ardite);
     ardite.setTemperature(860);
     ardite.setRarity(EnumRarity.RARE);
@@ -109,40 +84,7 @@ public class TinkerFluids extends TinkerPulse {
     alubrass.setTemperature(500);
 
     // Mod Integration fluids
-    brass = fluidMetal("brass", 0xede38b);
-    brass.setTemperature(470);
 
-    copper = fluidMetal(TinkerMaterials.copper);
-    copper.setTemperature(542);
-
-    tin = fluidMetal("tin", 0xc1cddc);
-    tin.setTemperature(350);
-
-    bronze = fluidMetal(TinkerMaterials.bronze);
-    bronze.setTemperature(475);
-
-    zinc = fluidMetal("zinc", 0xd3efe8);
-    zinc.setTemperature(375);
-
-    lead = fluidMetal(TinkerMaterials.lead);
-    lead.setTemperature(400);
-
-    nickel = fluidMetal("nickel", 0xc8d683);
-    nickel.setTemperature(727);
-
-    silver = fluidMetal(TinkerMaterials.silver);
-    silver.setTemperature(480);
-    silver.setRarity(EnumRarity.RARE);
-
-    electrum = fluidMetal(TinkerMaterials.electrum);
-    electrum.setTemperature(500);
-    electrum.setRarity(EnumRarity.EPIC);
-
-    steel = fluidMetal(TinkerMaterials.steel);
-    steel.setTemperature(681);
-
-    aluminum = fluidMetal("aluminium", 0xefe0d5);
-    aluminum.setTemperature(330);
   }
 
   @SubscribeEvent

@@ -6,9 +6,6 @@
     },
 	"variants": {
         "type": {
-            "cobalt": {
-                "textures": { "all": "tconstruct:blocks/block_cobalt" }
-            },
             "ardite": {
                 "textures": { "all": "tconstruct:blocks/block_ardite" }
             },

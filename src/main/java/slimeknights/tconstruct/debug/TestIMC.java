@@ -22,7 +22,7 @@ public class TestIMC {
   public static void integrateSmeltery() {
     // normal test, make sure to disable normal iron and gold during testing
     NBTTagCompound tag = new NBTTagCompound();
-    FluidRegistry.registerFluid(TinkerFluids.iron);
+//    FluidRegistry.registerFluid(TinkerFluids.iron);
     tag.setString("fluid", "iron");
     tag.setString("ore", "Iron");
 
@@ -31,7 +31,7 @@ public class TestIMC {
 
     // test with alloy and tool forge
     tag = new NBTTagCompound();
-    FluidRegistry.registerFluid(TinkerFluids.gold);
+  //  FluidRegistry.registerFluid(TinkerFluids.gold);
     tag.setString("fluid", "gold");
     tag.setString("ore", "Gold");
     tag.setBoolean("toolforge", true);

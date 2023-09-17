@@ -32,12 +32,12 @@ public class CastingRecipeChecker {
     // skip recipes with brass or alubrass if those are not integrated
     // done since we have to register those fluids as casts in init, but don't know until postInit if they are used
     boolean hasAlubrass = TinkerIntegration.isIntegrated(TinkerFluids.alubrass);
-    boolean hasBrass = TinkerIntegration.isIntegrated(TinkerFluids.brass);
+    boolean hasBrass = false;
     for(ICastingRecipe irecipe : TinkerRegistry.getAllTableCastingRecipes()) {
       if(irecipe instanceof CastingRecipe) {
         CastingRecipe recipe = (CastingRecipe) irecipe;
 
-        // skip recipes that use either alubrass or brass
+        // skip recipes that use alubrass
         if (fluidHidden(recipe.getFluid(), hasAlubrass, hasBrass)) {
           continue;
         }
@@ -88,6 +88,6 @@ public class CastingRecipeChecker {
       return true;
     }
     Fluid fluid = fluidStack.getFluid();
-    return fluid == null || (!hasAlubrass && fluid == TinkerFluids.alubrass) || (!hasBrass && fluid == TinkerFluids.brass);
+    return fluid == null || (!hasAlubrass && fluid == TinkerFluids.alubrass);
   }
 }

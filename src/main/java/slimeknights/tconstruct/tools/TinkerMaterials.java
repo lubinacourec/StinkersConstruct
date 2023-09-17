@@ -133,21 +133,15 @@ public final class TinkerMaterials {
   public static final Material magmaslime = mat("magmaslime", 0xff960d);
 
   // Metals
-  public static final Material iron       = mat("iron", 0xcacaca);
+  public static final Material iron = mat("iron", 0x1f1f1f);
+  public static final Material cobalt = mat("cobalt", 0x313131);
 
   // Nether Materials
   public static final Material netherrack = mat("netherrack", 0xb84f4f);
   public static final Material ardite     = mat("ardite", 0xd14210);
-  public static final Material cobalt     = mat("cobalt", 0x2882d4);
   public static final Material manyullyn  = mat("manyullyn", 0xa15cf8);
 
   // mod integration
-  public static final Material copper     = mat("copper", 0xed9f07);
-  public static final Material bronze     = mat("bronze", 0xe3bd68);
-  public static final Material lead       = mat("lead", 0x4d4968);
-  public static final Material silver     = mat("silver", 0xd1ecf6);
-  public static final Material electrum   = mat("electrum", 0xe8db49);
-  public static final Material steel      = mat("steel", 0xa7a7a7);
 
   // specul
   public static final Material xu;
@@ -305,15 +299,6 @@ public final class TinkerMaterials {
     magmaslime.addTrait(flammable);
 
     // Metals
-    iron.addCommonItems("Iron");
-    iron.setRepresentativeItem(Items.IRON_INGOT);
-    iron.addTrait(magnetic2, HEAD);
-    iron.addTrait(magnetic);
-
-    cobalt.addCommonItems("Cobalt");
-    cobalt.addTrait(momentum, HEAD);
-    cobalt.addTrait(lightweight);
-
     ardite.addCommonItems("Ardite");
     ardite.addTrait(stonebound, HEAD);
     ardite.addTrait(petramor);
@@ -323,25 +308,6 @@ public final class TinkerMaterials {
     manyullyn.addTrait(coldblooded);
 
     // mod integration
-    copper.addCommonItems("Copper");
-    copper.addTrait(established);
-
-    bronze.addCommonItems("Bronze");
-    bronze.addTrait(dense);
-
-    lead.addCommonItems("Lead");
-    lead.addTrait(poisonous);
-    lead.addTrait(heavy);
-
-    silver.addCommonItems("Silver");
-    silver.addTrait(holy);
-
-    electrum.addCommonItems("Electrum");
-    electrum.addTrait(shocking);
-
-    steel.addCommonItems("Steel");
-    steel.addTrait(sharp, HEAD);
-    steel.addTrait(stiff);
 
     // bowstring
     string.addItemIngot("string");
@@ -467,10 +433,6 @@ public final class TinkerMaterials {
                                     new HeadMaterialStats(270, 4.50f, 3.00f, IRON),
                                     new HandleMaterialStats(0.85f, -150),
                                     new ExtraMaterialStats(75));
-    TinkerRegistry.addMaterialStats(cobalt,
-                                    new HeadMaterialStats(780, 12.00f, 4.10f, COBALT),
-                                    new HandleMaterialStats(0.90f, 100),
-                                    new ExtraMaterialStats(300));
     TinkerRegistry.addMaterialStats(ardite,
                                     new HeadMaterialStats(990, 3.50f, 3.60f, COBALT),
                                     new HandleMaterialStats(1.40f, -200),
@@ -485,41 +447,10 @@ public final class TinkerMaterials {
                                     new ExtraMaterialStats(150));
 
     // Metals
-    TinkerRegistry.addMaterialStats(iron,
-                                    new HeadMaterialStats(204, 6.00f, 4.00f, DIAMOND),
-                                    new HandleMaterialStats(0.85f, 60),
-                                    new ExtraMaterialStats(50));
+
 
     // Mod Integration
-    TinkerRegistry.addMaterialStats(copper,
-                                    new HeadMaterialStats(210, 5.30f, 3.00f, IRON),
-                                    new HandleMaterialStats(1.05f, 30),
-                                    new ExtraMaterialStats(100));
 
-    TinkerRegistry.addMaterialStats(bronze,
-                                    new HeadMaterialStats(430, 6.80f, 3.50f, DIAMOND),
-                                    new HandleMaterialStats(1.10f, 70),
-                                    new ExtraMaterialStats(80));
-
-    TinkerRegistry.addMaterialStats(lead,
-                                    new HeadMaterialStats(434, 5.25f, 3.50f, IRON),
-                                    new HandleMaterialStats(0.70f, -50),
-                                    new ExtraMaterialStats(100));
-
-    TinkerRegistry.addMaterialStats(silver,
-                                    new HeadMaterialStats(250, 5.00f, 5.00f, IRON),
-                                    new HandleMaterialStats(0.95f, 50),
-                                    new ExtraMaterialStats(150));
-
-    TinkerRegistry.addMaterialStats(electrum,
-                                    new HeadMaterialStats(50, 12.00f, 3.00f, IRON),
-                                    new HandleMaterialStats(1.10f, -25),
-                                    new ExtraMaterialStats(250));
-
-    TinkerRegistry.addMaterialStats(steel,
-                                    new HeadMaterialStats(540, 7.00f, 6.00f, OBSIDIAN),
-                                    new HandleMaterialStats(0.9f, 150),
-                                    new ExtraMaterialStats(25));
 
     //TinkerRegistry.addMaterialStats(xu,         new ToolMaterialStats(97, 1.00f, 1.00f, 0.10f, 0.20f, DIAMOND));
   }
@@ -547,21 +478,13 @@ public final class TinkerMaterials {
 
     // Nether
     TinkerRegistry.addMaterialStats(netherrack, whyWouldYouMakeABowOutOfThis);
-    TinkerRegistry.addMaterialStats(cobalt, new BowMaterialStats(0.75f, 1.3f, 3f));
     TinkerRegistry.addMaterialStats(ardite, new BowMaterialStats(0.45f, 0.8f, 1f));
     TinkerRegistry.addMaterialStats(manyullyn, new BowMaterialStats(0.65f, 1.2f, 4f));
     TinkerRegistry.addMaterialStats(firewood, new BowMaterialStats(1f, 1f, 0f));
 
     // Metals
-    TinkerRegistry.addMaterialStats(iron, new BowMaterialStats(0.5f, 1.5f, 7f));
 
     // Mod Integration
-    TinkerRegistry.addMaterialStats(copper, new BowMaterialStats(0.6f, 1.45f, 5f));
-    TinkerRegistry.addMaterialStats(bronze, new BowMaterialStats(0.55f, 1.5f, 6f));
-    TinkerRegistry.addMaterialStats(lead, new BowMaterialStats(0.4f, 1.3f, 3f));
-    TinkerRegistry.addMaterialStats(silver, new BowMaterialStats(1.2f, 0.8f, 2f));
-    TinkerRegistry.addMaterialStats(electrum, new BowMaterialStats(1.5f, 1f, 4f));
-    TinkerRegistry.addMaterialStats(steel, new BowMaterialStats(0.4f, 2f, 9f));
 
     // Bowstring materials
     BowStringMaterialStats bowstring = new BowStringMaterialStats(1f);

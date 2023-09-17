@@ -47,8 +47,8 @@ public class TinkerIntegration extends TinkerPulse {
     integrate(TinkerMaterials.sponge);
     integrate(TinkerMaterials.firewood);
 
-    // listed here so it's the first in the toolforge listing
-    integrate(TinkerMaterials.iron, TinkerFluids.iron, "Iron").toolforge();
+    // listed here so it's the first in the toolforge listing (knightslime with this commented)
+    //    integrate(TinkerMaterials.iron, TinkerFluids.iron, "Iron").toolforge();
 
     integrate(TinkerMaterials.knightslime, TinkerFluids.knightslime, "Knightslime").toolforge();
     integrate(TinkerMaterials.slime, "slimecrystalGreen");
@@ -56,29 +56,16 @@ public class TinkerIntegration extends TinkerPulse {
     integrate(TinkerMaterials.magmaslime, "slimecrystalMagma");
 
     // alubrass needs both copper and aluminium
-    TinkerRegistry.integrate(new MaterialIntegration(null, TinkerFluids.alubrass, "Alubrass", "ingotCopper", "ingotAluminium")).toolforge();
+//    TinkerRegistry.integrate(new MaterialIntegration(null, TinkerFluids.alubrass, "Alubrass", "ingotCopper", "ingotAluminium")).toolforge();
 
 
     integrate(TinkerMaterials.netherrack);
-    integrate(TinkerMaterials.cobalt, TinkerFluids.cobalt, "Cobalt").toolforge();
     integrate(TinkerMaterials.ardite, TinkerFluids.ardite, "Ardite").toolforge();
     integrate(TinkerMaterials.manyullyn, TinkerFluids.manyullyn, "Manyullyn").toolforge();
 
     // mod integrations
-    integrate(TinkerMaterials.copper, TinkerFluids.copper, "Copper").toolforge();
-    integrate(TinkerMaterials.bronze, TinkerFluids.bronze, "Bronze").toolforge();
-    integrate(TinkerMaterials.lead, TinkerFluids.lead, "Lead").toolforge();
-    integrate(TinkerMaterials.silver, TinkerFluids.silver, "Silver").toolforge();
-    integrate(TinkerMaterials.electrum, TinkerFluids.electrum, "Electrum").toolforge();
-    integrate(TinkerMaterials.steel, TinkerFluids.steel, "Steel").toolforge();
 
     // non-toolmaterial integration
-    integrate(TinkerFluids.gold, "Gold").toolforge();
-    integrate(TinkerFluids.brass, "Brass").toolforge();
-    integrate(TinkerFluids.tin, "Tin").toolforge();
-    integrate(TinkerFluids.nickel, "Nickel").toolforge();
-    integrate(TinkerFluids.zinc, "Zinc").toolforge();
-    integrate(TinkerFluids.aluminum, "Aluminium").toolforge();
 
     // bow stuff
     integrate(TinkerMaterials.string);

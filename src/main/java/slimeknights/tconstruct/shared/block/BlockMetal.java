@@ -43,7 +43,6 @@ public class BlockMetal extends EnumBlock<BlockMetal.MetalTypes> {
   }
 
   public enum MetalTypes implements IStringSerializable, EnumBlock.IEnumMeta {
-    COBALT,
     ARDITE,
     MANYULLYN,
     KNIGHTSLIME,

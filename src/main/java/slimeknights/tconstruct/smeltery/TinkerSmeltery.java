@@ -299,10 +299,9 @@ public class TinkerSmeltery extends TinkerPulse {
   @Subscribe
   public void init(FMLInitializationEvent event) {
     // done here so they're present for integration in MaterialIntegration and fluids in TinkerFluids are also initialized
-    castCreationFluids.add(new FluidStack(TinkerFluids.gold, Material.VALUE_Ingot * 2));
+//    castCreationFluids.add(new FluidStack(TinkerFluids.gold, Material.VALUE_Ingot * 2));
 
     // always add extra fluids, as we are not sure if they are integrated until the end of postInit and we added recipes using them before integration
-    castCreationFluids.add(new FluidStack(TinkerFluids.brass, Material.VALUE_Ingot));
     castCreationFluids.add(new FluidStack(TinkerFluids.alubrass, Material.VALUE_Ingot));
 
     // add clay casts if enabled
@@ -380,15 +379,11 @@ public class TinkerSmeltery extends TinkerPulse {
 
     // gold is integrated via MaterialIntegration in TinkerIntegration now
 
-    // special melting
-    TinkerRegistry.registerMelting(Items.IRON_HORSE_ARMOR, TinkerFluids.iron, Material.VALUE_Ingot * 4);
-    TinkerRegistry.registerMelting(Items.GOLDEN_HORSE_ARMOR, TinkerFluids.gold, Material.VALUE_Ingot * 4);
-
     // rails, some of these are caught through registerOredictMelting, but for consistency all are just registered here
-    TinkerRegistry.registerMelting(Blocks.RAIL, TinkerFluids.iron, Material.VALUE_Ingot * 6 / 10);
-    TinkerRegistry.registerMelting(Blocks.ACTIVATOR_RAIL, TinkerFluids.iron, Material.VALUE_Ingot);
-    TinkerRegistry.registerMelting(Blocks.DETECTOR_RAIL, TinkerFluids.iron, Material.VALUE_Ingot);
-    TinkerRegistry.registerMelting(Blocks.GOLDEN_RAIL, TinkerFluids.gold, Material.VALUE_Ingot);
+//    TinkerRegistry.registerMelting(Blocks.RAIL, TinkerFluids.iron, Material.VALUE_Ingot * 6 / 10);
+//    TinkerRegistry.registerMelting(Blocks.ACTIVATOR_RAIL, TinkerFluids.iron, Material.VALUE_Ingot);
+//    TinkerRegistry.registerMelting(Blocks.DETECTOR_RAIL, TinkerFluids.iron, Material.VALUE_Ingot);
+//    TinkerRegistry.registerMelting(Blocks.GOLDEN_RAIL, TinkerFluids.gold, Material.VALUE_Ingot);
 
     // register stone toolpart melting
     for(IToolPart toolPart : TinkerRegistry.getToolParts()) {
@@ -492,7 +487,7 @@ public class TinkerSmeltery extends TinkerPulse {
                                                           true, false));
 
     // melt entities into a pulp
-    TinkerRegistry.registerEntityMelting(EntityIronGolem.class, new FluidStack(TinkerFluids.iron, 18));
+//    TinkerRegistry.registerEntityMelting(EntityIronGolem.class, new FluidStack(TinkerFluids.iron, 18));
     TinkerRegistry.registerEntityMelting(EntitySnowman.class, new FluidStack(FluidRegistry.WATER, 100));
     TinkerRegistry.registerEntityMelting(EntityVillager.class, new FluidStack(TinkerFluids.emerald, 6));
     TinkerRegistry.registerEntityMelting(EntityVindicator.class, new FluidStack(TinkerFluids.emerald, 6));
@@ -518,52 +513,27 @@ public class TinkerSmeltery extends TinkerPulse {
 
     // 1 iron ingot + 1 purple slime ball + seared stone in molten form = 1 knightslime ingot
     // 144 + 250 + 288 = 144
-    TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.knightslime, Config.ingotValue / 2),
-                                 new FluidStack(TinkerFluids.iron, Config.ingotValue / 2),
-                                 new FluidStack(TinkerFluids.purpleSlime, 125),
-                                 new FluidStack(TinkerFluids.searedStone, Config.ingotValue));
+//    TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.knightslime, Config.ingotValue / 2),
+//                                 new FluidStack(TinkerFluids.iron, Config.ingotValue / 2),
+//                                 new FluidStack(TinkerFluids.purpleSlime, 125),
+//                                 new FluidStack(TinkerFluids.searedStone, Config.ingotValue));
 
     // 1 ingot cobalt + 1 ingot ardite = 1 ingot manyullyn!
     // 144 + 144 = 144
-    TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.manyullyn, 2),
-                                 new FluidStack(TinkerFluids.cobalt, 2),
-                                 new FluidStack(TinkerFluids.ardite, 2));
+//    TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.manyullyn, 2),
+//                                 new FluidStack(TinkerFluids.cobalt, 2),
+//                                 new FluidStack(TinkerFluids.ardite, 2));
 
-    // 3 ingots copper + 1 ingot tin = 4 ingots bronze
-    if(TinkerIntegration.isIntegrated(TinkerFluids.bronze) &&
-       TinkerIntegration.isIntegrated(TinkerFluids.copper) &&
-       TinkerIntegration.isIntegrated(TinkerFluids.tin)) {
-      TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.bronze, 4),
-                                   new FluidStack(TinkerFluids.copper, 3),
-                                   new FluidStack(TinkerFluids.tin, 1));
-    }
-
-    // 1 ingot gold + 1 ingot silver = 2 ingots electrum
-    if(TinkerIntegration.isIntegrated(TinkerFluids.electrum) &&
-       TinkerIntegration.isIntegrated(TinkerFluids.gold) &&
-       TinkerIntegration.isIntegrated(TinkerFluids.silver)) {
-      TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.electrum, 2),
-                                   new FluidStack(TinkerFluids.gold, 1),
-                                   new FluidStack(TinkerFluids.silver, 1));
-    }
 
     // 1 ingot copper + 3 ingots aluminium = 4 ingots alubrass
-    if(TinkerIntegration.isIntegrated(TinkerFluids.alubrass) &&
-       TinkerIntegration.isIntegrated(TinkerFluids.copper) &&
-       TinkerIntegration.isIntegrated(TinkerFluids.aluminum)) {
-      TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.alubrass, 4),
-                                   new FluidStack(TinkerFluids.copper, 1),
-                                   new FluidStack(TinkerFluids.aluminum, 3));
-    }
+//    if(TinkerIntegration.isIntegrated(TinkerFluids.alubrass) &&
+//       TinkerIntegration.isIntegrated(TinkerFluids.copper) &&
+//       TinkerIntegration.isIntegrated(TinkerFluids.aluminum)) {
+//      TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.alubrass, 4),
+//                                   new FluidStack(TinkerFluids.copper, 1),
+//                                   new FluidStack(TinkerFluids.aluminum, 3));
+//    }
 
-    // 2 ingots copper + 1 ingot zinc = 3 ingots brass
-    if(TinkerIntegration.isIntegrated(TinkerFluids.brass) &&
-       TinkerIntegration.isIntegrated(TinkerFluids.copper) &&
-       TinkerIntegration.isIntegrated(TinkerFluids.zinc)) {
-      TinkerRegistry.registerAlloy(new FluidStack(TinkerFluids.brass, 3),
-                                   new FluidStack(TinkerFluids.copper, 2),
-                                   new FluidStack(TinkerFluids.zinc, 1));
-    }
   }
 
   /**

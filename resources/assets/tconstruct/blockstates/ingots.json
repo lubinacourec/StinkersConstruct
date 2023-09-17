@@ -5,7 +5,6 @@
         "model": "forge:item-layer"
     },
     "variants": {
-        "cobalt": [{ "textures": { "layer0": "tconstruct:items/materials/ingot_cobalt" }}],
         "ardite": [{ "textures": { "layer0": "tconstruct:items/materials/ingot_ardite" }}],
         "manyullyn": [{ "textures": { "layer0": "tconstruct:items/materials/ingot_manyullyn" }}],
         "knightslime": [{ "textures": { "layer0": "tconstruct:items/materials/ingot_knightslime" }}],

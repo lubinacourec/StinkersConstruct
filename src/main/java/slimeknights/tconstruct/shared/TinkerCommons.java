@@ -92,7 +92,6 @@ public class TinkerCommons extends TinkerPulse {
 
   public static ItemStack mudBrickBlock;
 
-  public static ItemStack blockCobalt;
   public static ItemStack blockArdite;
   public static ItemStack blockManyullyn;
   public static ItemStack blockKnightSlime;
@@ -117,7 +116,6 @@ public class TinkerCommons extends TinkerPulse {
   public static ItemStack nuggetAlubrass;
 
   // Ingot Itemstacks
-  public static ItemStack ingotCobalt;
   public static ItemStack ingotArdite;
   public static ItemStack ingotManyullyn;
   public static ItemStack ingotKnightSlime;
@@ -287,8 +285,6 @@ public class TinkerCommons extends TinkerPulse {
 
     // Ingots and nuggets
     if(isToolsLoaded() || isSmelteryLoaded() || forced) {
-      nuggetCobalt = nuggets.addMeta(0, "cobalt");
-      ingotCobalt = ingots.addMeta(0, "cobalt");
 
       nuggetArdite = nuggets.addMeta(1, "ardite");
       ingotArdite = ingots.addMeta(1, "ardite");
@@ -301,7 +297,6 @@ public class TinkerCommons extends TinkerPulse {
 
       blockMetal = registerEnumItemBlock(registry, blockMetal);
 
-      blockCobalt = new ItemStack(blockMetal, 1, BlockMetal.MetalTypes.COBALT.getMeta());
       blockArdite = new ItemStack(blockMetal, 1, BlockMetal.MetalTypes.ARDITE.getMeta());
       blockManyullyn = new ItemStack(blockMetal, 1, BlockMetal.MetalTypes.MANYULLYN.getMeta());
       blockKnightSlime = new ItemStack(blockMetal, 1, BlockMetal.MetalTypes.KNIGHTSLIME.getMeta());
