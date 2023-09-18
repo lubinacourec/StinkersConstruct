@@ -32,6 +32,7 @@ import slimeknights.tconstruct.library.materials.FletchingMaterialStats;
 import slimeknights.tconstruct.library.materials.HandleMaterialStats;
 import slimeknights.tconstruct.library.materials.HeadMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.shared.GTIntegration;
 import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.TinkerFluids;
 import slimeknights.tconstruct.tools.traits.TraitEnderference;
@@ -138,13 +139,11 @@ public final class TinkerMaterials {
 
   // Nether Materials
   public static final Material netherrack = mat("netherrack", 0xb84f4f);
-  public static final Material ardite     = mat("ardite", 0xd14210);
   public static final Material manyullyn  = mat("manyullyn", 0xa15cf8);
 
-  // mod integration
+  // gregtech integration
+  public static final Material ardite     = mat("ardite", GTIntegration.Ardite.getMaterialRGB());
 
-  // specul
-  public static final Material xu;
 
   // bowstring materials
   public static final Material string    = mat("string", 0xeeeeee);
@@ -171,10 +170,6 @@ public final class TinkerMaterials {
     Material mat = new Material(name, color, true);
     materials.add(mat);
     return mat;
-  }
-
-  static {
-    xu = new Material("unstable", TextFormatting.WHITE);
   }
 
   @SubscribeEvent
@@ -300,6 +295,7 @@ public final class TinkerMaterials {
 
     // Metals
     ardite.addCommonItems("Ardite");
+    ardite.setRepresentativeItem(GTIntegration.getIngotByID(GTIntegration.Ardite.getId()));
     ardite.addTrait(stonebound, HEAD);
     ardite.addTrait(petramor);
 

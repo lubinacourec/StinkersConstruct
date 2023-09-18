@@ -36,9 +36,9 @@ public class ItemFancyItemFrame extends ItemHangingEntity {
       if(TinkerCommons.nuggetCobalt != null) {
         subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.COBALT.ordinal()));
       }
-      if(TinkerCommons.nuggetArdite != null) {
-        subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.ARDITE.ordinal()));
-      }
+//      if(TinkerCommons.nuggetArdite != null) {
+//        subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.ARDITE.ordinal()));
+//      }
       if(TinkerCommons.nuggetManyullyn != null) {
         subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.MANYULLYN.ordinal()));
       }

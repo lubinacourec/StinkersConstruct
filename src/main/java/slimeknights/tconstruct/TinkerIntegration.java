@@ -22,6 +22,7 @@ import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.shared.GTIntegration;
 import slimeknights.tconstruct.shared.TinkerFluids;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.tools.TinkerMaterials;
@@ -60,7 +61,7 @@ public class TinkerIntegration extends TinkerPulse {
 
 
     integrate(TinkerMaterials.netherrack);
-//    integrate(TinkerMaterials.ardite, TinkerFluids.ardite, "Ardite").toolforge();
+    integrate(TinkerMaterials.ardite, GTIntegration.Ardite.getFluid(), "Ardite").toolforge();
     integrate(TinkerMaterials.manyullyn, TinkerFluids.manyullyn, "Manyullyn").toolforge();
 
     // mod integrations

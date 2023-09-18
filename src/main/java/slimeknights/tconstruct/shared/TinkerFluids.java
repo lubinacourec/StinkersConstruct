@@ -45,7 +45,7 @@ public class TinkerFluids extends TinkerPulse {
   public static FluidMolten searedStone;
   public static FluidMolten clay;
   public static FluidMolten dirt;
-  public static FluidMolten ardite;
+  public static Fluid ardite = GTIntegration.Ardite.getFluid();
   public static FluidMolten manyullyn;
   public static FluidMolten knightslime;
   public static FluidMolten emerald;
@@ -67,10 +67,11 @@ public class TinkerFluids extends TinkerPulse {
     // buuuuckeeeeet
     FluidRegistry.enableUniversalBucket();
 
-    // Fluids for integration, getting registered by TinkerIntegration
-    ardite = fluidMetal(TinkerMaterials.ardite);
+    /*
+   Fluids for integration, getting registered by TinkerIntegration
     ardite.setTemperature(860);
     ardite.setRarity(EnumRarity.RARE);
+  */
 
     manyullyn = fluidMetal(TinkerMaterials.manyullyn);
     manyullyn.setTemperature(1000);
