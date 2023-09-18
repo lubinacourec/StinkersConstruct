@@ -8,6 +8,7 @@ import gregtech.api.unification.Elements;
 import gregtech.api.fluids.fluidType.FluidType;
 import gregtech.api.fluids.fluidType.FluidTypes;
 import gregtech.api.unification.material.info.MaterialIconSet;
+import gregtech.api.unification.material.materials.MaterialFlagAddition;
 import gregtech.api.unification.material.properties.IMaterialProperty;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.ore.OrePrefix;
@@ -25,12 +26,41 @@ public class GTIntegration {
             .color(0xd14210)
             .iconSet(MaterialIconSet.METALLIC)
             .ore().ingot().dust()
-            .fluid(FluidTypes.LIQUID, true).fluidTemp(860)
+            .fluid(FluidTypes.LIQUID, false).fluidTemp(860)
             .element(elementalArdite)
             .blastTemp(860)
-            .flags(MaterialFlags.DISABLE_DECOMPOSITION, MaterialFlags.GENERATE_PLATE)
+            .flags(MaterialFlags.DISABLE_DECOMPOSITION)
             .build();
 
+    public static final Material Manyullyn = new Material.Builder(27001, tconId("manyullyn"))
+            .color(0xa15cf8)
+            .iconSet(MaterialIconSet.METALLIC)
+            .ingot().dust()
+            .fluid(FluidTypes.LIQUID, false).fluidTemp(1000)
+            .blastTemp(1000) // fluid/blast temperature to be revisited
+//            .components(Ardite, 1, Materials.Cobalt, 1) // components can't be set here, as gregtech's materials (cobalt) aren't registered when this is first called.
+            .flags(MaterialFlags.DECOMPOSITION_BY_CENTRIFUGING)
+            .build();
+
+    public static final Material Knightslime = new Material.Builder(27002, tconId("knightslime"))
+            .color(0xf18ff0)
+            .iconSet(MaterialIconSet.GEM_VERTICAL)
+            .ingot().dust()
+            .fluid(FluidTypes.LIQUID, false).fluidTemp(1500)
+            .blastTemp(1500) // fluid/blast temperature to be revisited
+//            .components() //uncomment this line when decided on components.
+            .flags(MaterialFlags.NO_UNIFICATION)
+            .build();
+
+    public static final Material AluminiumBrass = new Material.Builder(27003, tconId("alubrass"))
+            .color(0xa15cf8)
+            .iconSet(MaterialIconSet.METALLIC)
+            .ingot().dust()
+            .fluid(FluidTypes.LIQUID, false).fluidTemp(400)
+            .blastTemp(400) // fluid/blast temperature to be revisited
+//            .components(Materials.Aluminium, 1, Materials.Copper, 2) // components can't be set here, as gregtech's materials (aluminium/copper) aren't registered when this is first called.
+            .flags(MaterialFlags.DECOMPOSITION_BY_CENTRIFUGING)
+            .build();
 
     public static ItemStack getIngotByID(int materialID) {
         Item GTMetaIngot = Item.getByNameOrId("gregtech:meta_ingot");

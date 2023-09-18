@@ -496,7 +496,7 @@ public class TinkerSmeltery extends TinkerPulse {
   }
 
   /**
-   * Called by Tinkers Integration to register allows, some are conditional on integrations being loaded
+   * Called by Tinkers Integration to register alloys, some are conditional on integrations being loaded
    */
   public static void registerAlloys() {
     if(!isSmelteryLoaded()) {

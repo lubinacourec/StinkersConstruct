@@ -102,6 +102,8 @@ import static slimeknights.tconstruct.tools.TinkerTraits.unnatural;
 import static slimeknights.tconstruct.tools.TinkerTraits.writable;
 import static slimeknights.tconstruct.tools.TinkerTraits.writable2;
 
+import gregtech.api.unification.material.Materials;
+
 /**
  * All the tool materials tcon supports.
  */
@@ -128,7 +130,7 @@ public final class TinkerMaterials {
   public static final Material firewood   = mat("firewood", 0xcc5300);
 
   // Slime
-  public static final Material knightslime= mat("knightslime", 0xf18ff0);
+  public static final Material knightslime= mat("knightslime", GTIntegration.Knightslime.getMaterialRGB());
   public static final Material slime      = mat("slime", 0x82c873);
   public static final Material blueslime  = mat("blueslime", 0x74c8c7);
   public static final Material magmaslime = mat("magmaslime", 0xff960d);
@@ -139,10 +141,10 @@ public final class TinkerMaterials {
 
   // Nether Materials
   public static final Material netherrack = mat("netherrack", 0xb84f4f);
-  public static final Material manyullyn  = mat("manyullyn", 0xa15cf8);
+  public static final Material ardite     = mat("ardite", GTIntegration.Ardite.getMaterialRGB());
+  public static final Material manyullyn  = mat("manyullyn", GTIntegration.Manyullyn.getMaterialRGB());
 
   // gregtech integration
-  public static final Material ardite     = mat("ardite", GTIntegration.Ardite.getMaterialRGB());
 
 
   // bowstring materials

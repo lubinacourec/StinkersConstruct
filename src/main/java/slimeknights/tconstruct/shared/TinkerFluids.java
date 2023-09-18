@@ -46,8 +46,8 @@ public class TinkerFluids extends TinkerPulse {
   public static FluidMolten clay;
   public static FluidMolten dirt;
   public static Fluid ardite = GTIntegration.Ardite.getFluid();
-  public static FluidMolten manyullyn;
-  public static FluidMolten knightslime;
+  public static Fluid manyullyn = GTIntegration.Manyullyn.getFluid();
+  public static Fluid knightslime = GTIntegration.Knightslime.getFluid();
   public static FluidMolten emerald;
   public static FluidMolten glass;
   public static FluidColored blood;
@@ -55,7 +55,7 @@ public class TinkerFluids extends TinkerPulse {
   public static FluidColored blueslime;
   public static FluidColored purpleSlime;
 
-  public static FluidMolten alubrass;
+  public static Fluid alubrass = GTIntegration.AluminiumBrass.getFluid();
 
   // Mod Integration fluids
 
@@ -73,6 +73,7 @@ public class TinkerFluids extends TinkerPulse {
     ardite.setRarity(EnumRarity.RARE);
   */
 
+/*
     manyullyn = fluidMetal(TinkerMaterials.manyullyn);
     manyullyn.setTemperature(1000);
     manyullyn.setRarity(EnumRarity.RARE);
@@ -80,9 +81,10 @@ public class TinkerFluids extends TinkerPulse {
     knightslime = fluidMetal(TinkerMaterials.knightslime);
     knightslime.setTemperature(520);
     knightslime.setRarity(EnumRarity.EPIC);
-
-    alubrass = fluidMetal("aluminium_brass", 0xece347);
-    alubrass.setTemperature(500);
+*/
+//
+//      alubrass = fluidMetal("aluminium_brass", 0xece347);
+//    alubrass.setTemperature(500);
 
     // Mod Integration fluids
 

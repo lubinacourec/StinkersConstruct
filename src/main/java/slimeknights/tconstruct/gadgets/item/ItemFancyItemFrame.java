@@ -30,18 +30,19 @@ public class ItemFancyItemFrame extends ItemHangingEntity {
     if(this.isInCreativeTab(tab)) {
       subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.JEWEL.ordinal()));
 
-      if(TinkerCommons.nuggetAlubrass != null) {
-        subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.ALUBRASS.ordinal()));
-      }
-      if(TinkerCommons.nuggetCobalt != null) {
-        subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.COBALT.ordinal()));
-      }
+      // TODO: uncomment these when materials are added
+//      if(TinkerCommons.nuggetAlubrass != null) {
+//        subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.ALUBRASS.ordinal()));
+//      }
+//      if(TinkerCommons.nuggetCobalt != null) {
+//        subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.COBALT.ordinal()));
+//      }
 //      if(TinkerCommons.nuggetArdite != null) {
 //        subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.ARDITE.ordinal()));
 //      }
-      if(TinkerCommons.nuggetManyullyn != null) {
-        subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.MANYULLYN.ordinal()));
-      }
+//      if(TinkerCommons.nuggetManyullyn != null) {
+//        subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.MANYULLYN.ordinal()));
+//      }
 
       subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.GOLD.ordinal()));
       subItems.add(new ItemStack(this, 1, EntityFancyItemFrame.FrameType.CLEAR.ordinal()));

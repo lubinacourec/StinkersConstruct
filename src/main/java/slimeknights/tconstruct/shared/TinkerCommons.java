@@ -92,10 +92,7 @@ public class TinkerCommons extends TinkerPulse {
 
   public static ItemStack mudBrickBlock;
 
-  public static ItemStack blockManyullyn;
-  public static ItemStack blockKnightSlime;
   public static ItemStack blockSilkyJewel;
-  public static ItemStack blockAlubrass;
 
   public static ItemStack lavawood;
   public static ItemStack firewood;
@@ -108,15 +105,8 @@ public class TinkerCommons extends TinkerPulse {
   public static ItemEdible edibles;
 
   // Nugget Itemstacks
-  public static ItemStack nuggetCobalt;
-  public static ItemStack nuggetManyullyn;
-  public static ItemStack nuggetKnightSlime;
-  public static ItemStack nuggetAlubrass;
 
   // Ingot Itemstacks
-  public static ItemStack ingotManyullyn;
-  public static ItemStack ingotKnightSlime;
-  public static ItemStack ingotAlubrass;
 
   // Material Itemstacks
   public static ItemStack searedBrick;
@@ -266,12 +256,12 @@ public class TinkerCommons extends TinkerPulse {
     materials.setCreativeTab(TinkerRegistry.tabGeneral);
     edibles.setCreativeTab(TinkerRegistry.tabGeneral);
 
-    // Items that can always be present.. slimeballs
+    // Items that can always be present... slimeballs
     matSlimeBallBlue = edibles.addFood(1, 1, 1f, "slimeball_blue", new PotionEffect(MobEffects.SLOWNESS, 20 * 45, 2), new PotionEffect(MobEffects.JUMP_BOOST, 20 * 60, 2));
     matSlimeBallPurple = edibles.addFood(2, 1, 2f, "slimeball_purple", new PotionEffect(MobEffects.UNLUCK, 20 * 45), new PotionEffect(MobEffects.LUCK, 20 * 60));
     matSlimeBallBlood = edibles.addFood(3, 1, 1.5f, "slimeball_blood", new PotionEffect(MobEffects.POISON, 20 * 45, 2), new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 60));
     matSlimeBallMagma = edibles.addFood(4, 2, 1f, "slimeball_magma", new PotionEffect(MobEffects.WEAKNESS, 20 * 45), new PotionEffect(MobEffects.WITHER, 20 * 15), new PotionEffect(MobEffects.FIRE_RESISTANCE, 20 * 60));
-    matSlimeBallPink = edibles.addFood(5, 1, 1f, "slimeball_pink", new PotionEffect(MobEffects.NAUSEA, 20 * 10, 2)); // you mixed how many types of slime for this? its gross
+    matSlimeBallPink = edibles.addFood(5, 1, 1f, "slimeball_pink", new PotionEffect(MobEffects.NAUSEA, 20 * 10, 2)); // you mixed how many types of slime for this? gross.
 
     // All other items are either ingots or items for modifiers
 
@@ -282,18 +272,8 @@ public class TinkerCommons extends TinkerPulse {
 
     // Ingots and nuggets
     if(isToolsLoaded() || isSmelteryLoaded() || forced) {
-
-      nuggetManyullyn = nuggets.addMeta(2, "manyullyn");
-      ingotManyullyn = ingots.addMeta(2, "manyullyn");
-
-      nuggetAlubrass = nuggets.addMeta(5, "alubrass");
-      ingotAlubrass = ingots.addMeta(5, "alubrass");
-
       blockMetal = registerEnumItemBlock(registry, blockMetal);
 
-      blockManyullyn = new ItemStack(blockMetal, 1, BlockMetal.MetalTypes.MANYULLYN.getMeta());
-      blockKnightSlime = new ItemStack(blockMetal, 1, BlockMetal.MetalTypes.KNIGHTSLIME.getMeta());
-      blockAlubrass = new ItemStack(blockMetal, 1, BlockMetal.MetalTypes.ALUBRASS.getMeta());
       blockSilkyJewel = new ItemStack(blockMetal, 1, BlockMetal.MetalTypes.SILKY_JEWEL.getMeta());
     }
 
@@ -317,8 +297,7 @@ public class TinkerCommons extends TinkerPulse {
 
       matCreativeModifier = materials.addMeta(50, "creative_modifier");
 
-      ingotKnightSlime = ingots.addMeta(3, "knightslime");
-      nuggetKnightSlime = nuggets.addMeta(3, "knightslime");
+
     }
 
     if(isGadgetsLoaded() || forced) {

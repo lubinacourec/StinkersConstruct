@@ -19,16 +19,10 @@ import java.util.Set;
 
 import static slimeknights.tconstruct.gadgets.TinkerGadgets.stoneStick;
 import static slimeknights.tconstruct.gadgets.TinkerGadgets.stoneTorch;
-import static slimeknights.tconstruct.shared.TinkerCommons.blockAlubrass;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockClearGlass;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockClearStainedGlass;
-import static slimeknights.tconstruct.shared.TinkerCommons.blockKnightSlime;
-import static slimeknights.tconstruct.shared.TinkerCommons.blockManyullyn;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockSlime;
 import static slimeknights.tconstruct.shared.TinkerCommons.blockSlimeCongealed;
-import static slimeknights.tconstruct.shared.TinkerCommons.ingotAlubrass;
-import static slimeknights.tconstruct.shared.TinkerCommons.ingotKnightSlime;
-import static slimeknights.tconstruct.shared.TinkerCommons.ingotManyullyn;
 import static slimeknights.tconstruct.shared.TinkerCommons.matNecroticBone;
 import static slimeknights.tconstruct.shared.TinkerCommons.matSlimeBallBlood;
 import static slimeknights.tconstruct.shared.TinkerCommons.matSlimeBallBlue;
@@ -38,9 +32,6 @@ import static slimeknights.tconstruct.shared.TinkerCommons.matSlimeBallPurple;
 import static slimeknights.tconstruct.shared.TinkerCommons.matSlimeCrystalBlue;
 import static slimeknights.tconstruct.shared.TinkerCommons.matSlimeCrystalGreen;
 import static slimeknights.tconstruct.shared.TinkerCommons.matSlimeCrystalMagma;
-import static slimeknights.tconstruct.shared.TinkerCommons.nuggetAlubrass;
-import static slimeknights.tconstruct.shared.TinkerCommons.nuggetKnightSlime;
-import static slimeknights.tconstruct.shared.TinkerCommons.nuggetManyullyn;
 import static slimeknights.tconstruct.shared.TinkerCommons.searedBrick;
 import static slimeknights.tconstruct.tools.TinkerTools.binding;
 import static slimeknights.tconstruct.tools.TinkerTools.pattern;
@@ -151,10 +142,6 @@ public class TinkerOredict {
     oredict(matSlimeBallBlood, dict, dict + "Blood");
     oredict(matSlimeBallMagma, dict, dict + "Magma");
     oredict(matSlimeBallPink, dict);
-
-    oredictNIB(nuggetManyullyn, ingotManyullyn, blockManyullyn, "Manyullyn");
-    oredictNIB(nuggetKnightSlime, ingotKnightSlime, blockKnightSlime, "Knightslime");
-    oredictNIB(nuggetAlubrass, ingotAlubrass, blockAlubrass, "Alubrass");
 
     String metal = "blockMetal";
     oredict(new ItemStack(Blocks.IRON_BLOCK), metal);

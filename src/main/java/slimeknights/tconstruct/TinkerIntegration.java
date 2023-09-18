@@ -51,7 +51,7 @@ public class TinkerIntegration extends TinkerPulse {
     // listed here so it's the first in the toolforge listing (knightslime with this commented)
     //    integrate(TinkerMaterials.iron, TinkerFluids.iron, "Iron").toolforge();
 
-    integrate(TinkerMaterials.knightslime, TinkerFluids.knightslime, "Knightslime").toolforge();
+    integrate(TinkerMaterials.knightslime, GTIntegration.Knightslime.getFluid(), "Knightslime").toolforge();
     integrate(TinkerMaterials.slime, "slimecrystalGreen");
     integrate(TinkerMaterials.blueslime, "slimecrystalBlue");
     integrate(TinkerMaterials.magmaslime, "slimecrystalMagma");
@@ -62,7 +62,7 @@ public class TinkerIntegration extends TinkerPulse {
 
     integrate(TinkerMaterials.netherrack);
     integrate(TinkerMaterials.ardite, GTIntegration.Ardite.getFluid(), "Ardite").toolforge();
-    integrate(TinkerMaterials.manyullyn, TinkerFluids.manyullyn, "Manyullyn").toolforge();
+    integrate(TinkerMaterials.manyullyn, GTIntegration.Manyullyn.getFluid(), "Manyullyn").toolforge();
 
     // mod integrations
 
