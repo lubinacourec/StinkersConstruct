@@ -302,7 +302,7 @@ public class TinkerSmeltery extends TinkerPulse {
 //    castCreationFluids.add(new FluidStack(TinkerFluids.gold, Material.VALUE_Ingot * 2));
 
     // always add extra fluids, as we are not sure if they are integrated until the end of postInit and we added recipes using them before integration
-    castCreationFluids.add(new FluidStack(TinkerFluids.alubrass, Material.VALUE_Ingot));
+  //  castCreationFluids.add(new FluidStack(TinkerFluids.alubrass, Material.VALUE_Ingot));
 
     // add clay casts if enabled
     if(Config.claycasts) {

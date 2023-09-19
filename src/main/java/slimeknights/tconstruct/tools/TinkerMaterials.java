@@ -147,6 +147,7 @@ public final class TinkerMaterials {
   // gregtech integration
 
 
+
   // bowstring materials
   public static final Material string    = mat("string", 0xeeeeee);
   public static final Material vine      = mat("vine", 0x40a10f);
