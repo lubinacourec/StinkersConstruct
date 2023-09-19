@@ -3,7 +3,6 @@ package slimeknights.tconstruct.shared;
 import com.google.common.eventbus.Subscribe;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -26,11 +25,11 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.fluid.FluidColored;
 import slimeknights.tconstruct.library.fluid.FluidMolten;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.shared.GTIntegration.GTIntegration;
 import slimeknights.tconstruct.shared.block.BlockLiquidSlime;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.block.BlockMolten;
 import slimeknights.tconstruct.smeltery.block.BlockTinkerFluid;
-import slimeknights.tconstruct.tools.TinkerMaterials;
 
 @Pulse(id = TinkerFluids.PulseId, pulsesRequired = TinkerSmeltery.PulseId, forced = true)
 public class TinkerFluids extends TinkerPulse {

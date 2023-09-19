@@ -22,8 +22,7 @@ import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.materials.Material;
-import slimeknights.tconstruct.shared.GTIntegration;
-import slimeknights.tconstruct.shared.TinkerFluids;
+import slimeknights.tconstruct.shared.GTIntegration.GTIntegration;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.tools.TinkerMaterials;
 

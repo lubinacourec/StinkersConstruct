@@ -1,4 +1,4 @@
-package slimeknights.tconstruct.shared;
+package slimeknights.tconstruct.shared.GTIntegration;
 
 import gregtech.api.GTValues;
 import gregtech.api.unification.material.Material;
